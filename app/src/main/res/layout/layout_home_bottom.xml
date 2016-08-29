@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RadioGroup
+        android:id="@+id/rg_home_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/home_bottom_rg_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@mipmap/icon_home_bottom_home"
+            android:drawablePadding="5dp"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/layout_bottom_home" />
+
+        <RadioButton
+            android:id="@+id/rb_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/icon_home_bottom_diamond"
+            android:drawablePadding="5dp"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/layout_bottom_list" />
+       <TextView
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rb_trends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:drawableTop="@mipmap/icon_home_bottom_message"
+            android:drawablePadding="5dp"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:text="@string/layout_bottom_trends" />
+
+        <RadioButton
+            android:id="@+id/rb_mine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_home_bottom_user"
+            android:drawablePadding="5dp"
+            android:textColor="@color/white"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/layout_bottom_mine" />
+    </RadioGroup>
+</RelativeLayout>

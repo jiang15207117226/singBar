@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <!--登陆页面颜色-->
+    <color name="login_div_or_text_color">#C6C6C6</color>
+    <color name="login_btn_color">#837BD0</color>
+    <color name="login_btn_color_click">#3441e6</color>
+
+    <!--pop页面颜色-->
+    <color name="pop_song_top">#FBD14B</color>
+    <color name="pop_song_recommend_color">#d2d0d0</color>
+
+    <!--我的页面颜色-->
+    <color name="mine_bottom_bg">#F6F4F5</color>
+    <color name="mine_style_text_color">#7F6A9D</color>
+    <color name="mine_style_text_celected">#3B3154</color>
+    <color name="mine_query_pressed">#777D84</color>
+    <color name="mine_item_opus_name_color">#DEBC4E</color>
+    <color name="mine_item_attention_btn_bg_color">#FB5A84</color>
+
+    <!--home页面颜色-->
+    <color name="home_bottom_rg_bg">#3B3154</color>
+</resources>

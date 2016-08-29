@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_top_navgationBar"
+        layout="@layout/layout_top_navgationbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_pop_recommend" />
+
+        <LinearLayout
+            android:id="@+id/ll_mine_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_mine_user_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_mine_user_head"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_mine_user_head"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="yonghuid"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_mine_user_head"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="yonghuid"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_mine_user"
+                    android:layout_centerHorizontal="true"
+                    android:drawableLeft="@mipmap/ic_launcher"
+                    android:gravity="center"
+                    android:text="12345"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_mine_user"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:text="歌唱达人"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_mine_opus"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_mine_test_style"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/mine_type_opus"
+                android:textColor="@color/mine_style_text_color"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/rb_mine_attention"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/mine_type_attention"
+                android:textColor="@color/mine_style_text_color"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/rb_mine_fans"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/mine_type_fans"
+                android:textColor="@color/mine_style_text_color"
+                android:textSize="20sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_mine_show"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"></FrameLayout>
+</LinearLayout>

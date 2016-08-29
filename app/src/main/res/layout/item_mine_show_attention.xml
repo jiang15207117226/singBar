@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    >
+
+    <ImageView
+        android:id="@+id/iv_mine_item_attention_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@mipmap/ic_launcher" />
+    <TextView
+        android:id="@+id/tv_mine_item_attention_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/mine_item_opus_name_color"
+        android:layout_toRightOf="@+id/iv_mine_item_attention_head"
+        android:layout_alignTop="@+id/iv_mine_item_attention_head"
+        android:padding="5dp"
+        android:text="name"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="超级明星"
+        android:layout_below="@+id/tv_mine_item_attention_name"
+        android:layout_alignLeft="@+id/tv_mine_item_attention_name"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:background="@drawable/selector_mine_item_attention_btn_bg"
+        android:layout_centerVertical="true"
+        android:text="关注中"/>
+</RelativeLayout>
