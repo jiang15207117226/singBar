@@ -5,6 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="red">#c11d1d</color>
+    <color name="didWhatColor">#21cf52</color>
+    <color name="lightBlue">#B3E5E9</color>
+    <color name="blue">#0172BC</color>
     <!--MainActivity颜色-->
     <color name="navigation_bar_color">#54577B</color>
     <!--登陆页面颜色-->

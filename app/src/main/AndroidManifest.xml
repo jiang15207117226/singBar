@@ -22,6 +22,7 @@
         <activity
             android:name=".view.activity.RegisterActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        <activity android:name=".view.activity.ListenActivity"></activity>
     </application>
 
 </manifest>
