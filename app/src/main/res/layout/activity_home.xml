@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_pop_under"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="gone" />
+
     <FrameLayout
         android:id="@+id/fl_home_content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"></FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_home_bottom"></FrameLayout>
 
     <include
         android:id="@+id/layout_home_bottom"
         layout="@layout/layout_home_bottom" />
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_is_pop_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_home_bottom"
+        android:layout_alignTop="@+id/iv_bottom_center"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:visibility="gone"></LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_bottom_center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/icon_record" />
+</RelativeLayout>

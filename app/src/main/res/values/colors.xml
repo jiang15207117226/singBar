@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <!--MainActivity颜色-->
+    <color name="navigation_bar_color">#54577B</color>
     <!--登陆页面颜色-->
     <color name="login_div_or_text_color">#C6C6C6</color>
     <color name="login_btn_color">#837BD0</color>
@@ -21,7 +23,9 @@
     <color name="mine_query_pressed">#777D84</color>
     <color name="mine_item_opus_name_color">#DEBC4E</color>
     <color name="mine_item_attention_btn_bg_color">#FB5A84</color>
+    <color name="mine_item_fl_bg">#F5F3F4</color>
 
     <!--home页面颜色-->
     <color name="home_bottom_rg_bg">#3B3154</color>
+    <color name="home_bottom_text_checked_color">#FBD14B</color>
 </resources>

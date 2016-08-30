@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">singbar</string>
-
+    <!--注册-->
+    <string name="register_title">手机号仅用于登录合账号安全，不向其他用户公开</string>
+    <string name="register_account">中国大陆+86</string>
+    <string name="register_account_hint">请输入您的手机号</string>
+    <string name="register_user_service">我已阅读并同意用户服务协议</string>
     <!--login-->
     <string name="login_account_hint">请输入账号</string>
     <string name="login_password_hint">请输入密码</string>

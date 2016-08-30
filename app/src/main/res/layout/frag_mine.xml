@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -84,55 +84,59 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="48dp"
+        android:orientation="horizontal">
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rb_mine_opus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_mine_test_style"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/mine_type_opus"
+            android:checked="true"
+            android:textColor="@color/mine_style_text_color"
+            android:textSize="20sp" />
 
-            <RadioButton
-                android:id="@+id/rb_mine_opus"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/selector_mine_test_style"
-                android:button="@null"
-                android:gravity="center"
-                android:text="@string/mine_type_opus"
-                android:textColor="@color/mine_style_text_color"
-                android:textSize="20sp" />
+        <RadioButton
+            android:id="@+id/rb_mine_attention"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:background="@drawable/selector_mine_test_style"
+            android:text="@string/mine_type_attention"
+            android:textColor="@color/mine_style_text_color"
+            android:textSize="20sp" />
 
-            <RadioButton
-                android:id="@+id/rb_mine_attention"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:button="@null"
-                android:gravity="center"
-                android:text="@string/mine_type_attention"
-                android:textColor="@color/mine_style_text_color"
-                android:textSize="20sp" />
-
-            <RadioButton
-                android:id="@+id/rb_mine_fans"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:button="@null"
-                android:gravity="center"
-                android:text="@string/mine_type_fans"
-                android:textColor="@color/mine_style_text_color"
-                android:textSize="20sp" />
-        </RadioGroup>
-    </LinearLayout>
-
+        <RadioButton
+            android:id="@+id/rb_mine_fans"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:background="@drawable/selector_mine_test_style"
+            android:text="@string/mine_type_fans"
+            android:textColor="@color/mine_style_text_color"
+            android:textSize="20sp" />
+    </RadioGroup>
     <FrameLayout
         android:id="@+id/fl_mine_show"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"></FrameLayout>
+        android:background="@color/mine_item_fl_bg"
+        android:layout_weight="4">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"></ListView>
+    </FrameLayout>
 </LinearLayout>
