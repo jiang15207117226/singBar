@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fitsSystemWindows="true"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_find"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_find_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@mipmap/icon_back"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="返回"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_find_pw_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+            android:text="找回密码"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_find"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_find"
+        android:orientation="horizontal"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <RadioButton
+            android:id="@+id/rb_find_zero"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:background="@drawable/selector_find_progress"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/find_auth"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:id="@+id/rb_find_one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_find_progress"
+            android:button="@null"
+            android:gravity="center"
+            android:clickable="false"
+            android:text="@string/find_new_pw"
+            android:textColor="@color/find_text_color" />
+
+        <RadioButton
+            android:id="@+id/rb_find_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_find_progress"
+            android:button="@null"
+            android:gravity="center"
+            android:clickable="false"
+            android:text="@string/find_success"
+            android:textColor="@color/find_text_color" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fl_find_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rg_find">
+    </FrameLayout>
+</RelativeLayout>
