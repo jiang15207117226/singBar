@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/26.
  */
-public class PagerAdapter extends FragmentPagerAdapter{
+public class PagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;
     private List<String> tabList;
     public PagerAdapter(FragmentManager fm,List<Fragment> fragmentList,List<String> tabList) {

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,6 @@ public class HomeFragment extends Fragment{
     private List<Fragment> fragmentList;
     private List<String> tabList;
     private HomeitemFragment homeFragment;
-    private FragmentManager manager;
     private FocusitemFragment focusFragment;
     private View view;
     @Nullable
@@ -36,8 +34,8 @@ public class HomeFragment extends Fragment{
         buildadapter();
         return view;
     }
+
     private void init() {
-        manager=getActivity().getSupportFragmentManager();
         tablayout= (TabLayout)view.findViewById(R.id.tab_line);
         vp= (ViewPager) view.findViewById(R.id.home_vp);
         fragmentList=new ArrayList<>();
@@ -56,7 +54,7 @@ public class HomeFragment extends Fragment{
 
     }
     private void buildadapter() {
-        PagerAdapter adapter=new PagerAdapter(manager,fragmentList,tabList);
+        PagerAdapter adapter=new PagerAdapter(getChildFragmentManager(),fragmentList,tabList);
         vp.setAdapter(adapter);
         tablayout.setupWithViewPager(vp);
     }

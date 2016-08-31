@@ -46,7 +46,7 @@
             android:gravity="center"
             android:id="@+id/tv_listen_content"
             android:textColor="@color/white"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="200dp"
             android:text="已经听了一百遍"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,20 +56,26 @@
             android:layout_below="@id/tv_listen_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:onClick="click"
+                android:id="@+id/iv_activity_up"
+                android:src="@mipmap/landscape_player_btn_pre_normal"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:clickable="true"
+                android:onClick="click"
+                android:id="@+id/iv_activity_play"
+                android:src="@drawable/selector_play_unplay"/>
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:onClick="click"
+                android:id="@+id/iv_activity_down"
+                android:src="@mipmap/landscape_player_btn_next_normal"/>
 
         </LinearLayout>
             <ProgressBar

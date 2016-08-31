@@ -46,6 +46,15 @@ public class ListenActivity extends Activity {
     }
     public void click(View view){
         switch (view.getId()){
+            case R.id.iv_activity_up:
+
+                break;
+            case R.id.iv_activity_play:
+
+                break;
+            case R.id.iv_activity_down:
+
+                break;
             case R.id.iv_focus_listen:
 
                 break;
