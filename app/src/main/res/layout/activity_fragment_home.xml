@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tab_line"
-        android:background="@color/lightBlue"
-        app:tabIndicatorColor="@color/didWhatColor"
-        app:tabSelectedTextColor="@color/black"
+        android:background="@color/home_bottom_rg_bg"
+        app:tabIndicatorColor="@color/find_get_color"
+        app:tabSelectedTextColor="@color/home_bottom_text_checked_color"
         app:tabTextColor="@color/white">
     </android.support.design.widget.TabLayout>
 </LinearLayout>
