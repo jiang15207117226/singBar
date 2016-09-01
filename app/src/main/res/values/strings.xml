@@ -1,5 +1,24 @@
 <resources>
     <string name="app_name">singbar</string>
+      <string name="geci">曾经的你 - 许巍
+
+                                       曾梦想仗剑走天涯
+
+                                       看一看世界的繁华
+
+                                       年少的心总有些轻狂
+
+                                       如今你四海为家
+
+                                       曾让你心疼的姑娘
+
+                                       如今已悄然无踪影
+
+                                       爱情总让你渴望又感到烦恼
+
+                                       曾让你遍体鳞伤</string>
+
+
     <!--注册-->
     <string name="register_title">手机号仅用于登录和账号安全，不向其他用户公开</string>
     <string name="register_account">中国大陆+86</string>
