@@ -11,8 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import plz.com.singbar.R;
@@ -41,15 +42,19 @@ public class FocusitemFragment extends Fragment {
         lv.setOnItemClickListener(listener);
         list=new ArrayList<>();
         for (int i=0;i<10;i++) {
+
+            SimpleDateFormat dateFormat=new SimpleDateFormat("MM月dd日 HH:mm");
+            Date date=new Date();
+            String string=dateFormat.format(date);
+
             FocusitemInfo info = new FocusitemInfo();
             String name = "secret";
             String singname = "我们的歌";
-            String time = "4分钟前";
             int singnum = 521;
             int comment = 22163;
             int flower = 31311;
             info.setName(name);
-            info.setTime(time);
+            info.setTime(string);
             info.setSingname(singname);
             info.setSingnum(singnum);
             info.setComment(comment);
