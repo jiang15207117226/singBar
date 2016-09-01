@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/bg"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_finish"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_find_finish"/>
+    <TextView
+        android:id="@+id/tv_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_finish"
+        android:layout_alignLeft="@+id/iv_finish"
+        android:textColor="@color/find_auth"
+        android:layout_alignRight="@+id/iv_finish"
+        android:gravity="center"
+        android:text="完成"/>
+    <TextView
+        android:id="@+id/tv_replace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/find_auth"
+        android:layout_below="@+id/tv_finish"
+        android:layout_centerHorizontal="true"
+        android:text="3s后为您跳转至登录页面..."/>
+
+</RelativeLayout>

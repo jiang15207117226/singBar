@@ -3,6 +3,7 @@ package plz.com.singbar.view.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,7 +14,11 @@ import android.widget.Toast;
 
 import org.litepal.tablemanager.Connector;
 
+import java.util.List;
+
 import plz.com.singbar.R;
+import plz.com.singbar.bean.UserBean;
+import plz.com.singbar.operation.DbOperation;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private   ViewHolder holder;
@@ -61,24 +66,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(this,"用户名或密码为空...",Toast.LENGTH_SHORT).show();
                     break;
                 }
-                Intent intent=new Intent(this,HomeActivity.class);
-                startActivity(intent);
-//                List<UserBean>list=DbOperation.query(account);
-//                if (list==null||list.size()<1){
-//                    Log.i("result",list.size()+"");
-//                    break;
-//                }else{
-//                    for (UserBean bean:list){
-//                       if (bean.getAccount().equals(account)){
-//                           if (bean.getPw().equals(pw)){
-//                               Toast.makeText(this,"登陆成功!",Toast.LENGTH_SHORT).show();
-//
-//                           }else{
-//                               Toast.makeText(this,"密码错误...",Toast.LENGTH_SHORT).show();
-//                           }
-//                       }
-//                    }
-//                }
+                List<UserBean> list= DbOperation.query(account);
+                if (list==null||list.size()<1){
+                    Log.i("result",list.size()+"");
+                    Toast.makeText(this,"用户名或密码错误...",Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    for (UserBean bean:list){
+                       if (bean.getAccount().equals(account)){
+                           if (bean.getPw().equals(pw)){
+                               Toast.makeText(this,"登陆成功!",Toast.LENGTH_SHORT).show();
+                               Intent intent=new Intent(this,HomeActivity.class);
+                               startActivity(intent);
+                           }else{
+                               Toast.makeText(this,"密码错误...",Toast.LENGTH_SHORT).show();
+                           }
+                       }
+                    }
+                }
                 break;
             case R.id.tv_login_registerAccount:
                 //注册账号
@@ -87,6 +92,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             break;
             case R.id.tv_login_findBackPW:
                 //找回密码
+                Intent findBack=new Intent(this,FindBackPwActivity.class);
+                startActivity(findBack);
             break;
 
         }

@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">singbar</string>
     <!--注册-->
-    <string name="register_title">手机号仅用于登录合账号安全，不向其他用户公开</string>
+    <string name="register_title">手机号仅用于登录和账号安全，不向其他用户公开</string>
     <string name="register_account">中国大陆+86</string>
     <string name="register_account_hint">请输入您的手机号</string>
     <string name="register_user_service">我已阅读并同意用户服务协议</string>
+    <!--找回密码-->
+    <string name="find_auth">1.安全验证</string>
+    <string name="find_new_pw">2.设置新密码</string>
+    <string name="find_success">3.修改成功</string>
     <!--login-->
     <string name="login_account_hint">请输入账号</string>
     <string name="login_password_hint">请输入密码</string>
@@ -18,7 +22,6 @@
     <string name="layout_bottom_list">榜单</string>
     <string name="layout_bottom_trends">动态</string>
     <string name="layout_bottom_mine">我的</string>
-
 
     <!--pop_song-->
     <string name="pop_song_query_hint">歌曲名、歌手名、首字母</string>

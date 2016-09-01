@@ -1,10 +1,11 @@
 package plz.com.singbar.view.activity;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +20,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import plz.com.singbar.R;
+import plz.com.singbar.view.frag.HomeFragment;
 import plz.com.singbar.view.frag.MineFragment;
 
 /**
  * Created by Administrator on 2016/8/29.
  */
-public class HomeActivity extends Activity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
     private ViewHolder holder;
     private FragmentManager manager;
     private PopupWindow pop;
     private MineFragment mineFragment;
+    private HomeFragment homeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,10 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
         holder = new ViewHolder();
         holder.bindView(view);
         initPop();//初始化pop
-        manager=getFragmentManager();
+        manager=getSupportFragmentManager();
         mineFragment=new MineFragment();
+        homeFragment=new HomeFragment();
+        manager.beginTransaction().add(R.id.fl_home_content,homeFragment).commit();
         //设置底部中间imageview点击监听
         holder.bottomCenter.setOnClickListener(this);
         //设置底部RddioGroup监听
@@ -63,6 +68,7 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
             case R.id.rb_home:
                 //首页
                 setBottomTextColor(1);//设置文字选中颜色
+                transaction.replace(R.id.fl_home_content,homeFragment);
                 break;
             case R.id.rb_list:
                 //榜单
