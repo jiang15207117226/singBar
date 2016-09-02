@@ -2,11 +2,15 @@ package plz.com.singbar.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
 
 import plz.com.singbar.R;
 import plz.com.singbar.view.info.FocusitemInfo;
@@ -23,6 +27,11 @@ public class ListenActivity extends Activity {
     private TextView comment;
     private TextView flower;
     private FocusitemInfo info;
+    private CheckBox play;
+    private MediaPlayer player;
+    private boolean ispause=false;
+    private int position=0;
+    private List<String> musiclist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +44,7 @@ public class ListenActivity extends Activity {
     }
 
     private void init() {
+        play= (CheckBox) findViewById(R.id.cb_activity_play);
         head= (ImageView) findViewById(R.id.iv_listen_user);
         name= (TextView) findViewById(R.id.tv_listen_username);
         time= (TextView) findViewById(R.id.tv_activity_time);
@@ -50,29 +60,43 @@ public class ListenActivity extends Activity {
         comment.setText(info.getComment()+"");
         flower.setText(info.getFlower()+"");
 
-
+        player=new MediaPlayer();
+        player=MediaPlayer.create(this,R.raw.lianrenxing);
     }
     public void click(View view){
         switch (view.getId()){
-            case R.id.iv_activity_up:
+            case R.id.rb_activity_up:
 
                 break;
-            case R.id.iv_activity_play:
+            case R.id.cb_activity_play:
+                if (play.isChecked()){
+                    player.start();
+                }else {
+                    if(ispause){
+                        player.seekTo(position);
+                        player.start();
+                        ispause=false;
+                    }else {
+                        player.pause();
+                        position = player.getCurrentPosition();
+                        ispause = true;
+                    }
+                }
 
                 break;
-            case R.id.iv_activity_down:
+            case R.id.rb_activity_down:
 
                 break;
             case R.id.iv_focus_listen:
 
                 break;
-            case R.id.iv_activity_listen:
-                singnum.setText(info.getSingnum()+1+"");
+            case R.id.tv_user_share:
+
                 break;
-            case R.id.iv_activity_comment:
+            case R.id.tv_user_comment:
                 comment.setText(info.getComment()+1+"");
                 break;
-            case R.id.iv_activity_flower:
+            case R.id.tv_user_flower:
                 flower.setText(info.getFlower()+1+"");
                 break;
             case R.id.iv_listen_back:
@@ -82,4 +106,5 @@ public class ListenActivity extends Activity {
         }
 
     }
+
 }

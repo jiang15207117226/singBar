@@ -59,21 +59,21 @@
                 android:layout_height="60dp"
                 android:button="@null"
                 android:onClick="click"
-                android:id="@+id/iv_activity_up"
+                android:id="@+id/rb_activity_up"
                 android:background="@mipmap/landscape_player_btn_pre_normal"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
                 android:onClick="click"
-                android:id="@+id/iv_activity_play"
+                android:id="@+id/cb_activity_play"
                 android:background="@drawable/selector_play_unplay"/>
             <RadioButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:button="@null"
                 android:onClick="click"
-                android:id="@+id/iv_activity_down"
+                android:id="@+id/rb_activity_down"
                 android:background="@mipmap/landscape_player_btn_next_normal"/>
 
         </RadioGroup>
@@ -144,8 +144,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/iv_activity_listen"
             android:src="@mipmap/audition"
-            android:clickable="true"
-            android:onClick="click"
             android:padding="5dp" />
         <TextView
             android:layout_width="wrap_content"
@@ -158,9 +156,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/iv_activity_comment"
             android:padding="5dp"
-            android:clickable="true"
-            android:onClick="click"
-            android:src="@drawable/selector_com_com_disable"/>
+            android:src="@mipmap/timeline_icon_comment_disable"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,8 +168,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/iv_activity_flower"
             android:padding="5dp"
-            android:clickable="true"
-            android:onClick="click"
             android:src="@mipmap/flower0"/>
         <TextView
             android:layout_width="wrap_content"
@@ -199,6 +193,7 @@
            android:id="@+id/tv_user_flower"
            android:padding="5dp"
            android:clickable="true"
+           android:onClick="click"
            android:gravity="center"
            android:layout_weight="1"
            android:drawableTop="@mipmap/flower1"
@@ -211,6 +206,7 @@
             android:padding="5dp"
             android:gravity="center"
             android:clickable="true"
+            android:onClick="click"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:text="评论"/>
@@ -220,6 +216,7 @@
             android:id="@+id/tv_user_share"
             android:padding="5dp"
             android:clickable="true"
+            android:onClick="click"
             android:layout_weight="1"
             android:gravity="center"
             android:drawableTop="@mipmap/share"

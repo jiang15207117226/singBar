@@ -29,14 +29,14 @@ public class Homepage extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_focus, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
         init();
         buildadapter();
         return view;
     }
 
     private void init() {
-        lv = (ListView) view.findViewById(R.id.lv_fragment_focus);
+        lv = (ListView) view.findViewById(R.id.lv_fragment_home);
         lv.setOnItemClickListener(listener);
         list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
