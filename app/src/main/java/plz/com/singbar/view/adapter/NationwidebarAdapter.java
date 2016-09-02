@@ -46,7 +46,7 @@ public class NationwidebarAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHold hold = null;
+        ViewHold hold;
         if (view == null) {
             view = inflater.inflate(R.layout.itme_nationwiebar, null);
             hold = new ViewHold();
@@ -58,9 +58,9 @@ public class NationwidebarAdapter extends BaseAdapter {
             hold.userName = (TextView) view.findViewById(R.id.text_itme_one);
             hold.singname = (TextView) view.findViewById(R.id.text_itme_two);
             hold.audition = (TextView) view.findViewById(R.id.itme_nation_shiting);
-
             view.setTag(hold);
         }
+
         hold = (ViewHold) view.getTag();
         hold.userName.setText(list.get(i).getUserName());
         hold.singname.setText(list.get(i).getSingname());

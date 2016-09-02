@@ -29,14 +29,14 @@ public class Homepage extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.homepagelistview, container, false);
         init();
         buildadapter();
         return view;
     }
 
     private void init() {
-        lv = (ListView) view.findViewById(R.id.lv_fragment_home);
+        lv = (ListView) view.findViewById(R.id.homepage_list);
         lv.setOnItemClickListener(listener);
         list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -59,6 +59,7 @@ public class Homepage extends Fragment {
         HomepageAdapter adapter = new HomepageAdapter(list, getContext());
         lv.setAdapter(adapter);
     }
+
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

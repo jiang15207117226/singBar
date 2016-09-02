@@ -43,7 +43,7 @@ public class Nationwidebar extends Fragment {
         list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NationwidebarInfo info = new NationwidebarInfo();
-            String userName = "secret";
+            String userName = "许巍";
             String singname = "曾经的你";
             int audition = 136;
 
