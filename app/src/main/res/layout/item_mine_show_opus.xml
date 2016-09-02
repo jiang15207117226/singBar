@@ -1,76 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingTop="5dp"
+    android:layout_height="match_parent"
     android:paddingBottom="10dp"
-    android:layout_height="match_parent">
+    android:paddingTop="5dp">
+
     <ImageView
         android:id="@+id/iv_mine_item_opus_head"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:padding="5dp"/>
-    <TextView
-        android:id="@+id/tv_mine_item_opus_time"
-        android:layout_alignTop="@+id/iv_mine_item_opus_head"
-        android:layout_alignParentRight="true"
-        android:paddingTop="5dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_mine_item_opus_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3分钟前"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/iv_mine_item_opus_head"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
+        android:text="3分钟前"
+        android:textSize="15sp" />
+
     <TextView
         android:id="@+id/tv_mine_item_opus_listenCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mine_item_opus_time"
         android:layout_alignRight="@+id/tv_mine_item_opus_time"
-        android:text="1234"/>
+        android:layout_below="@+id/tv_mine_item_opus_time"
+        android:drawableLeft="@mipmap/icon_listen_lv"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="1234" />
+
     <TextView
         android:id="@+id/tv_mine_item_opus_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/iv_mine_item_opus_head"
-        android:textColor="@color/mine_item_opus_name_color"
         android:padding="5dp"
-        android:text="name"/>
+        android:text="name"
+        android:textColor="@color/mine_item_opus_name_color"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tv_mine_item_opus_songName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:layout_below="@+id/tv_mine_item_opus_username"
         android:layout_alignLeft="@+id/tv_mine_item_opus_username"
-        android:text="我们的歌"/>
-    <TextView
+        android:layout_below="@+id/tv_mine_item_opus_username"
+        android:text="我们的歌"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <CheckBox
         android:id="@+id/tv_mine_item_opus_flowers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="123"
-        android:layout_below="@+id/tv_mine_item_opus_songName"
         android:layout_alignLeft="@+id/tv_mine_item_opus_songName"
+        android:layout_below="@+id/tv_mine_item_opus_songName"
+        android:button="@null"
+        android:drawableLeft="@mipmap/icon_flowers_x32"
+        android:gravity="center"
         android:paddingRight="30dp"
-        />
-    <TextView
+        android:text="123" />
+
+    <CheckBox
         android:id="@+id/tv_mine_item_opus_commends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="123"
         android:layout_below="@+id/tv_mine_item_opus_songName"
         android:layout_toRightOf="@+id/tv_mine_item_opus_flowers"
+        android:button="@null"
+        android:drawableLeft="@mipmap/icon_comments_x32"
+        android:gravity="center"
         android:paddingRight="30dp"
-        />
+        android:text="123" />
+
     <TextView
         android:id="@+id/tv_mine_item_opus_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_mine_item_opus_head"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
         android:layout_marginRight="20dp"
-        android:text="来听听我唱的《XX之歌》"/>
+        android:background="@mipmap/icon_border"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:text="来听听我唱的《XX之歌》" />
 </RelativeLayout>

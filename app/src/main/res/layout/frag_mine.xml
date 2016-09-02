@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@mipmap/icon_pop_recommend" />
+            android:src="@mipmap/mine_bg" />
 
         <LinearLayout
             android:id="@+id/ll_mine_user"
@@ -32,10 +32,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:background="@drawable/shape_mine_user_head"
-                android:src="@mipmap/ic_launcher" />
+                android:background="@drawable/shape_mine_user_head" />
 
             <TextView
+                android:id="@+id/tv_mine_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_mine_user_head"
@@ -46,14 +46,15 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/tv_mine_design"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_mine_user_head"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="yonghuid"
+                android:text="个性签名"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -61,14 +62,17 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_mine_listenCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_mine_user"
                     android:layout_centerHorizontal="true"
-                    android:drawableLeft="@mipmap/ic_launcher"
+                    android:drawableLeft="@mipmap/icon_listen"
+                    android:drawablePadding="5dp"
                     android:gravity="center"
                     android:text="12345"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,6 +89,7 @@
     </RelativeLayout>
 
     <RadioGroup
+        android:id="@+id/rg_mine"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal">
@@ -96,9 +101,9 @@
             android:layout_weight="1"
             android:background="@drawable/selector_mine_test_style"
             android:button="@null"
+            android:checked="true"
             android:gravity="center"
             android:text="@string/mine_type_opus"
-            android:checked="true"
             android:textColor="@color/mine_style_text_color"
             android:textSize="20sp" />
 
@@ -107,9 +112,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/selector_mine_test_style"
             android:button="@null"
             android:gravity="center"
-            android:background="@drawable/selector_mine_test_style"
             android:text="@string/mine_type_attention"
             android:textColor="@color/mine_style_text_color"
             android:textSize="20sp" />
@@ -119,24 +124,40 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/selector_mine_test_style"
             android:button="@null"
             android:gravity="center"
-            android:background="@drawable/selector_mine_test_style"
             android:text="@string/mine_type_fans"
             android:textColor="@color/mine_style_text_color"
             android:textSize="20sp" />
     </RadioGroup>
+
     <FrameLayout
         android:id="@+id/fl_mine_show"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/mine_item_fl_bg"
-        android:layout_weight="4">
+        android:layout_weight="4"
+        android:background="@color/mine_item_fl_bg">
+
         <ListView
+            android:id="@+id/lv_mine_opus"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"></ListView>
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:divider="@color/mine_item_fl_bg"
+            android:dividerHeight="10dp"></ListView>
+
+        <TextView
+            android:id="@+id/tv_mine_noProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@mipmap/icon_opus"
+            android:text="您当前还没有任何作品"
+            android:textColor="@color/mine_style_text_color"
+            android:visibility="gone" />
     </FrameLayout>
 </LinearLayout>

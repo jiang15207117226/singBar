@@ -8,7 +8,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-
     <color name="red">#c11d1d</color>
     <color name="didWhatColor">#21cf52</color>
     <color name="lightBlue">#B3E5E9</color>
@@ -17,6 +16,7 @@
     <color name="black">#000000</color>
     <color name="bg">#2e2733</color>
     <color name="gray">#F5F3F4</color>
+    <color name="text_default">#8F8F8F</color>
     <!--找回密码-->
     <color name="find_text_color">#626262</color>
     <color name="find_get_color">#FBD14B</color>

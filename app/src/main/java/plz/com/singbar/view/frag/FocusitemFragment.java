@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
+
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,19 +29,25 @@ import plz.com.singbar.view.info.FocusitemInfo;
  */
 public class FocusitemFragment extends Fragment {
     private View view;
-    private ListView lv;
+    private com.handmark.pulltorefresh.library.PullToRefreshListView lv;
     private List<FocusitemInfo> list;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_focus,container,false);
+        view=inflater.inflate(R.layout.fragment_home,container,false);
         init();
+        getdata();
         buildadapter();
         return view;
     }
     private void init() {
-        lv= (ListView) view.findViewById(R.id.lv_fragment_focus);
-        lv.setOnItemClickListener(listener);
+        lv= (PullToRefreshListView) view.findViewById(R.id.lv_fragment_home);
+        lv.setMode(PullToRefreshBase.Mode.BOTH);
+        lv.getRefreshableView().setOnItemClickListener(listener);
+        lv.setOnRefreshListener(fl);
+
+    }
+    private void getdata(){
         list=new ArrayList<>();
         for (int i=0;i<10;i++) {
 
@@ -73,6 +81,17 @@ public class FocusitemFragment extends Fragment {
             FocusitemInfo info= (FocusitemInfo) adapterView.getItemAtPosition(i);
             intent.putExtra("key",info);
             startActivity(intent);
+
+        }
+    };
+    PullToRefreshBase.OnRefreshListener2 fl=new PullToRefreshBase.OnRefreshListener2() {
+        @Override
+        public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+
+        }
+
+        @Override
+        public void onPullUpToRefresh(PullToRefreshBase refreshView) {
 
         }
     };

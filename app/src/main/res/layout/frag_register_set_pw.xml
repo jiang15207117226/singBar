@@ -32,6 +32,29 @@
             android:textColor="@color/find_auth"
             />
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="设置一个昵称(10字以内):"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_input_edit_bg">
+
+        <EditText
+            android:id="@+id/et_register_petName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入昵称"
+            android:maxLength="10"
+            android:padding="10dp"
+            android:textSize="14sp" />
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
