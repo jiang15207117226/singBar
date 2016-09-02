@@ -19,12 +19,5 @@ public class SongsetsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songsets);
 
-        init();
-    }
-
-    public void init() {
-        lv = (ListView) findViewById(R.id.songsets_lv);
-        iv = (ImageView) findViewById(R.id.songsets_iv);
-
     }
 }

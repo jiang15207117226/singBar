@@ -25,12 +25,12 @@ public class HomeitemAdapter extends BaseAdapter {
     public HomeitemAdapter(List<HomeitemInfo> list, Context context) {
         this.list = list;
         this.context = context;
-        inflater=LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return list==null?0:list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -46,22 +46,23 @@ public class HomeitemAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHold hold;
-        if (view==null) {
+        if (view == null) {
             view = inflater.inflate(R.layout.item_home, null);
-            hold=new ViewHold();
-            hold.title= (TextView) view.findViewById(R.id.tv_home_title);
-            hold.time= (TextView) view.findViewById(R.id.tv_home_time);
-            hold.image= (ImageView) view.findViewById(R.id.iv_home_pic);
-            hold.content= (TextView) view.findViewById(R.id.tv_home_content);
+            hold = new ViewHold();
+            hold.title = (TextView) view.findViewById(R.id.tv_home_title);
+            hold.time = (TextView) view.findViewById(R.id.tv_home_time);
+            hold.image = (ImageView) view.findViewById(R.id.iv_home_pic);
+            hold.content = (TextView) view.findViewById(R.id.tv_home_content);
             view.setTag(hold);
         }
-        hold= (ViewHold) view.getTag();
+        hold = (ViewHold) view.getTag();
         hold.title.setText(list.get(i).getTitle());
         hold.time.setText(list.get(i).getTime());
         hold.content.setText(list.get(i).getContent());
         return view;
     }
-    private class ViewHold{
+
+    private class ViewHold {
         TextView title;
         TextView time;
         TextView content;

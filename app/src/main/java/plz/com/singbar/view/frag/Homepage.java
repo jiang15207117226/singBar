@@ -15,7 +15,7 @@ import java.util.List;
 
 import plz.com.singbar.R;
 import plz.com.singbar.view.activity.ListenActivity;
-import plz.com.singbar.view.adapter.FocusitemAdapter;
+import plz.com.singbar.view.adapter.HomepageAdapter;
 import plz.com.singbar.view.info.FocusitemInfo;
 
 /**
@@ -42,13 +42,11 @@ public class Homepage extends Fragment {
         for (int i = 0; i < 3; i++) {
             FocusitemInfo info = new FocusitemInfo();
             String name = "secret";
-            String singname = "11111`1";
-//            String time = "4分钟前";
+            String singname = "曾经的你";
             int singnum = 521;
-            int comment = 22163;
-            int flower = 31311;
+            int comment = 221;
+            int flower = 451;
             info.setName(name);
-//            info.setTime(time);
             info.setSingname(singname);
             info.setSingnum(singnum);
             info.setComment(comment);
@@ -58,10 +56,9 @@ public class Homepage extends Fragment {
     }
 
     private void buildadapter() {
-        FocusitemAdapter adapter = new FocusitemAdapter(list, getContext());
+        HomepageAdapter adapter = new HomepageAdapter(list, getContext());
         lv.setAdapter(adapter);
     }
-
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

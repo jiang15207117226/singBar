@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import plz.com.singbar.R;
 import plz.com.singbar.view.frag.HomeFragment;
+import plz.com.singbar.view.frag.HotSaleFragment;
 import plz.com.singbar.view.frag.MineFragment;
 
 /**
@@ -32,6 +33,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
     private PopupWindow pop;
     private MineFragment mineFragment;
     private HomeFragment homeFragment;
+    private HotSaleFragment hotSaleFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +48,18 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     /**
      * 初始化
+     *
      * @param view
      */
     private void init(View view) {
         holder = new ViewHolder();
         holder.bindView(view);
         initPop();//初始化pop
-        manager=getSupportFragmentManager();
-        mineFragment=new MineFragment();
-        homeFragment=new HomeFragment();
-        manager.beginTransaction().add(R.id.fl_home_content,homeFragment).commit();
+        manager = getSupportFragmentManager();
+        mineFragment = new MineFragment();
+        homeFragment = new HomeFragment();
+        hotSaleFragment = new HotSaleFragment();
+        manager.beginTransaction().add(R.id.fl_home_content, homeFragment).commit();
         //设置底部中间imageview点击监听
         holder.bottomCenter.setOnClickListener(this);
         //设置底部RddioGroup监听
@@ -63,16 +68,17 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
-        FragmentTransaction transaction=manager.beginTransaction();
+        FragmentTransaction transaction = manager.beginTransaction();
         switch (i) {
             case R.id.rb_home:
                 //首页
                 setBottomTextColor(1);//设置文字选中颜色
-                transaction.replace(R.id.fl_home_content,homeFragment);
+                transaction.replace(R.id.fl_home_content, homeFragment);
                 break;
             case R.id.rb_list:
                 //榜单
                 setBottomTextColor(2);//设置文字选中颜色
+                transaction.replace(R.id.fl_home_content, hotSaleFragment);
                 break;
             case R.id.rb_trends:
                 //动态
@@ -81,7 +87,7 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
             case R.id.rb_mine:
                 //我的
                 setBottomTextColor(4);//设置文字选中颜色
-                transaction.replace(R.id.fl_home_content,mineFragment);
+                transaction.replace(R.id.fl_home_content, mineFragment);
                 break;
         }
         transaction.commit();
@@ -132,9 +138,9 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     private void initPop() {
         View view = LayoutInflater.from(this).inflate(R.layout.pop_song, null);
-        WindowManager windowManager=getWindowManager();
-        int screenHeight=windowManager.getDefaultDisplay().getHeight()-holder.bottomCenter.getLayoutParams().height-getStatusBarHeight();
-        Log.i("result","screenHeight->"+screenHeight+"===="+holder.bottomCenter.getLayoutParams().height);
+        WindowManager windowManager = getWindowManager();
+        int screenHeight = windowManager.getDefaultDisplay().getHeight() - holder.bottomCenter.getLayoutParams().height - getStatusBarHeight();
+        Log.i("result", "screenHeight->" + screenHeight + "====" + holder.bottomCenter.getLayoutParams().height);
         pop = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, screenHeight);
         pop.setBackgroundDrawable(new BitmapDrawable());
         pop.setTouchable(true);
@@ -175,13 +181,14 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
             }
         }
     };
-    PopupWindow.OnDismissListener dismissListener=new PopupWindow.OnDismissListener() {
+    PopupWindow.OnDismissListener dismissListener = new PopupWindow.OnDismissListener() {
         @Override
         public void onDismiss() {
             holder.bottomCenter.setImageResource(R.mipmap.icon_record);
             holder.isPopShow.setVisibility(View.GONE);
         }
     };
+
     //视图管理类
     private class ViewHolder {
         private RelativeLayout layout_bottom;
@@ -193,16 +200,17 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
         private RadioButton rBtnTrends;
         private RadioButton rBtnMine;
         private TextView popUnder;
+
         private void bindView(View view) {
             layout_bottom = (RelativeLayout) view.findViewById(R.id.layout_home_bottom);
-            isPopShow= (LinearLayout) view.findViewById(R.id.ll_is_pop_show);
+            isPopShow = (LinearLayout) view.findViewById(R.id.ll_is_pop_show);
             bottomCenter = (ImageView) view.findViewById(R.id.iv_bottom_center);
             bottomRg = (RadioGroup) layout_bottom.findViewById(R.id.rg_home_bottom);
             rBtnHome = (RadioButton) layout_bottom.findViewById(R.id.rb_home);
             rBtnList = (RadioButton) layout_bottom.findViewById(R.id.rb_list);
             rBtnTrends = (RadioButton) layout_bottom.findViewById(R.id.rb_trends);
             rBtnMine = (RadioButton) layout_bottom.findViewById(R.id.rb_mine);
-            popUnder= (TextView) view.findViewById(R.id.tv_pop_under);
+            popUnder = (TextView) view.findViewById(R.id.tv_pop_under);
         }
     }
 
@@ -222,10 +230,11 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
             record = (TextView) view.findViewById(R.id.tv_pop_item_record);
         }
     }
+
     public int getStatusBarHeight() {
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-           return getResources().getDimensionPixelSize(resourceId);
+            return getResources().getDimensionPixelSize(resourceId);
         }
         return 0;
     }
