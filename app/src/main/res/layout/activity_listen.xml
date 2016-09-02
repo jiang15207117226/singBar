@@ -189,47 +189,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/iv_activity_listen"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="5dp"
-            android:src="@mipmap/icon_listen_lv" />
-
         <TextView
             android:id="@+id/tv_activity_singnum"
             android:layout_width="wrap_content"
+            android:drawablePadding="5dp"
             android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_listen_lv"
+            android:gravity="center"
             android:padding="5dp"
             android:text="321" />
-
-        <ImageView
-            android:id="@+id/iv_activity_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:src="@mipmap/timeline_icon_comment_disable" />
 
         <TextView
             android:id="@+id/tv_activity_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_comments_x32"
             android:padding="5dp"
+            android:gravity="center"
+            android:drawablePadding="5dp"
             android:text="100" />
-
-        <ImageView
-            android:id="@+id/iv_activity_flower"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:src="@mipmap/icon_flowers_x32" />
 
         <TextView
             android:id="@+id/tv_activity_flower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:drawableLeft="@mipmap/icon_flowers_x32"
             android:padding="5dp"
             android:text="100" />
 
