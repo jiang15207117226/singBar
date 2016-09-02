@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
+    android:layout_height="match_parent"
     android:layout_weight="8"
     android:gravity="center">
 
@@ -24,16 +24,19 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/white"
-            android:gravity="center">
+            android:gravity="bottom"
+            android:paddingBottom="50dp">
 
             <TextView
                 android:id="@+id/tv_pop_item_kodBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/seletor_pop_item"
                 android:clickable="true"
                 android:drawablePadding="5dp"
-                android:drawableTop="@mipmap/click_sing"
+                android:textSize="18sp"
+                android:drawableTop="@mipmap/icon_pop_sing"
                 android:gravity="center"
                 android:text="点歌台" />
 
@@ -42,9 +45,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/seletor_pop_item"
                 android:clickable="true"
                 android:drawablePadding="5dp"
-                android:drawableTop="@mipmap/click_sing"
+                android:textSize="18sp"
+                android:drawableTop="@mipmap/icon_pop_has"
                 android:gravity="center"
                 android:text="已点歌曲" />
 
@@ -53,9 +58,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/seletor_pop_item"
                 android:clickable="true"
+                android:textSize="18sp"
                 android:drawablePadding="5dp"
-                android:drawableTop="@mipmap/click_sing"
+                android:drawableTop="@mipmap/icon_pop_local"
                 android:gravity="center"
                 android:text="本地录音" />
         </LinearLayout>
@@ -67,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:background="@drawable/seletor_pop_item"
         android:clickable="true"
         android:src="@mipmap/click_sing" />
 </RelativeLayout>

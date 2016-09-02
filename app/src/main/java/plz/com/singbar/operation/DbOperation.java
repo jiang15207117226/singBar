@@ -16,6 +16,9 @@ public class DbOperation {
     public static List<UserBean> query(String content) {
         return DataSupport.where("account = ?", content).find(UserBean.class);
     }
+    public static UserBean queryById(int id){
+        return DataSupport.find(UserBean.class,id);
+    }
     public static int findLastBeanId(){
         UserBean bean=DataSupport.findLast(UserBean.class);
         if (bean!=null){
