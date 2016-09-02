@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="beijing">#EEEEEE</color>
+    <color name="heise">#000000</color>
+    <color name="baise">#FAFAFA</color>
+    <color name="zise">#3B3154</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
     <color name="red">#c11d1d</color>
     <color name="didWhatColor">#21cf52</color>
     <color name="lightBlue">#B3E5E9</color>

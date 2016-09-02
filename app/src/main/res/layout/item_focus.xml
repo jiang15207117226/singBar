@@ -61,9 +61,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/iv_focus_comment"
                 android:padding="5dp"
-                android:clickable="true"
-                android:onClick="click"
-                android:src="@drawable/selector_com_com_disable"/>
+                android:src="@mipmap/timeline_icon_comment_disable"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,9 +73,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/iv_focus_flower"
                 android:padding="5dp"
-                android:clickable="true"
-                android:onClick="click"
-                android:src="@mipmap/timeline_icon_like"/>
+                android:src="@mipmap/flower0"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
