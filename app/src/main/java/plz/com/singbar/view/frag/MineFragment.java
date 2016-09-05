@@ -31,6 +31,7 @@ import plz.com.singbar.bean.FansBean;
 import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.bean.UserOwnSongsBean;
 import plz.com.singbar.operation.CircleTrans;
+import plz.com.singbar.operation.DbOperation;
 import plz.com.singbar.view.activity.ListenActivity;
 import plz.com.singbar.view.adapter.AttentionAdapter;
 import plz.com.singbar.view.adapter.FansAdapter;
@@ -45,7 +46,8 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
     private List<AttenBean> attenList;
     private List<FansBean> fansList;
     private UserInfo info;
-    private UserBean bean;
+    private UserBean userBean;
+    private int userID;
     private MineOpusAdapter opusAdapter;
     private AttentionAdapter attenAdapter;
     private FansAdapter fansAdapter;
@@ -72,20 +74,21 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         holder.bindView(view);//绑定视图
         holder.topBarTitle.setText(getString(R.string.mine_title));
         holder.mineRg.setOnCheckedChangeListener(this);
-        bean = info.getUserBean();
-        Log.i("result",bean+"");
-        String headUrl = bean.getHead();
+        userID = info.getUserID();
+        Log.i("result", userID + "");
+        userBean = DbOperation.queryById(userID);
+        String headUrl = userBean.getHead();
         if (headUrl != null) {
             Picasso.with(getActivity()).load(headUrl).placeholder(R.mipmap.health_guide_woman_selected).resize(100, 100).transform(new CircleTrans()).centerCrop().into(holder.userHead);
         }
-        holder.userName.setText(bean.getPetName());
+        holder.userName.setText(userBean.getPetName());
         list = new ArrayList<>();
         addListData();
         if (list == null || list.size() < 1) {
             holder.noProduct.setVisibility(View.VISIBLE);
         } else {
             holder.noProduct.setVisibility(View.GONE);
-            opusAdapter = new MineOpusAdapter(getActivity(), list, bean);
+            opusAdapter = new MineOpusAdapter(getActivity(), list, userBean);
             holder.opusLv.setAdapter(opusAdapter);
         }
         holder.opusLv.setOnItemClickListener(this);
@@ -142,7 +145,7 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
             UserOwnSongsBean songsBean = list.get(i);
             Intent intent = new Intent(getActivity(), ListenActivity.class);
             intent.putExtra("songsBean", songsBean);
-            intent.putExtra("userBean", bean);
+            intent.putExtra("userBean", userBean);
             intent.putExtra("adress", 0x02);
             startActivity(intent);
         }
@@ -222,6 +225,6 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
     }
 
     public interface UserInfo {
-        UserBean getUserBean();
+        int getUserID();
     }
 }

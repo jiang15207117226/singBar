@@ -20,20 +20,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import plz.com.singbar.R;
-import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.view.frag.HomeFragment;
+import plz.com.singbar.view.frag.HotSaleFragment;
 import plz.com.singbar.view.frag.MineFragment;
 
 /**
  * Created by Administrator on 2016/8/29.
  */
 public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, MineFragment.UserInfo {
+
     private ViewHolder holder;
     private FragmentManager manager;
     private PopupWindow pop;
     private MineFragment mineFragment;
     private HomeFragment homeFragment;
-    private UserBean bean;
+    private HotSaleFragment hotSaleFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +54,12 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
     private void init(View view) {
         holder = new ViewHolder();
         holder.bindView(view);
-        bean = (UserBean) getIntent().getSerializableExtra("userBean");
         initPop();//初始化pop
         manager = getSupportFragmentManager();
         mineFragment = new MineFragment();
         mineFragment.getUserInfo(this);
         homeFragment = new HomeFragment();
+        hotSaleFragment = new HotSaleFragment();
         manager.beginTransaction().add(R.id.fl_home_content, homeFragment).commit();
         //设置底部中间imageview点击监听
         holder.bottomCenter.setOnClickListener(this);
@@ -78,6 +79,7 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
             case R.id.rb_list:
                 //榜单
                 setBottomTextColor(2);//设置文字选中颜色
+                transaction.replace(R.id.fl_home_content, hotSaleFragment);
                 break;
             case R.id.rb_trends:
                 //动态
@@ -86,7 +88,6 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
             case R.id.rb_mine:
                 //我的
                 setBottomTextColor(4);//设置文字选中颜色
-                manager.beginTransaction().remove(homeFragment).commit();
                 transaction.replace(R.id.fl_home_content, mineFragment);
                 break;
         }
@@ -176,7 +177,6 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
                     break;
                 case R.id.tv_pop_item_record:
                     //本地录音
-
                     break;
             }
         }
@@ -190,8 +190,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
     };
 
     @Override
-    public UserBean getUserBean() {
-        return (UserBean) getIntent().getSerializableExtra("userBean");
+    public int getUserID() {
+        return getIntent().getIntExtra("id", -1);
     }
 
     //视图管理类

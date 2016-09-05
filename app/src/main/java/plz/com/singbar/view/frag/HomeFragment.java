@@ -66,7 +66,8 @@ public class HomeFragment extends Fragment {
         vp.setAdapter(adapter);
         tablayout.setupWithViewPager(vp);
     }
-    public interface SetContext{
+
+    public interface SetContext {
         void setContext(Context context);
     }
 }

@@ -3,7 +3,6 @@ package plz.com.singbar.view.frag;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,16 +19,12 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import plz.com.singbar.R;
 import plz.com.singbar.bean.NoteBean;
+import plz.com.singbar.operation.DataOperation;
 import plz.com.singbar.view.activity.ReadContentActivity;
 import plz.com.singbar.view.adapter.HomeitemAdapter;
 
@@ -37,7 +32,7 @@ import plz.com.singbar.view.adapter.HomeitemAdapter;
 /**
  * Created by Administrator on 2016/8/26.
  */
-public class HomeitemFragment extends Fragment implements HomeFragment.SetContext{
+public class HomeitemFragment extends Fragment implements HomeFragment.SetContext,DataOperation.OnPostFinish{
     private String[] urls = new String[]{
             "http://changba.com/commonreport/testsrc/view2.php?id=899&msgid=899&curuserid=155553520&curuserid=155553520&code=Gt1bjDM0qnEZ4aFQeA8nF98Et52lvNZxS42el5XvYuKPpYCJ35x7XY9xHX6ZtjJhG27dKQO0DoVTpnKLpp_xxqm-UMdU9u3YXosRAVlEVu_0x0OJjGuS_A",
             "http://changba.com/commonreport/testsrc/view2.php?id=868&msgid=868&curuserid=155553520&curuserid=155553520&code=Gt1bjDM0qnEZ4aFQeA8nF98Et52lvNZxS42el5XvYuKPpYCJ35x7XY9xHX6ZtjJhG27dKQO0DoVTpnKLpp_xxqm-UMdU9u3YXosRAVlEVu_0x0OJjGuS_A",
@@ -71,7 +66,9 @@ public class HomeitemFragment extends Fragment implements HomeFragment.SetContex
         lv = (PullToRefreshListView) view.findViewById(R.id.lv_fragment_home);
         loadingImg = (ImageView) view.findViewById(R.id.iv_loading);
         loadingText = (TextView) view.findViewById(R.id.tv_loading);
-        new DataOperation().execute(urls);
+        DataOperation dataOperation=new DataOperation();
+        dataOperation.setOnPostFinish(this);
+        dataOperation.execute(urls);
         lv.setMode(PullToRefreshBase.Mode.BOTH);
         lv.getRefreshableView().setOnItemClickListener(listener);
         lv.setOnRefreshListener(fl);
@@ -130,65 +127,22 @@ public class HomeitemFragment extends Fragment implements HomeFragment.SetContex
     }
 
 
-    private class DataOperation extends AsyncTask<String, Void, List<NoteBean>> {
-        @Override
-        protected void onPreExecute() {
-            AnimationDrawable drawable = (AnimationDrawable) loadingImg.getDrawable();
-            drawable.start();
-            loadingText.setVisibility(View.VISIBLE);
-        }
+    @Override
+    public void onPostFinish(List<NoteBean> noteBeen) {
+        noteList = noteBeen;
+        AnimationDrawable drawable = (AnimationDrawable) loadingImg.getDrawable();
+        drawable.stop();
+        addData();
+        loadingText.setVisibility(View.GONE);
+        loadingImg.setVisibility(View.GONE);
+        buildadapter(noteListPart);
+    }
 
-        @Override
-        protected List<NoteBean> doInBackground(String... urls) {
-            Log.i("result", "doInBackground");
-            List<NoteBean> list = new ArrayList<>();
-            for (String url : urls) {
-                try {
-                    Document document = Jsoup.connect(url).get();
-                    Element el = document.select(".article-top").first();//解析得到第一个class=“article-top”标签
-                    String title = el.select(".article-title").text();
-                    Log.i("result", "doInBackground: title --  " + title);
-                    String imgUrl = el.select(".article-img").attr("src");
-                    Log.i("result", "doInBackground: img -- " + imgUrl);
-                    Element ele = document.select(".article").first();
-                    Elements es = ele.select("span");
-                    String content = "";
-                    for (Element e : es) {
-                        if (content.length() < 50) {
-                            String con = e.text();
-                            if (con != null && con.length() >= 1) {
-                                content += con;
-                            }
-                        } else {
-                            Log.i("result", content);
-                            break;
-                        }
-
-                    }
-                    NoteBean noteBean = new NoteBean();
-                    noteBean.setTitle(title);
-                    noteBean.setUrl(url);
-                    noteBean.setImgUrl(imgUrl);
-                    noteBean.setFirstLine(content);
-                    list.add(noteBean);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            return list;
-        }
-
-        @Override
-        protected void onPostExecute(List<NoteBean> noteBeen) {
-            Log.i("result", "onPostExecute");
-            noteList = noteBeen;
-            AnimationDrawable drawable = (AnimationDrawable) loadingImg.getDrawable();
-            drawable.stop();
-            addData();
-            loadingText.setVisibility(View.GONE);
-            loadingImg.setVisibility(View.GONE);
-            buildadapter(noteListPart);
-        }
+    @Override
+    public void onPre() {
+        AnimationDrawable drawable = (AnimationDrawable) loadingImg.getDrawable();
+        drawable.start();
+        loadingText.setVisibility(View.VISIBLE);
     }
 
     private void addData() {

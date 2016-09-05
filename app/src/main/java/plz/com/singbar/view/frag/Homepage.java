@@ -10,13 +10,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import plz.com.singbar.R;
 import plz.com.singbar.bean.UserOwnSongsBean;
 import plz.com.singbar.view.activity.ListenActivity;
-import plz.com.singbar.view.adapter.FocusitemAdapter;
+import plz.com.singbar.view.adapter.HomepageAdapter;
 import plz.com.singbar.view.info.FocusitemInfo;
 
 /**
@@ -30,25 +32,25 @@ public class Homepage extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.homepagelistview, container, false);
         init();
         buildadapter();
         return view;
     }
 
     private void init() {
-        lv = (ListView) view.findViewById(R.id.lv_fragment_home);
+        lv = (ListView) view.findViewById(R.id.homepage_list);
         lv.setOnItemClickListener(listener);
         list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             UserOwnSongsBean info = new UserOwnSongsBean();
             String name = "secret";
-            String singname = "11111`1";
-//            String time = "4分钟前";
+            String singname = "曾经的你";
             int singnum = 521;
             int comment = 22163;
             int flower = 31311;
-//            info.setTime(time);
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+            info.setTime(format.format(new Date()));
             info.setSongName(singname);
             info.setTrys(singnum);
             info.setComments(comment);
@@ -58,7 +60,7 @@ public class Homepage extends Fragment {
     }
 
     private void buildadapter() {
-        FocusitemAdapter adapter = new FocusitemAdapter(list, getContext());
+        HomepageAdapter adapter = new HomepageAdapter(list, getContext());
         lv.setAdapter(adapter);
     }
 
