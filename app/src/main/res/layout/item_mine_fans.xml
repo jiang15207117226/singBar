@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/iv_mine_item_afans_head"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="5dp"
+        android:src="@mipmap/health_guide_woman_selected" />
+
+    <TextView
+        android:id="@+id/tv_mine_item_fans_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_mine_item_afans_head"
+        android:layout_toRightOf="@+id/iv_mine_item_afans_head"
+        android:padding="5dp"
+        android:text="name"
+        android:textColor="@color/mine_item_opus_name_color"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_mine_fans_callName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_mine_item_fans_name"
+        android:layout_below="@+id/tv_mine_item_fans_name"
+        android:padding="5dp"
+        android:text="超级明星" />
+
+    <TextView
+        android:id="@+id/tv_fans_focus"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/selector_mine_item_fans_btn_bg"
+        android:button="@null"
+        android:gravity="center"
+        android:text="她的主页"
+        android:textColor="@color/mine_item_attention_btn_bg_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/tv_mine_fans_callName"
+        android:layout_below="@+id/iv_mine_item_afans_head"
+        android:layout_marginLeft="5dp"
+        android:background="@color/mine_item_fl_bg"
+        android:clickable="true" />
+</RelativeLayout>

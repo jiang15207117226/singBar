@@ -31,9 +31,7 @@ public class HotSaleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.activity_fragment_home, container, false);
-
         init();
         build();
         return view;

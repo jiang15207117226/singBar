@@ -21,11 +21,11 @@ import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.operation.DbOperation;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-    private   ViewHolder holder;
+    private ViewHolder holder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view=LayoutInflater.from(this).inflate(R.layout.activity_main,null);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
         //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         //设置状态栏颜色
@@ -49,7 +49,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
          */
         setClickListener();
     }
-    private void setClickListener(){
+
+    private void setClickListener() {
         holder.btnLogin.setOnClickListener(this);
         holder.registerAccount.setOnClickListener(this);
         holder.findbackPw.setOnClickListener(this);
@@ -57,63 +58,65 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_login_login:
                 //登陆
-//                String account=holder.inputAccount.getText().toString();
-//                String pw=holder.inputPassword.getText().toString();
-//                if (account.length()<1||pw.length()<1){
-//                    Toast.makeText(this,"用户名或密码为空...",Toast.LENGTH_SHORT).show();
-//                    break;
-//                }
-//                List<UserBean> list= DbOperation.query(account);
-//                if (list==null||list.size()<1){
-//                    Log.i("result",list.size()+"");
-//                    Toast.makeText(this,"用户名或密码错误...",Toast.LENGTH_SHORT).show();
-//                    break;
-//                }else{
-//                    for (UserBean bean:list){
-//                       if (bean.getAccount().equals(account)){
-//                           if (bean.getPw().equals(pw)){
-//                               Toast.makeText(this,"登陆成功!",Toast.LENGTH_SHORT).show();
-                               Intent intent=new Intent(this,HomeActivity.class);
-                               startActivity(intent);
-//                           }else{
-//                               Toast.makeText(this,"密码错误...",Toast.LENGTH_SHORT).show();
-//                           }
-//                       }
-//                    }
-//                }
+                String account = holder.inputAccount.getText().toString();
+                String pw = holder.inputPassword.getText().toString();
+                if (account.length() < 1 || pw.length() < 1) {
+                    Toast.makeText(this, "用户名或密码为空...", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                List<UserBean> list = DbOperation.query(account);
+                if (list == null || list.size() < 1) {
+                    Log.i("result", list.size() + "");
+                    Toast.makeText(this, "用户名或密码错误...", Toast.LENGTH_SHORT).show();
+                    break;
+                } else {
+                    for (UserBean bean : list) {
+                        if (bean.getAccount().equals(account)) {
+                            if (bean.getPw().equals(pw)) {
+                                Toast.makeText(this, "登陆成功!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(this, HomeActivity.class);
+                                intent.putExtra("id",bean.getId());
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(this, "密码错误...", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
                 break;
             case R.id.tv_login_registerAccount:
                 //注册账号
-                Intent register=new Intent(this,RegisterActivity.class);
+                Intent register = new Intent(this, RegisterActivity.class);
                 startActivity(register);
-            break;
+                break;
             case R.id.tv_login_findBackPW:
                 //找回密码
-                Intent findBack=new Intent(this,FindBackPwActivity.class);
+                Intent findBack = new Intent(this, FindBackPwActivity.class);
                 startActivity(findBack);
-            break;
-
+                break;
         }
     }
 
     /**
      * 控件(视图)管理类
      */
-    private class ViewHolder{
+    private class ViewHolder {
         private EditText inputAccount;
         private EditText inputPassword;
         private Button btnLogin;
         private TextView registerAccount;
         private TextView findbackPw;
-        private void bindView(View view){
-            inputAccount= (EditText) view.findViewById(R.id.et_login_inputAccount);
-            inputPassword= (EditText) view.findViewById(R.id.et_login_inputPW);
-            btnLogin= (Button) view.findViewById(R.id.btn_login_login);
-            registerAccount= (TextView) view.findViewById(R.id.tv_login_registerAccount);
-            findbackPw= (TextView) view.findViewById(R.id.tv_login_findBackPW);
+
+        private void bindView(View view) {
+            inputAccount = (EditText) view.findViewById(R.id.et_login_inputAccount);
+            inputPassword = (EditText) view.findViewById(R.id.et_login_inputPW);
+            btnLogin = (Button) view.findViewById(R.id.btn_login_login);
+            registerAccount = (TextView) view.findViewById(R.id.tv_login_registerAccount);
+            findbackPw = (TextView) view.findViewById(R.id.tv_login_findBackPW);
         }
     }
 }

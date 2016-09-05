@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sping">
+        <item>人气榜</item>
+        <item>实力榜</item>
+        <item>歌手榜</item>
+    </string-array>
+
+
+</resources>

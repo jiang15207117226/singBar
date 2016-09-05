@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:radius="13dp"/>
+            <stroke android:color="#B3171C" android:width="2dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="13dp"/>
+            <stroke android:color="@color/mine_item_attention_btn_bg_color" android:width="2dp"/>
+        </shape>
+    </item>
+</selector>

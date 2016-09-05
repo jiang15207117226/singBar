@@ -28,4 +28,8 @@ dependencies {
     compile 'com.zcw:togglebutton-library:1.0.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.loopeer.android.thirdparty.pulltorefresh:Android-PullToRefresh:2.1.1'
+    compile 'com.android.support:design:24.0.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'org.jsoup:jsoup:1.9.2'
 }
