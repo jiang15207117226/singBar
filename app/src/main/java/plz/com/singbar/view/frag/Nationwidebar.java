@@ -31,6 +31,8 @@ public class Nationwidebar extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+     //   View view = inflater.inflate(R.layout.activity_nationwidebar, container, false);
+        return super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.activity_nationwidebar, container, false);
         init();
         buildadapter();
