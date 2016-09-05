@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/home_bottom_rg_bg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:clickable="true"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/iv_dg_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="onclick"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="点歌台"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <ImageView
+
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/sousuo" />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_weight="1"
+        android:id="@+id/fl_diange_one"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </FrameLayout>
+  <RadioGroup
+      android:background="@color/home_bottom_rg_bg"
+      android:layout_gravity="bottom"
+      android:id="@+id/rg_diange_one"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+      <RadioButton
+          android:checked="true"
+          android:id="@+id/rb_dg_gx"
+          android:layout_marginTop="3dp"
+          android:drawableTop="@drawable/selector_diange_xx"
+          android:gravity="center"
+          android:layout_weight="1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="#F4C600"
+          android:button="@null"
+          android:text="歌星点歌"/>
+      <RadioButton
+          android:id="@+id/rb_dg_dg"
+          android:layout_marginTop="3dp"
+          android:textColor="#ffffff"
+          android:drawableTop="@drawable/selector_diange_fenlei"
+          android:gravity="center"
+          android:layout_weight="1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:button="@null"
+          android:text="歌单"/>
+      <RadioButton
+          android:id="@+id/rb_dg_hc"
+          android:textColor="#ffffff"
+          android:layout_marginTop="3dp"
+          android:drawableTop="@drawable/selector_diange_hc"
+          android:gravity="center"
+          android:layout_weight="1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:button="@null"
+          android:text="合唱"/>
+      <RadioButton
+          android:id="@+id/rb_dg_qc"
+          android:textColor="#ffffff"
+          android:layout_marginTop="3dp"
+          android:drawableTop="@drawable/selector_diange_qc"
+          android:gravity="center"
+          android:layout_weight="1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:button="@null"
+          android:text="清唱"/>
+  </RadioGroup>
+</LinearLayout>
