@@ -34,12 +34,13 @@ import plz.com.singbar.view.adapter.FocusitemAdapter;
  */
 public class FocusitemFragment extends Fragment {
     private View view;
+    private FocusitemAdapter adapter;
     private ImageView loading;
     private TextView loadingText;
     private com.handmark.pulltorefresh.library.PullToRefreshListView lv;
     private List<UserOwnSongsBean> list;
-    private List<UserBean>userList;
-    private FocusitemAdapter adapter;
+    private List<UserBean> userList;
+    private TextView tv;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,17 +53,19 @@ public class FocusitemFragment extends Fragment {
         lv = (PullToRefreshListView) view.findViewById(R.id.lv_fragment_home);
         loading = (ImageView) view.findViewById(R.id.iv_loading);
         loadingText = (TextView) view.findViewById(R.id.tv_loading);
+        tv= (TextView) view.findViewById(R.id.tv_focus);
         lv.setMode(PullToRefreshBase.Mode.BOTH);
         lv.getRefreshableView().setOnItemClickListener(listener);
         lv.setOnRefreshListener(fl);
-        buildadapter();
         handler.postDelayed(thread,1000);
+
     }
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what==0x01){
                 getdata();
+                buildadapter();
                 AnimationDrawable drawable= (AnimationDrawable) loading.getDrawable();
                 drawable.stop();
                 loading.setVisibility(View.GONE);
@@ -109,8 +112,13 @@ public class FocusitemFragment extends Fragment {
     }
 
     private void buildadapter() {
-        adapter = new FocusitemAdapter(list, getActivity().getBaseContext());
-        lv.setAdapter(adapter);
+        if (list == null || list.size() < 1) {
+            tv.setVisibility(View.VISIBLE);
+        } else {
+            tv.setVisibility(View.GONE);
+            adapter = new FocusitemAdapter(list, getActivity().getBaseContext());
+            lv.setAdapter(adapter);
+        }
     }
 
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {

@@ -1,16 +1,23 @@
 package plz.com.singbar.view.activity;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import plz.com.singbar.R;
@@ -22,6 +29,7 @@ import plz.com.singbar.bean.UserOwnSongsBean;
  * Created by Administrator on 2016/8/29.
  */
 public class ListenActivity extends Activity implements CompoundButton.OnCheckedChangeListener{
+    private MyService.MyIBinder binder;
     private ImageView head;
     private TextView name;
     private TextView callName;
@@ -38,9 +46,9 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
     private UserBean bean;
     private CheckBox play;
     private CheckBox atten;
-    private MediaPlayer player;
-    private boolean ispause=false;
-    private int position=0;
+    private PopupWindow pw;
+    private LayoutInflater inflater;
+    private EditText et;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +61,8 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
     }
 
     private void init() {
+        Intent intents=new Intent(this, MyService.class);
+        bindService(intents,connection,BIND_AUTO_CREATE);
         giveFlower= (CheckBox) findViewById(R.id.cb_user_flower);
         wComment= (CheckBox) findViewById(R.id.cb_user_comment);
         play= (CheckBox) findViewById(R.id.cb_activity_play);
@@ -75,18 +85,38 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         callName.setText(bean.getButility());
         fansCount.setText(bean.getFansCount()+"");
         songName.setText(songsBean.getSongName());
-        sorce.setText("来听听我唱的《"+songsBean.getSongName()+"》");
+        sorce.setText("...来听听我唱的《"+songsBean.getSongName()+"》");
         time.setText(songsBean.getTime());
         singnum.setText(songsBean.getTrys()+"");
         comment.setText(songsBean.getComments()+"");
         flower.setText(songsBean.getFlowers()+"");
 
-        player=new MediaPlayer();
-        player=MediaPlayer.create(this,R.raw.lianrenxing);
-
         atten.setOnCheckedChangeListener(this);
+
+        inflater = LayoutInflater.from(this);
+        View popupwindow = inflater.inflate(R.layout.item_comment, null);
+        et= (EditText) popupwindow.findViewById(R.id.et_comment);
+        pw = new PopupWindow(popupwindow, 1000, 800);
+        pw.setTouchable(true);
+        pw.setOutsideTouchable(true);
+        pw.setBackgroundDrawable(new ColorDrawable(0000));
+        pw.setFocusable(true);
     }
+    ServiceConnection connection=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder= (MyService.MyIBinder) service;
+
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
     public void click(View view){
+        if (binder==null){
+            return;
+        }
         int comments=Integer.parseInt(comment.getText().toString());
         int flowers=Integer.parseInt(flower.getText().toString());
         switch (view.getId()){
@@ -95,32 +125,28 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
                 break;
             case R.id.cb_activity_play:
                 if (play.isChecked()){
-                    player.start();
+                    binder.play();
                 }else {
-                    if(ispause){
-                        player.seekTo(position);
-                        player.start();
-                        ispause=false;
-                    }else {
-                        player.pause();
-                        position = player.getCurrentPosition();
-                        ispause = true;
-                    }
+                    binder.pause();
                 }
 
                 break;
             case R.id.rb_activity_down:
 
                 break;
-            case R.id.iv_focus_listen:
-
-                break;
             case R.id.tv_user_share:
-
+                String s="来听听我唱的《"+songsBean.getSongName()+"》";
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT,s);
+                shareIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareIntent, "分享到"));
                 break;
             case R.id.cb_user_comment:
                 if (wComment.isChecked()){
+                    et.setText(null);
                     comment.setText(comments+1+"");
+                    pw.showAtLocation(view, Gravity.CENTER, 0, 300);
                 }else{
                     comment.setText(comments-1+"");
                 }
@@ -134,6 +160,13 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
                 break;
             case R.id.iv_listen_back:
                 finish();
+                break;
+            case R.id.bt_comment_no:
+                pw.dismiss();
+                break;
+            case R.id.bt_comment_finish:
+                songsBean.setComment(et.getText().toString());
+                pw.dismiss();
                 break;
 
         }

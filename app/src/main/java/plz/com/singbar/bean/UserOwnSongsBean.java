@@ -13,6 +13,7 @@ public class UserOwnSongsBean implements Serializable{
     private int trys;           //试听数
     private String voiceUrl;    //歌曲地址
     private String time;        //时间
+    private String comment;     //评论内容
 
     public int getId() {
         return id;
@@ -68,5 +69,13 @@ public class UserOwnSongsBean implements Serializable{
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

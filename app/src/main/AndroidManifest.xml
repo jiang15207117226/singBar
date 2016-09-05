@@ -26,6 +26,7 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity android:name=".view.activity.ListenActivity"></activity>
         <activity android:name=".view.activity.ReadContentActivity"/>
+        <service android:name=".view.activity.MyService"></service>
     </application>
 
 </manifest>

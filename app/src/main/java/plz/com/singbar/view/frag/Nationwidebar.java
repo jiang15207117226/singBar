@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import plz.com.singbar.R;
+import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.view.activity.ListenActivity;
 import plz.com.singbar.view.adapter.NationwidebarAdapter;
-import plz.com.singbar.view.info.FocusitemInfo;
 import plz.com.singbar.view.info.NationwidebarInfo;
 
 
@@ -43,6 +43,7 @@ public class Nationwidebar extends Fragment {
         list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NationwidebarInfo info = new NationwidebarInfo();
+            UserBean bean=new UserBean();
             String userName = "许巍";
             String singname = "曾经的你";
             int audition = 136;
@@ -50,7 +51,6 @@ public class Nationwidebar extends Fragment {
             info.setUserName(userName);
             info.setSingname(singname);
             info.setAudition(audition);
-
             list.add(info);
         }
     }
@@ -64,7 +64,7 @@ public class Nationwidebar extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Intent intent = new Intent(getActivity(), ListenActivity.class);
-            FocusitemInfo info = (FocusitemInfo) adapterView.getItemAtPosition(i);
+            NationwidebarInfo info = (NationwidebarInfo) adapterView.getItemAtPosition(i);
             intent.putExtra("key", info);
             startActivity(intent);
 
