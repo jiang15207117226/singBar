@@ -159,7 +159,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tv_mine_item_opus_source"
+            android:id="@+id/tv_listen_source"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_listen_user"
@@ -234,7 +234,7 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/tv_user_flower"
+            android:id="@+id/cb_user_flower"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -248,7 +248,7 @@
             android:textColor="@color/white" />
 
         <CheckBox
-            android:id="@+id/tv_user_comment"
+            android:id="@+id/cb_user_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

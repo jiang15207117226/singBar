@@ -1,15 +1,18 @@
 package plz.com.singbar.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/8/31.
  */
-public class UserOwnSongsBean {
-    private int id;
-    private String songName;
-    private int flowers;
-    private int comments;
-    private int trys;
-    private String time;
+public class UserOwnSongsBean implements Serializable{
+    private int id;             //id
+    private String songName;    //歌曲名
+    private int flowers;        //收花数
+    private int comments;       //评论数
+    private int trys;           //试听数
+    private String voiceUrl;    //歌曲地址
+    private String time;        //时间
 
     public int getId() {
         return id;
@@ -49,6 +52,14 @@ public class UserOwnSongsBean {
 
     public void setTrys(int trys) {
         this.trys = trys;
+    }
+
+    public String getVoiceUrl() {
+        return voiceUrl;
+    }
+
+    public void setVoiceUrl(String voiceUrl) {
+        this.voiceUrl = voiceUrl;
     }
 
     public String getTime() {

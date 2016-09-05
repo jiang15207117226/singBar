@@ -86,6 +86,7 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
             case R.id.rb_mine:
                 //我的
                 setBottomTextColor(4);//设置文字选中颜色
+                manager.beginTransaction().remove(homeFragment).commit();
                 transaction.replace(R.id.fl_home_content, mineFragment);
                 break;
         }

@@ -77,6 +77,7 @@ public class MineOpusAdapter extends BaseAdapter {
         return view;
     }
 
+
     private class ViewHolder {
         private ImageView head;
         private TextView userName;
