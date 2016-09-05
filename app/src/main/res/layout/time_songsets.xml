@@ -5,8 +5,9 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_dg_head"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:padding="10dp"
         android:src="@mipmap/health_guide_men_selected" />
 
@@ -18,6 +19,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_dg_gname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="120dp"
@@ -30,12 +32,14 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tv_dg_daxiao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3.5m"
                 android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/tv_dg_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="80dp"
@@ -47,6 +51,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_dg_kg"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
