@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import plz.com.singbar.R;
-import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.view.activity.ListenActivity;
 import plz.com.singbar.view.adapter.NationwidebarAdapter;
 import plz.com.singbar.view.info.NationwidebarInfo;
@@ -31,8 +30,6 @@ public class Nationwidebar extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-     //   View view = inflater.inflate(R.layout.activity_nationwidebar, container, false);
-        return super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.activity_nationwidebar, container, false);
         init();
         buildadapter();
@@ -45,7 +42,6 @@ public class Nationwidebar extends Fragment {
         list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NationwidebarInfo info = new NationwidebarInfo();
-            UserBean bean=new UserBean();
             String userName = "许巍";
             String singname = "曾经的你";
             int audition = 136;

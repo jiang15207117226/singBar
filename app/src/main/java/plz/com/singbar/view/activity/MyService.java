@@ -7,31 +7,64 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+
+import java.util.List;
+
 import plz.com.singbar.R;
+import plz.com.singbar.view.info.DgGxInfo;
 
 
 /**
  * Created by Administrator on 2016/7/13.
  */
 public class MyService extends Service {
-    private MediaPlayer player;
-    private boolean ispause=false;
-    private int position=0;
+    public MediaPlayer player=new MediaPlayer();
+    public int position=0;
+    private int musicposition;
+    public List<DgGxInfo> list;
 
     public class MyIBinder extends Binder {
+        public int getDuration(){
+            int duration = 0;
+            if (player!= null) {
+                duration = player.getDuration();
+            }
+            return duration;
+        }
+        public int getCurrentPosition(){
+            if (player!= null) {
+                position = player.getCurrentPosition();
+            }
+            return position;
+        }
+        public void seekTo(int position) {
+            if (player != null) {
+                player.seekTo(position);
+            }
+        }
         public void play(){
+            player.seekTo(position);
             player.start();
         }
         public void pause(){
-            if(ispause){
-                player.seekTo(position);
-                player.start();
-                ispause=false;
-            }else {
                 player.pause();
                 position=player.getCurrentPosition();
-                ispause=true;
+        }
+        public void playup(){
+            if (musicposition-1<0){
+                musicposition=list.size()-1;
+            }else {
+                musicposition--;
             }
+            player.start();
+        }
+        public void playdown(){
+            if (musicposition+1>list.size()){
+                musicposition=0;
+            }else {
+                musicposition++;
+            }
+            player.start();
         }
 
     }

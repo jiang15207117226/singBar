@@ -33,7 +33,6 @@
         <activity android:name=".view.activity.ListenActivity"></activity>
         <activity android:name=".view.activity.DiangeActivity">
 
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
