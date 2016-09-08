@@ -89,12 +89,27 @@
                     android:onClick="click" />
 
             </RadioGroup>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_music_time"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/listen_ll"
+                android:text="03.25"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_music_playtime"
+                android:textColor="@color/white"
+                android:layout_below="@id/listen_ll"
+                android:text="00.00"/>
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
+            <SeekBar
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_below="@id/listen_ll" />
+                android:layout_height="wrap_content"
+                android:id="@+id/sb_activity"
+                android:layout_below="@id/tv_music_time" />
         </RelativeLayout>
     </FrameLayout>
 
@@ -247,12 +262,11 @@
             android:text="送花"
             android:textColor="@color/white" />
 
-        <CheckBox
-            android:id="@+id/cb_user_comment"
+        <TextView
+            android:id="@+id/tv_user_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:button="@null"
             android:clickable="true"
             android:drawableTop="@drawable/selector_comments"
             android:gravity="center"

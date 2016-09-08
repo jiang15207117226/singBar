@@ -65,8 +65,8 @@ public class MineOpusAdapter extends BaseAdapter {
             view.setTag(holder);
         }
         holder= (ViewHolder) view.getTag();
-        Picasso.with(context).load(bean.getHead()).placeholder(R.mipmap.health_guide_woman_selected).resize(80,80).transform(new CircleTrans()).centerCrop().into(holder.head);
-        holder.userName.setText(bean.getPetName());
+//        Picasso.with(context).load(bean.getHead()).placeholder(R.mipmap.health_guide_woman_selected).resize(80,80).transform(new CircleTrans()).centerCrop().into(holder.head);
+//        holder.userName.setText(bean.getPetName());
         String songName=list.get(i).getSongName();
         holder.songName.setText(songName);
         holder.time.setText(list.get(i).getTime());

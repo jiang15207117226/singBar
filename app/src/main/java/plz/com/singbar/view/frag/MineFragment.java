@@ -77,11 +77,11 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         userID = info.getUserID();
         Log.i("result", userID + "");
         userBean = DbOperation.queryById(userID);
-        String headUrl = userBean.getHead();
-        if (headUrl != null) {
-            Picasso.with(getActivity()).load(headUrl).placeholder(R.mipmap.health_guide_woman_selected).resize(100, 100).transform(new CircleTrans()).centerCrop().into(holder.userHead);
-        }
-        holder.userName.setText(userBean.getPetName());
+//        String headUrl = userBean.getHead();
+//        if (headUrl != null) {
+//            Picasso.with(getActivity()).load(headUrl).placeholder(R.mipmap.health_guide_woman_selected).resize(100, 100).transform(new CircleTrans()).centerCrop().into(holder.userHead);
+//        }
+//        holder.userName.setText(userBean.getPetName());
         list = new ArrayList<>();
         addListData();
         if (list == null || list.size() < 1) {
