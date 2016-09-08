@@ -8,17 +8,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/iv_focus_image"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
             android:src="@mipmap/health_guide_woman_selected"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_focus_image"
-            android:layout_margin="10dp"
+            android:padding="5dp"
             android:id="@+id/tv_focus_name"
+            android:textColor="@color/home_bottom_text_checked_color"
+            android:textSize="20sp"
             android:text="name"/>
         <TextView
             android:layout_width="wrap_content"
@@ -27,6 +32,8 @@
             android:layout_toRightOf="@id/iv_focus_image"
             android:layout_below="@id/tv_focus_name"
             android:layout_alignLeft="@id/tv_focus_name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:text="singname"/>
         <TextView
             android:layout_width="wrap_content"
@@ -39,8 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/iv_focus_listen"
-            android:src="@mipmap/audition"
-            android:padding="5dp"
+            android:src="@mipmap/icon_listen_lv"
             android:layout_toLeftOf="@+id/tv_focus_singnum"
             android:layout_below="@id/tv_focus_time" />
         <TextView
@@ -60,29 +66,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/iv_focus_comment"
-                android:padding="5dp"
-                android:src="@mipmap/timeline_icon_comment_disable"/>
+                android:src="@mipmap/icon_comments_x32"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_focus_comment"
-                android:padding="5dp"
+                android:layout_marginRight="20dp"
                 android:text="100"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/iv_focus_flower"
-                android:padding="5dp"
                 android:src="@mipmap/flower0"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_focus_flower"
-                android:padding="5dp"
                 android:text="100"/>
-
         </LinearLayout>
+        <TextView
+            android:id="@+id/tv_item_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_focus_image"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/icon_border"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:text="..来听听我唱的《XX之歌》" />
 
     </RelativeLayout>
+
 
 </LinearLayout>

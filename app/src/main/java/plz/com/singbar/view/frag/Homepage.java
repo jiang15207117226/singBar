@@ -19,7 +19,6 @@ import plz.com.singbar.R;
 import plz.com.singbar.bean.UserOwnSongsBean;
 import plz.com.singbar.view.activity.ListenActivity;
 import plz.com.singbar.view.adapter.HomepageAdapter;
-import plz.com.singbar.view.info.FocusitemInfo;
 
 /**
  * Created by Administrator on 2016/8/31.
@@ -68,7 +67,7 @@ public class Homepage extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Intent intent = new Intent(getActivity(), ListenActivity.class);
-            FocusitemInfo info = (FocusitemInfo) adapterView.getItemAtPosition(i);
+            UserOwnSongsBean info = (UserOwnSongsBean) adapterView.getItemAtPosition(i);
             intent.putExtra("key", info);
             startActivity(intent);
 
