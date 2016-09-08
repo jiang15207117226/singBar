@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -48,7 +49,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
     private CheckBox giveFlower;
     private UserOwnSongsBean songsBean;
     private UserBean bean;
-    private CheckBox play;
+    private Button play;
     private CheckBox atten;
     private PopupWindow pw;
     private LayoutInflater inflater;
@@ -72,8 +73,10 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             binder= (MyService.MyIBinder) service;
+            binder.getmusic();
             seekBar.setMax(binder.getDuration());
             musictime.setText(dateFormat.format(binder.getDuration()));
+//            songName.setText(binder.getmusicname());
         }
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -86,7 +89,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         Intent intents=new Intent(this, MyService.class);
         bindService(intents,connection,BIND_AUTO_CREATE);
         giveFlower= (CheckBox) findViewById(R.id.cb_user_flower);
-        play= (CheckBox) findViewById(R.id.cb_activity_play);
+        play= (Button) findViewById(R.id.cb_activity_play);
         atten= (CheckBox) findViewById(R.id.cb_focus_listen);
         head= (ImageView) findViewById(R.id.iv_listen_user);
         name= (TextView) findViewById(R.id.tv_listen_username);
@@ -148,17 +151,21 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         switch (view.getId()){
             case R.id.rb_activity_up:
                 binder.playup();
+                play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 break;
             case R.id.cb_activity_play:
-                if (play.isChecked()){
-                    binder.play();
-                }else {
+                if (binder.getplayer().isPlaying()){
                     binder.pause();
+                    play.setBackground(getDrawable(R.mipmap.minibar_btn_play_normal));
+                }else {
+                    binder.play();
+                    play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 }
                 handler.post(updateThread);
                 break;
             case R.id.rb_activity_down:
                 binder.playdown();
+                play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 break;
             case R.id.tv_user_share:
                 String s="来听听我唱的《"+songsBean.getSongName()+"》";
