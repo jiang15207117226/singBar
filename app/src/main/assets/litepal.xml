@@ -2,11 +2,13 @@
 <litepal>
     <dbname value="user"></dbname>
 
-    <version value="3"></version>
+    <version value="6"></version>
 
     <list>
         <mapping class="plz.com.singbar.bean.UserBean"></mapping>
         <mapping class="plz.com.singbar.bean.NoteBean"></mapping>
-        <mapping class="plz.com.singbar.bean.MyAttenBean"></mapping>
+        <mapping class="plz.com.singbar.bean.AttenBean"></mapping>
+        <mapping class="plz.com.singbar.bean.UserDetailBean"></mapping>
+        <mapping class="plz.com.singbar.bean.UserOwnSongsBean"></mapping>
     </list>
 </litepal>

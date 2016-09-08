@@ -1,11 +1,13 @@
 package plz.com.singbar.bean;
 
+import org.litepal.crud.DataSupport;
+
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2016/8/31.
  */
-public class UserOwnSongsBean implements Serializable{
+public class UserOwnSongsBean extends DataSupport implements Serializable{
     private int id;             //id
     private String songName;    //歌曲名
     private int flowers;        //收花数
@@ -13,6 +15,15 @@ public class UserOwnSongsBean implements Serializable{
     private int trys;           //试听数
     private String voiceUrl;    //歌曲地址
     private String time;        //时间
+    private UserBean userBean;
+
+    public UserBean getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
+    }
 
     public int getId() {
         return id;

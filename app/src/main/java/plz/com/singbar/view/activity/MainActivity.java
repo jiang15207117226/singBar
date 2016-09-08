@@ -22,6 +22,7 @@ import plz.com.singbar.operation.DbOperation;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private ViewHolder holder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             if (bean.getPw().equals(pw)) {
                                 Toast.makeText(this, "登陆成功!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(this, HomeActivity.class);
-                                intent.putExtra("id",bean.getId());
+                                intent.putExtra("id", bean.getId());
                                 startActivity(intent);
                                 finish();
                             } else {

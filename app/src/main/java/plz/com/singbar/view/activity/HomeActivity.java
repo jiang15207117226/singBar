@@ -52,6 +52,9 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
      * @param view
      */
     private void init(View view) {
+//        for (int i=2;i<50;i++){
+//            DbOperation.insertData(i);
+//        }
         holder = new ViewHolder();
         holder.bindView(view);
         initPop();//初始化pop

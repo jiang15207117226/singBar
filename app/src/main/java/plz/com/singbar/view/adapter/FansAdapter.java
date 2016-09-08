@@ -1,6 +1,7 @@
 package plz.com.singbar.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.List;
 import plz.com.singbar.R;
 import plz.com.singbar.bean.FansBean;
 import plz.com.singbar.operation.CircleTrans;
+import plz.com.singbar.view.activity.HerHomeActivity;
 
 /**
  * Created by Administrator on 2016/9/1.
@@ -24,7 +26,7 @@ public class FansAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;
     private List<FansBean> list;
     private LayoutInflater inflater;
-
+    private boolean isOthersHome=false;
     public FansAdapter(Context context, List<FansBean> list) {
         this.context = context;
         this.list = list;
@@ -62,17 +64,30 @@ public class FansAdapter extends BaseAdapter implements View.OnClickListener {
         Picasso.with(context).load(list.get(i).getHead()).placeholder(R.mipmap.health_guide_woman_selected).resize(80, 80).transform(new CircleTrans()).centerCrop().into(holder.head);
         holder.name.setText(list.get(i).getPetName());
         holder.callName.setText(list.get(i).getCallName());
-        holder.herHome.setOnClickListener(this);
-        holder.herHome.setTag(i);
+        if (isOthersHome){
+            holder.herHome.setVisibility(View.INVISIBLE);
+        }else {
+            holder.herHome.setVisibility(View.VISIBLE);
+            holder.herHome.setOnClickListener(this);
+            holder.herHome.setTag(i);
+        }
         return view;
     }
-
+    public void notifyData(List<FansBean> list){
+        this.list=list;
+        notifyDataSetChanged();
+    }
     @Override
     public void onClick(View view) {
         int i = (int) view.getTag();
         Log.i("result", i + "-->i");
+        Intent intent=new Intent(context, HerHomeActivity.class);
+        intent.putExtra("id",list.get(i).getUserId());
+        context.startActivity(intent);
     }
-
+    public void setIsOthersHome(boolean isOthersHome){
+        this.isOthersHome=isOthersHome;
+    }
     private class ViewHolder {
         private ImageView head;
         private TextView name;

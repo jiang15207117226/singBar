@@ -16,6 +16,7 @@ import java.util.Date;
 
 import plz.com.singbar.R;
 import plz.com.singbar.bean.UserBean;
+import plz.com.singbar.bean.UserDetailBean;
 import plz.com.singbar.operation.GenerMbAccount;
 
 /**
@@ -60,6 +61,7 @@ public class SetPwFrag extends Fragment implements View.OnClickListener {
             }
         } else {
             UserBean bean = new UserBean();
+            UserDetailBean userDetailBean=new UserDetailBean();
             bean.setAccount(account);
             bean.setPetName(pN);
             bean.setPw(pw);
@@ -67,7 +69,10 @@ public class SetPwFrag extends Fragment implements View.OnClickListener {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String time = format.format(new Date());
             bean.setTime(time);
+            bean.setButility("歌唱新秀");
+            bean.setUserDetailBean(userDetailBean);
             bean.save();
+            userDetailBean.save();
             Log.i("result","save");
             p.replaceToFinish();
         }

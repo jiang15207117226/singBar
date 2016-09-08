@@ -57,8 +57,6 @@ public class HomeFragment extends Fragment {
         tablayout.setTabMode(TabLayout.MODE_FIXED);
         tablayout.addTab(tablayout.newTab().setText(tabList.get(0)));
         tablayout.addTab(tablayout.newTab().setText(tabList.get(1)));
-
-
     }
 
     private void buildadapter() {

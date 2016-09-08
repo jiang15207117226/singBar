@@ -7,6 +7,15 @@ public class FansBean {
     private String head;
     private String petName;
     private String callName;
+    private int userId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getHead() {
         return head;
