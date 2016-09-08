@@ -7,6 +7,15 @@ public class DgGxInfo {
     private String ima;
     private String singname;
     private String singername;
+    private String playurl;
+
+    public String getPlayurl() {
+        return playurl;
+    }
+
+    public void setPlayurl(String playurl) {
+        this.playurl = playurl;
+    }
 
     public String getIma() {
         return ima;

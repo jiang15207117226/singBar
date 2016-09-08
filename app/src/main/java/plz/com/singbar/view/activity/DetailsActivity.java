@@ -529,6 +529,7 @@ public class DetailsActivity extends Activity{
             System.out.println("requestCode"+requestCode);
             if (requestCode == 2) {
                 Uri uri = data.getData();//得到返回值并设置头像
+                Log.i("result",uri+"");
                 Picasso.with(DetailsActivity.this).load(uri).resize(50, 50).centerCrop().transform(new CircleTransform()).into(iv);
             }
         }

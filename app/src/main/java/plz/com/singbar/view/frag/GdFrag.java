@@ -1,5 +1,6 @@
 package plz.com.singbar.view.frag;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import plz.com.singbar.R;
+import plz.com.singbar.view.activity.GdInActivity;
 import plz.com.singbar.view.adapter.DgGdAdapter;
 import plz.com.singbar.view.info.DgGdInfo;
 
@@ -76,5 +79,15 @@ public class GdFrag extends Fragment{
 
         adapter=new DgGdAdapter(getActivity(),list,width2);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(l);
     }
+    AdapterView.OnItemClickListener l = new AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Intent intent = new Intent(getActivity(), GdInActivity.class);
+            intent.putExtra("keyword",list.get(i).getText());
+            startActivity(intent);
+
+        }
+    };
 }

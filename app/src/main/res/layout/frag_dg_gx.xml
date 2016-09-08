@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+
+        android:id="@+id/convenient_one"
+        android:layout_height="200dp"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/jianqie" />
+        app:canLoop="true"
+        />
 
     <LinearLayout
         android:background="@color/beijing"
@@ -21,6 +26,7 @@
             android:layout_height="30dp"
             android:background="#e33333"/>
         <TextView
+            android:id="@+id/tv_gx_one"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
