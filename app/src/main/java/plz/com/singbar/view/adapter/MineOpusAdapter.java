@@ -81,6 +81,7 @@ public class MineOpusAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
     private class ViewHolder {
         private ImageView head;
         private TextView userName;
