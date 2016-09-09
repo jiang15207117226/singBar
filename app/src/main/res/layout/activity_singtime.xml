@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/start_bt"
+            android:id="@+id/iv_start_bt"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
             android:src="@mipmap/changge" />
 
         <ImageView
-            android:id="@+id/end_bt"
+            android:id="@+id/iv_end_bt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

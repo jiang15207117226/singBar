@@ -118,8 +118,8 @@ public class MediaRecordertest extends Activity {
     }
 
     public void init() {
-        im1 = (ImageView) findViewById(R.id.start_bt);
-        im2 = (ImageView) findViewById(R.id.end_bt);
+        im1 = (ImageView) findViewById(R.id.iv_start_bt);
+        im2 = (ImageView) findViewById(R.id.iv_end_bt);
         lv = (ListView) findViewById(R.id.singtiem_listview);
     }
 
