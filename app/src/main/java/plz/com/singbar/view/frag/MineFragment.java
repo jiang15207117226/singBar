@@ -349,8 +349,8 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
             String time = format.format(new Date());
             userOwn.setTime(time);
             list.add(userOwn);
-            userOwn.save();
-            DbOperation.updateSongsUserId(userID, DbOperation.querySongsId(userOwn.getSongName()));
+//            userOwn.save();
+//            DbOperation.updateSongsUserId(userID, DbOperation.querySongsId(userOwn.getSongName()));
         }
     }
 

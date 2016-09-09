@@ -95,7 +95,7 @@ public class InsertAttenActivity extends Activity implements View.OnClickListene
             list = DbOperation.queryByPetName(input);
         }
         if (list == null || list.size() < 1) {
-            Toast.makeText(this, "搜索失败...请检查输入是否有误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "搜索失败...", Toast.LENGTH_SHORT).show();
         } else {
             listCopy=this.list;
             this.list=list;

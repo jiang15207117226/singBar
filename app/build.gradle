@@ -32,4 +32,6 @@ dependencies {
     compile 'com.android.support:design:24.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.jsoup:jsoup:1.9.2'
+    compile files('libs/open_sdk_r5756.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
 }

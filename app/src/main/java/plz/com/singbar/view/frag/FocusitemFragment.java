@@ -1,5 +1,6 @@
 package plz.com.singbar.view.frag;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ import plz.com.singbar.view.adapter.FocusitemAdapter;
 /**
  * Created by Administrator on 2016/8/26.
  */
-public class FocusitemFragment extends Fragment {
+public class FocusitemFragment extends Fragment implements HomeFragment.SetContext{
     private View view;
     private FocusitemAdapter adapter;
     private ImageView loading;
@@ -41,6 +42,7 @@ public class FocusitemFragment extends Fragment {
     private List<UserOwnSongsBean> list;
     private List<UserBean> userList;
     private TextView tv;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -116,7 +118,7 @@ public class FocusitemFragment extends Fragment {
             tv.setVisibility(View.VISIBLE);
         } else {
             tv.setVisibility(View.GONE);
-            adapter = new FocusitemAdapter(list, getActivity().getBaseContext());
+            adapter = new FocusitemAdapter(list, context);
             lv.setAdapter(adapter);
         }
     }
@@ -143,4 +145,9 @@ public class FocusitemFragment extends Fragment {
 
         }
     };
+
+    @Override
+    public void setContext(Context context) {
+        this.context=context;
+    }
 }

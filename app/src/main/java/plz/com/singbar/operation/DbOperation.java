@@ -159,8 +159,10 @@ public class DbOperation {
             if (!isExit) {
                 positions[i] = position;
                 List<UserBean> list1 = DbOperation.queryPartById(position);
-                UserBean bean = list1.get(0);
-                list.add(bean);
+                if (list1!=null&&list1.size()>=1){
+                    UserBean bean = list1.get(0);
+                    list.add(bean);
+                }
             }
         }
         return list;
