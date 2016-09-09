@@ -63,7 +63,7 @@ public class SongsOperation {
                 }
 
 
-                JSONObject object =jsonObject.optJSONObject("data");
+                final JSONObject object =jsonObject.optJSONObject("data");
                 Gson gson =new Gson();
                 Gson gsons =new Gson();
                 SingInfo singInfo =gsons.fromJson(object.toString(),SingInfo.class);
@@ -77,7 +77,7 @@ public class SongsOperation {
                         final SingInfoo singInfoo=gson.fromJson(array.get(i).toString(),SingInfoo.class);
 
                         String spec ="http://apis.baidu.com/geekery/music/playinfo";
-                        final String[] url = new String[1];
+
                         OkHttpClient mOkHttpClient = new OkHttpClient();
                         final Request request = new Request.Builder()
                                 .url(spec + "?hash=" + singInfoo.getHash()).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
@@ -109,11 +109,47 @@ public class SongsOperation {
                             }
                         });
 
+                        String speco ="http://apis.baidu.com/geekery/music/krc";
 
-                        listo.add(singInfoo);
+                        String arg="?name="+singInfoo.getFilename()+"&hash="+singInfoo.getHash()+"&time="+singInfoo.getDuration();
+                        OkHttpClient mOkHttpCliento = new OkHttpClient();
+                        final Request requesto = new Request.Builder()
+                                .url(speco + arg).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
+                                .get()
+                                .build();
+                        Call calloo = mOkHttpCliento.newCall(requesto);
+                        calloo.enqueue(new Callback() {
+
+
+                                          @Override
+                                          public void onFailure(Call call, IOException e) {
+
+                                          }
+
+                                          @Override
+                                          public void onResponse(Call call, Response response) throws IOException {
+                                              String stro = response.body().string();
+                                              Log.i("result","-------------------"+stro+"-------------------------");
+                                              JSONObject jsonObjecto = null;
+                                              try {
+                                                  jsonObjecto=new JSONObject(stro);
+                                                  JSONObject object1=jsonObjecto.optJSONObject("data");
+                                                  String ss =object1.optString("content");
+                                                  singInfoo.setContext(ss);
+
+                                              } catch (JSONException e) {
+                                                  e.printStackTrace();
+                                              }
+                                          }
+                                      });
+
+
+
+                            listo.add(singInfoo);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
 
                 }
                 singInfo.setSingInfoo(listo);

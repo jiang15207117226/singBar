@@ -20,6 +20,15 @@ public class SingInfoo implements Serializable{
     private String singername;
     private String hash;
     private String ima;
+    private String context;
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
 
     public String getUrl() {
         return url;
