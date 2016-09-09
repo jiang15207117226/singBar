@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+
+        android:id="@+id/convenient_one"
+        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        app:canLoop="true"
+        />
+
+    <LinearLayout
+        android:background="@color/beijing"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_width="8dp"
+            android:layout_height="30dp"
+            android:background="#e33333"/>
+        <TextView
+            android:id="@+id/tv_gx_one"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/beijing"
+            android:paddingLeft="10dp"
+            android:text="推荐歌曲"
+             />
+
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lv_dg_gx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+</LinearLayout>

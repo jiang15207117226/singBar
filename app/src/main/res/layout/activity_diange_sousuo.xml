@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/home_bottom_rg_bg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+   <LinearLayout
+
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:layout_gravity="center_vertical"
+       android:orientation="horizontal"
+       android:background="@drawable/shape_diange_sousuo"
+       android:layout_weight="1"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content">
+       <ImageView
+           android:layout_gravity="center_vertical"
+           android:layout_width="32dp"
+           android:layout_height="32dp"
+           android:src="@mipmap/sousuohei"/>
+     <EditText
+         android:id="@+id/et_diange_sousuo"
+         android:layout_gravity="center_vertical"
+         android:maxLines="1"
+         android:layout_marginLeft="5dp"
+         android:layout_marginRight="5dp"
+         android:background="@null"
+         android:layout_width="match_parent"
+         android:hint="歌名、歌手、专辑"
+         android:singleLine="true"
+         android:textColorHint="#C1C1C1"
+         android:layout_height="wrap_content" />
+
+   </LinearLayout>
+      <TextView
+          android:id="@+id/tv_diange_sousuo"
+          android:clickable="true"
+          android:textSize="18sp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="搜索"
+          android:textColor="#ffffff"
+          android:layout_gravity="center_vertical"
+          android:layout_marginRight="10dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ListView
+        android:id="@+id/lv_diange_sousuo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_loading_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignLeft="@+id/tv_loading_one"
+            android:layout_alignRight="@+id/tv_loading_one"
+            android:src="@drawable/anim_list_loading"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_loading_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_loading_one"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/home_bottom_text_checked_color"
+            android:text="loading..."/>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -5,8 +5,9 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_dg_head"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:padding="10dp"
         android:src="@mipmap/health_guide_men_selected" />
 
@@ -14,28 +15,39 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
+
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_dg_gname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="120dp"
+            android:padding="10dp"
             android:text="曾经的你"
-            android:textSize="20dp" />
+            android:singleLine="true"
+            android:textSize="18dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:gravity="center">
+            android:orientation="horizontal"
+           >
 
             <TextView
+                android:singleLine="true"
+                android:textColor="#B0B0B0"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/tv_dg_daxiao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3.5m"
                 android:textSize="15dp" />
 
             <TextView
+                android:singleLine="true"
+                android:textColor="#B0B0B0"
+                android:id="@+id/tv_dg_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="80dp"
@@ -47,10 +59,12 @@
     </LinearLayout>
 
     <Button
+        android:layout_marginRight="10dp"
+        android:id="@+id/btn_dg_kg"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:background="@drawable/shape"
+        android:background="@drawable/selector_k_k"
         android:text="K歌" />
 
 </LinearLayout>
