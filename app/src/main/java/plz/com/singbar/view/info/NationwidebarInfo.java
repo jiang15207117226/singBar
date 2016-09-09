@@ -15,8 +15,6 @@ public class NationwidebarInfo implements Serializable {
     private String singname;//歌曲名
     private int audition;//试听量
 
-
-
     public String getHeadPortraits() {
         return headPortraits;
     }

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="10dp"
+    android:descendantFocusability="blocksDescendants"
     android:paddingTop="5dp">
 
     <ImageView
@@ -58,25 +59,23 @@
         android:textColor="@color/black"
         android:textSize="16sp" />
 
-    <CheckBox
+    <TextView
         android:id="@+id/tv_mine_item_opus_flowers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv_mine_item_opus_songName"
         android:layout_below="@+id/tv_mine_item_opus_songName"
-        android:button="@null"
         android:drawableLeft="@mipmap/icon_flowers_x32"
         android:gravity="center"
         android:paddingRight="30dp"
         android:text="123" />
 
-    <CheckBox
+    <TextView
         android:id="@+id/tv_mine_item_opus_commends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_mine_item_opus_songName"
         android:layout_toRightOf="@+id/tv_mine_item_opus_flowers"
-        android:button="@null"
         android:drawableLeft="@mipmap/icon_comments_x32"
         android:gravity="center"
         android:paddingRight="30dp"

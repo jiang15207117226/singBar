@@ -5,32 +5,37 @@
     android:orientation="vertical">
 
     <LinearLayout
-
+        android:background="@color/home_bottom_rg_bg"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/songsets_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
             android:onClick="onclick"
-            android:padding="10dp"
-            android:src="@mipmap/hotweibo_back_icon" />
+            android:src="@mipmap/back" />
 
         <TextView
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="点歌台"
-            android:textSize="30dp" />
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
 
         <ImageView
 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@mipmap/market_sng_title_search_icon" />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/sousuo" />
     </LinearLayout>
 
     <ImageView
@@ -39,14 +44,62 @@
         android:scaleType="centerCrop"
         android:src="@mipmap/jianqie" />
 
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
     <TextView
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_width="8dp"
+        android:layout_height="30dp"
+        android:background="#e33333"/>
+    <TextView
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/beijing"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         android:text="推荐歌曲"
-        android:textSize="30dp" />
+        android:textSize="20sp" />
 
+</LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <GridView
+    android:id="@+id/gv_gv_one"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:numColumns="3"
+    >
+
+    </GridView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击更多"/>
+    <ImageView
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/gengduo"
+        android:layout_width="20dp"
+        android:layout_height="10dp" />
+</LinearLayout>
+
+    </LinearLayout>
     <ListView
         android:id="@+id/songsets_lv"
         android:layout_width="match_parent"

@@ -16,7 +16,6 @@ import java.util.List;
 import plz.com.singbar.R;
 import plz.com.singbar.view.activity.ListenActivity;
 import plz.com.singbar.view.adapter.NationwidebarAdapter;
-import plz.com.singbar.view.info.FocusitemInfo;
 import plz.com.singbar.view.info.NationwidebarInfo;
 
 
@@ -46,12 +45,11 @@ public class Nationwidebar extends Fragment {
             NationwidebarInfo info = new NationwidebarInfo();
             String userName = "许巍";
             String singname = "曾经的你";
-            int audition = 200;
+            int audition = 136;
 
             info.setUserName(userName);
             info.setSingname(singname);
             info.setAudition(audition);
-
             list.add(info);
         }
     }
@@ -65,7 +63,7 @@ public class Nationwidebar extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Intent intent = new Intent(getActivity(), ListenActivity.class);
-            FocusitemInfo info = (FocusitemInfo) adapterView.getItemAtPosition(i);
+            NationwidebarInfo info = (NationwidebarInfo) adapterView.getItemAtPosition(i);
             intent.putExtra("key", info);
             startActivity(intent);
 
