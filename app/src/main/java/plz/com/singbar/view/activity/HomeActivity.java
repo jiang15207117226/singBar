@@ -27,14 +27,14 @@ import plz.com.singbar.view.frag.MineFragment;
 /**
  * Created by Administrator on 2016/8/29.
  */
-public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, MineFragment.UserInfo {
-
+public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
     private ViewHolder holder;
     private FragmentManager manager;
     private PopupWindow pop;
     private MineFragment mineFragment;
     private HomeFragment homeFragment;
     private HotSaleFragment hotSaleFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,6 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
         initPop();//初始化pop
         manager = getSupportFragmentManager();
         mineFragment = new MineFragment();
-        mineFragment.getUserInfo(this);
         homeFragment = new HomeFragment();
         hotSaleFragment = new HotSaleFragment();
         manager.beginTransaction().add(R.id.fl_home_content, homeFragment).commit();
@@ -180,6 +179,7 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
                     break;
                 case R.id.tv_pop_item_record:
                     //本地录音
+
                     break;
             }
         }
@@ -191,11 +191,6 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
             holder.isPopShow.setVisibility(View.GONE);
         }
     };
-
-    @Override
-    public int getUserID() {
-        return getIntent().getIntExtra("id", -1);
-    }
 
     //视图管理类
     private class ViewHolder {

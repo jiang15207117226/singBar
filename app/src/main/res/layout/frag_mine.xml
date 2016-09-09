@@ -28,13 +28,11 @@
 
             <ImageView
                 android:id="@+id/iv_mine_user_head"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:background="@drawable/shape_mine_user_head"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/health_guide_men_selected" />
+                android:background="@drawable/shape_mine_user_head" />
 
             <TextView
                 android:id="@+id/tv_mine_userName"
@@ -44,7 +42,7 @@
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="yonghuid"
-                android:textColor="@color/home_bottom_text_checked_color"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView

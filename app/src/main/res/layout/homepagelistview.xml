@@ -4,29 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/spinner_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/spinner_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="榜单"
-            android:textSize="30sp" />
-
-        <Spinner
-            android:id="@+id/sping"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/spinner_tv"
-            android:entries="@array/sping"
-            android:padding="10dp">
-
-        </Spinner>
-    </LinearLayout>
+        android:padding="10dp"
+        android:text="榜单"
+        android:textSize="30sp" />
 
 
     <ListView
