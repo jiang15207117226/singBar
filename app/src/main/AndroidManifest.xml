@@ -13,9 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.DiangeActivity">
-
-        </activity>
+        <activity android:name=".view.activity.DiangeActivity"></activity>
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:noHistory="true"
@@ -32,24 +30,20 @@
         <activity
             android:name=".view.activity.RegisterActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
-        <activity android:name=".view.activity.DetailsActivity">
-            android:windowSoftInputMode="adjustUnspecified|stateHidden">
-
-        </activity>
+        <activity
+            android:name=".view.activity.DetailsActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity android:name=".view.activity.AboutActivity"></activity>
         <activity android:name=".view.activity.ListenActivity"></activity>
         <activity android:name=".view.activity.MainActivity">
-
-
-
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-        <activity android:name=".view.activity.DgSouSuoActivity">
-
-
-        </activity>
+        <activity android:name=".view.activity.DgSouSuoActivity"></activity>
         <activity android:name=".view.activity.ReadContentActivity"/>
         <service android:name=".view.activity.MyService"></service>
-        <activity android:name=".view.activity.GdInActivity"></activity>
     </application>
 
 </manifest>

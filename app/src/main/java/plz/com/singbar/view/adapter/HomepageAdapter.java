@@ -11,23 +11,21 @@ import android.widget.TextView;
 import java.util.List;
 
 import plz.com.singbar.R;
-import plz.com.singbar.view.info.FocusitemInfo;
+import plz.com.singbar.bean.UserOwnSongsBean;
 
 /**
  * Created by Administrator on 2016/8/29.
  */
 public class HomepageAdapter extends BaseAdapter {
-    private List<FocusitemInfo> list;
+    private List<UserOwnSongsBean> list;
     private Context context;
     private LayoutInflater inflater;
 
-    public HomepageAdapter(List<FocusitemInfo> list, Context context) {
+    public HomepageAdapter(List<UserOwnSongsBean> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
-
-
 
     @Override
     public int getCount() {
@@ -60,12 +58,12 @@ public class HomepageAdapter extends BaseAdapter {
             view.setTag(hold);
         }
         hold = (ViewHold) view.getTag();
-        hold.name.setText(list.get(i).getName());
-        hold.singname.setText(list.get(i).getSingname());
+//        hold.name.setText(list.get(i).getName());
+        hold.singname.setText(list.get(i).getSongName());
         hold.time.setText(list.get(i).getTime());
-        hold.singnum.setText(list.get(i).getSingnum() + "");
-        hold.comment.setText(list.get(i).getComment() + "");
-        hold.flower.setText(list.get(i).getFlower() + "");
+        hold.singnum.setText(list.get(i).getTrys() + "");
+        hold.comment.setText(list.get(i).getComments() + "");
+        hold.flower.setText(list.get(i).getFlowers() + "");
         return view;
     }
 

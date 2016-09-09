@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_one">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <plz.com.singbar.view.activity.PickerView
+        android:id="@+id/pic_one"
+        android:layout_width="80dp"
+        android:layout_height="160dp" />
+
+        <TextView
+            android:id="@+id/tv_test_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="月"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/pic_one"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+        <plz.com.singbar.view.activity.PickerView
+            android:layout_width="80dp"
+            android:layout_height="160dp"
+            android:id="@+id/pic_two"
+            android:layout_toRightOf="@+id/tv_test_one"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_test_two"
+            android:text="日"
+            android:layout_toRightOf="@+id/pic_two"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginRight="20dp"
+            />
+
+
+
+    </RelativeLayout>
+</RelativeLayout>
