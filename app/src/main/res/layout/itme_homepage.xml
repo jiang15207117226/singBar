@@ -48,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_focus_time"
             android:layout_toLeftOf="@+id/tv_focus_singnum"
-            android:src="@mipmap/icon_listen_lv" />
+            android:padding="5dp"
+            android:src="@mipmap/audition" />
 
         <TextView
             android:id="@+id/tv_focus_singnum"
@@ -72,7 +73,7 @@
                 android:clickable="true"
                 android:onClick="click"
                 android:padding="5dp"
-                android:src="@mipmap/icon_comments_x32" />
+                android:src="@drawable/selector_com_com_disable" />
 
             <TextView
                 android:id="@+id/tv_focus_comment"

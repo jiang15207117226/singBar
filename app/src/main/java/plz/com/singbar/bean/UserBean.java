@@ -23,7 +23,6 @@ public class UserBean extends DataSupport implements Serializable {
     private String time;        //时间
     private String butility;    //称号
     private int attentionCount; //关注数
-    private int fansCount;      //粉丝数
     private List<MyAttenBean> list = new ArrayList<>();
 
     public int getId() {
@@ -122,14 +121,6 @@ public class UserBean extends DataSupport implements Serializable {
         this.attentionCount = attentionCount;
     }
 
-    public int getFansCount() {
-        return fansCount;
-    }
-
-    public void setFansCount(int fansCount) {
-        this.fansCount = fansCount;
-    }
-
     public List<MyAttenBean> getList() {
         return list;
     }
@@ -137,5 +128,4 @@ public class UserBean extends DataSupport implements Serializable {
     public void setList(List<MyAttenBean> list) {
         this.list = list;
     }
-
 }

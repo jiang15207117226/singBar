@@ -13,15 +13,6 @@ public class FocusitemInfo implements Serializable{
     private int singnum;
     private int comment;
     private int flower;
-    private String voiceUrl;
-
-    public String getVoiceUrl() {
-        return voiceUrl;
-    }
-
-    public void setVoiceUrl(String voiceUrl) {
-        this.voiceUrl = voiceUrl;
-    }
 
     public int getHead() {
         return head;

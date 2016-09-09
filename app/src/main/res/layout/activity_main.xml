@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="@string/login_account_hint"
-            android:digits="0123456789abcdefghigklmnopqrstuvwxyz.?"
             android:inputType="textPhonetic"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"

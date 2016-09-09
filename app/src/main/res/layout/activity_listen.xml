@@ -56,7 +56,7 @@
                 android:text="已经听了一百遍"
                 android:textColor="@color/white" />
 
-            <LinearLayout
+            <RadioGroup
                 android:id="@+id/listen_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,51 +64,37 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <RadioButton
                     android:id="@+id/rb_activity_up"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:background="@mipmap/landscape_player_btn_pre_normal"
+                    android:button="@null"
                     android:onClick="click" />
 
-                <Button
+                <CheckBox
                     android:id="@+id/cb_activity_play"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@mipmap/minibar_btn_play_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_play_unplay"
+                    android:button="@null"
                     android:onClick="click" />
 
-                <Button
+                <RadioButton
                     android:id="@+id/rb_activity_down"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:background="@mipmap/landscape_player_btn_next_normal"
+                    android:button="@null"
                     android:onClick="click" />
 
-            </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_music_time"
-                android:textColor="@color/white"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:layout_below="@id/listen_ll"
-                android:text="03.25"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_music_playtime"
-                android:textColor="@color/white"
-                android:layout_marginLeft="5dp"
-                android:layout_below="@id/listen_ll"
-                android:text="00.00"/>
+            </RadioGroup>
 
-            <SeekBar
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/sb_activity"
-                android:layout_below="@id/tv_music_time" />
+                android:layout_height="5dp"
+                android:layout_below="@id/listen_ll" />
         </RelativeLayout>
     </FrameLayout>
 
@@ -173,7 +159,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tv_listen_source"
+            android:id="@+id/tv_mine_item_opus_source"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_listen_user"
@@ -248,7 +234,7 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/cb_user_flower"
+            android:id="@+id/tv_user_flower"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -261,11 +247,12 @@
             android:text="送花"
             android:textColor="@color/white" />
 
-        <TextView
+        <CheckBox
             android:id="@+id/tv_user_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:button="@null"
             android:clickable="true"
             android:drawableTop="@drawable/selector_comments"
             android:gravity="center"

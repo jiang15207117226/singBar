@@ -2,18 +2,15 @@ package plz.com.singbar.bean;
 
 import org.litepal.crud.DataSupport;
 
-import java.io.Serializable;
-
 /**
  * Created by Administrator on 2016/9/1.
  */
-public class MyAttenBean extends DataSupport implements Serializable{
+public class MyAttenBean extends DataSupport {
     private int id;
     private String myAccount;
     private String accountBy;
     private boolean isAttenMe;
     private UserBean userBean;
-    private UserOwnSongsBean userOwnSongsBean;
 
     public int getId() {
         return id;
@@ -53,13 +50,5 @@ public class MyAttenBean extends DataSupport implements Serializable{
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
-    }
-
-    public UserOwnSongsBean getUserOwnSongsBean() {
-        return userOwnSongsBean;
-    }
-
-    public void setUserOwnSongsBean(UserOwnSongsBean userOwnSongsBean) {
-        this.userOwnSongsBean = userOwnSongsBean;
     }
 }
