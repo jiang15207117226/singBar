@@ -56,6 +56,9 @@
 
         <activity android:name=".view.activity.DiangeActivity"></activity>
         <activity android:name=".view.activity.FeedBackActivity" />
+        <activity android:name=".view.activity.GdInActivity"/>
+        <activity android:name=".view.activity.DgSouSuoActivity"/>
+        <activity android:name=".view.activity.MediaRecordertest"/>
         <activity android:name=".view.activity.SetActivity" />
         <activity
             android:name=".view.activity.InsertAttenActivity"
