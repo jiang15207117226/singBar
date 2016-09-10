@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -58,6 +59,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
     private TextView playtime;
     private TextView musictime;
     private SimpleDateFormat dateFormat;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
             binder.getmusic();
             seekBar.setMax(binder.getDuration());
             musictime.setText(dateFormat.format(binder.getDuration()));
+            binder.getplayer().setOnCompletionListener(musiclistener);
 //            songName.setText(binder.getmusicname());
         }
         @Override
@@ -104,6 +107,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         seekBar= (SeekBar) findViewById(R.id.sb_activity);
         playtime= (TextView) findViewById(R.id.tv_music_playtime);
         musictime= (TextView) findViewById(R.id.tv_music_time);
+        textView= (TextView) findViewById(R.id.tv_comment_content);
 
         Intent intent=getIntent();
         songsBean= (UserOwnSongsBean) intent.getSerializableExtra("songsBean");
@@ -120,6 +124,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
 
         atten.setOnCheckedChangeListener(this);
         seekBar.setOnSeekBarChangeListener(sbchangelistener);
+
         inflater = LayoutInflater.from(this);
         View popupwindow = inflater.inflate(R.layout.item_comment, null);
         et= (EditText) popupwindow.findViewById(R.id.et_comment);
@@ -129,6 +134,12 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         pw.setBackgroundDrawable(new ColorDrawable(0000));
         pw.setFocusable(true);
     }
+    MediaPlayer.OnCompletionListener musiclistener=new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            binder.playdown();
+        }
+    };
     Handler handler = new Handler();
     Runnable updateThread = new Runnable(){
         public void run() {
@@ -197,6 +208,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
                 comment.setText(comments+1+"");
                 songsBean.setComment(et.getText().toString());
                 pw.dismiss();
+                textView.setText(bean.getPetName()+"刚刚发表了评论:"+songsBean.getComment());
                 Toast.makeText(this,"评论成功",Toast.LENGTH_SHORT).show();
                 break;
 

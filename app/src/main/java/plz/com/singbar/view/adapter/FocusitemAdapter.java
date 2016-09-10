@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import plz.com.singbar.R;
+import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.bean.UserOwnSongsBean;
 
 /**
@@ -18,11 +19,13 @@ import plz.com.singbar.bean.UserOwnSongsBean;
  */
 public class FocusitemAdapter extends BaseAdapter {
     private List<UserOwnSongsBean> list;
+    private List<UserBean> beanList;
     private Context context;
     private LayoutInflater inflater;
 
-    public FocusitemAdapter(List<UserOwnSongsBean> list, Context context) {
+    public FocusitemAdapter(List<UserOwnSongsBean> list,List<UserBean> beanList, Context context) {
         this.list = list;
+        this.beanList=beanList;
         this.context = context;
         inflater=LayoutInflater.from(context);
     }
@@ -59,6 +62,7 @@ public class FocusitemAdapter extends BaseAdapter {
             view.setTag(hold);
         }
         hold= (ViewHolder) view.getTag();
+        hold.name.setText(beanList.get(i).getPetName());
         hold.singname.setText(list.get(i).getSongName());
         hold.time.setText(list.get(i).getTime());
         hold.singnum.setText(list.get(i).getTrys()+"");

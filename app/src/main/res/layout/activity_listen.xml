@@ -8,7 +8,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/listen"
+        android:background="@mipmap/musicstop"
         android:scaleType="centerCrop">
 
         <RelativeLayout
@@ -239,6 +239,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/tv_comment_content"
+        android:gravity="center"
+        android:text="当前还没有人评论！"
+        android:textColor="@color/black"
         android:layout_weight="1" />
 
     <LinearLayout

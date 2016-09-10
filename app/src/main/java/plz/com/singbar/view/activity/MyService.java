@@ -69,7 +69,6 @@ public class MyService extends Service {
         }
         public void play(){
 //            try {
-                player.seekTo(position);
 //                player.setDataSource(data.get(musicposition).get("path"));
                 player.start();
 //            } catch (IOException e) {
@@ -79,6 +78,7 @@ public class MyService extends Service {
         public void pause(){
                 player.pause();
                 position=player.getCurrentPosition();
+                player.seekTo(position);
         }
         public void playup(){
             if (musicposition-1<0){
