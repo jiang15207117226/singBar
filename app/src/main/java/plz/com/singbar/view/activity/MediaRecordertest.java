@@ -2,6 +2,7 @@ package plz.com.singbar.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,12 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import plz.com.singbar.R;
+import plz.com.singbar.view.info.DgGxInfo;
+import plz.com.singbar.view.info.SingInfoo;
+
 
 /**
  * Created by Administrator on 2016/9/6.
  */
 public class MediaRecordertest extends Activity {
-
+    private String geci;
+    private String geming;
+    private String shijian;
+    private String dizhi;
     private ImageView im1;
     private ImageView im2;
     private ListView lv;
@@ -34,7 +41,7 @@ public class MediaRecordertest extends Activity {
     private MediaRecorder mediaRecorder;
     private List<String> rec = new ArrayList<String>();// 存放录音文件
 
-
+    private MediaPlayer player = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,12 @@ public class MediaRecordertest extends Activity {
         } else {
             Toast.makeText(this, "请先插入SD卡", Toast.LENGTH_LONG).show();
             return;
+        }
+        int tag = getIntent().getIntExtra("tag", -1);
+        if (tag == 0) {
+            SingInfoo infoo = (SingInfoo) getIntent().getSerializableExtra("data");
+        } else if (tag == 1) {
+            DgGxInfo dgGxInfo = (DgGxInfo) getIntent().getSerializableExtra("data");
         }
 
         //开始录音
@@ -67,7 +80,16 @@ public class MediaRecordertest extends Activity {
                     // 设置输出文件路径
                     mediaRecorder.setOutputFile(path.getAbsolutePath());
                     mediaRecorder.prepare();
+
+                    Intent intent = getIntent();
+                    geci = (String) intent.getSerializableExtra("geci'");
+                    geming = (String) intent.getSerializableExtra("geming'");
+                    shijian = (String) intent.getSerializableExtra("shijian'");
+                    dizhi = (String) intent.getSerializableExtra("dizhi");
                     mediaRecorder.start();
+                    player();
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -95,6 +117,7 @@ public class MediaRecordertest extends Activity {
          */
     }
 
+
     public void MusicList() {
         File[] f = fi.listFiles(new MusicFilter());
         rec.clear();
@@ -107,7 +130,9 @@ public class MediaRecordertest extends Activity {
         lv.setAdapter(adapter);
     }
 
+
     public void init() {
+
         im1 = (ImageView) findViewById(R.id.start_bt);
         im2 = (ImageView) findViewById(R.id.end_bt);
         lv = (ListView) findViewById(R.id.singtiem_listview);
@@ -120,6 +145,22 @@ public class MediaRecordertest extends Activity {
         intent.setDataAndType(Uri.fromFile(file), "audio");
         this.startActivity(intent);
     }
+
+    public void player() {
+        try {
+            if (dizhi != null) {
+
+                player.setDataSource(dizhi);
+                player.start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 }
 
 

@@ -1,9 +1,11 @@
 package plz.com.singbar.view.info;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/9/2 0002.
  */
-public class DgGxInfo {
+public class DgGxInfo implements Serializable{
     private String ima;
     private String singname;
     private String singername;

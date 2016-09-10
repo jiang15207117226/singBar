@@ -1,6 +1,7 @@
 package plz.com.singbar.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,13 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import plz.com.singbar.R;
-import plz.com.singbar.view.activity.FindBackPwActivity;
+import plz.com.singbar.view.activity.MediaRecordertest;
 import plz.com.singbar.view.info.DgGxInfo;
 
 /**
  * Created by Administrator on 2016/9/7 0007.
  */
-public class GxAdapter extends BaseAdapter{
+public class GxAdapter extends BaseAdapter implements View.OnClickListener{
     private List<DgGxInfo> list;
     private Context context;
     private LayoutInflater inflater;
@@ -62,7 +63,18 @@ public class GxAdapter extends BaseAdapter{
         holder.singername.setText(list.get(i).getSingername());
         holder.dx.setText(list.get(i).getSingdx());
         Picasso.with(context).load(list.get(i).getIma()).into(holder.head);
+        holder.kge.setOnClickListener(this);
+        holder.kge.setTag(i);
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int i= (int) view.getTag();
+        Intent intent=new Intent(context, MediaRecordertest.class);
+        intent.putExtra("data",list.get(i));
+        intent.putExtra("tag",1);
+        context.startActivity(intent);
     }
 
 

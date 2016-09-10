@@ -325,6 +325,7 @@ public class DetailsActivity extends Activity {
                 break;
             case R.id.tv_details_nickName:
                 et.setHint("设置昵称");
+                et.setText("");
                 popupWindowo = new PopupWindow(etview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindowo.setFocusable(true);
                 popupWindowo.setTouchable(true);
@@ -495,6 +496,7 @@ public class DetailsActivity extends Activity {
                 break;
             case R.id.tv_details_qianming:
                 et.setHint("设置个性签名");
+                et.setText("");
                 popupWindowo = new PopupWindow(etview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindowo.setFocusable(true);
                 popupWindowo.setTouchable(true);

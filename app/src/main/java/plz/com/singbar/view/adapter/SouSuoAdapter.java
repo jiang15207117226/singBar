@@ -3,6 +3,7 @@ package plz.com.singbar.view.adapter;
 import android.content.Context;
 
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,13 @@ import java.util.List;
 
 import plz.com.singbar.R;
 
+import plz.com.singbar.view.activity.MediaRecordertest;
 import plz.com.singbar.view.info.SingInfo;
 
 /**
  * Created by Administrator on 2016/9/6 0006.
  */
-public class SouSuoAdapter extends BaseAdapter{
+public class SouSuoAdapter extends BaseAdapter implements View.OnClickListener{
     private SingInfo info;
     private int k;
     private String h;
@@ -80,12 +82,22 @@ public class SouSuoAdapter extends BaseAdapter{
         float vv=Float.parseFloat(decimalFormat.format(b));
         viewHolder.daxiao.setText(vv+"M-");
 
-
         Picasso.with(context).load(imalist.get(i)).placeholder(R.mipmap.health_guide_men_selected).into(viewHolder.iv);
+        viewHolder.kge.setOnClickListener(this);
+        viewHolder.kge.setTag(i);
         return view;
     }
 
- class ViewHolder{
+    @Override
+    public void onClick(View view) {
+        int i= (int) view.getTag();
+        Intent intent=new Intent(context, MediaRecordertest.class);
+        intent.putExtra("data",info.getSingInfoo().get(i));
+        intent.putExtra("tag",0);
+        context.startActivity(intent);
+    }
+
+    class ViewHolder{
      private ImageView iv;
      private TextView singname;
      private TextView daxiao;
