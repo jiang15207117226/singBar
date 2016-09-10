@@ -36,7 +36,7 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
     private MineFragment mineFragment;
     private HomeFragment homeFragment;
     private HotSaleFragment hotSaleFragment;
-
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,7 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
 //        for (int i=2;i<50;i++){
 //            DbOperation.insertData(i);
 //        }
+        id = getIntent().getIntExtra("id", -1);
         holder = new ViewHolder();
         holder.bindView(view);
         initPop();//初始化pop
@@ -70,6 +71,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
         //设置底部RddioGroup监听
         holder.bottomRg.setOnCheckedChangeListener(this);
     }
+
+
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -197,9 +200,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     @Override
     public int getUserID() {
-        return getIntent().getIntExtra("id", -1);
+        return id;
     }
-
     //视图管理类
     private class ViewHolder {
         private RelativeLayout layout_bottom;

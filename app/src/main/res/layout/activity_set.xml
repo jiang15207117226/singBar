@@ -288,6 +288,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:onClick="noLogin"
             android:background="@drawable/shape_btn"
             android:text="退出登录"
             android:textColor="#ffffff" />

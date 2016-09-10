@@ -3,8 +3,10 @@ package plz.com.singbar.view.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQAuth;
 import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
@@ -23,11 +26,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.tablemanager.Connector;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import plz.com.singbar.R;
 import plz.com.singbar.bean.UserBean;
+import plz.com.singbar.bean.UserDetailBean;
 import plz.com.singbar.operation.DbOperation;
+import plz.com.singbar.operation.GenerMbAccount;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private ViewHolder holder;
@@ -37,6 +44,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private QQAuth qqAuth;
     private String openidString;
     private IUiListener iUiListener;
+    private String account;
+    private String pw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
          * 初始化
          */
         init(view);
+        Intent intent = new Intent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setClass(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 
     private void init(View view) {
@@ -72,37 +85,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
         holder.findbackPw.setOnClickListener(this);
     }
 
+    private void loginSucceed(int userId) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("id", userId);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login_login:
                 //登陆
-                String account = holder.inputAccount.getText().toString();
-                String pw = holder.inputPassword.getText().toString();
+                account = holder.inputAccount.getText().toString();
+                pw = holder.inputPassword.getText().toString();
                 if (account.length() < 1 || pw.length() < 1) {
                     Toast.makeText(this, "用户名或密码为空...", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                List<UserBean> list = DbOperation.query(account);
-                if (list == null || list.size() < 1) {
-                    Log.i("result", list.size() + "");
-                    Toast.makeText(this, "用户名或密码错误...", Toast.LENGTH_SHORT).show();
-                    break;
-                } else {
-                    for (UserBean bean : list) {
-                        if (bean.getAccount().equals(account)) {
-                            if (bean.getPw().equals(pw)) {
-                                Toast.makeText(this, "登陆成功!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(this, HomeActivity.class);
-                                intent.putExtra("id", bean.getId());
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(this, "密码错误...", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                }
+                handler.postDelayed(loginThread, 700);
                 break;
             case R.id.tv_login_registerAccount:
                 //注册账号
@@ -117,6 +118,43 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int id = (int) msg.obj;
+            if (msg.what == 0) {
+                loginSucceed(id);
+            }
+        }
+    };
+    Thread loginThread = new Thread() {
+        @Override
+        public void run() {
+            super.run();
+            List<UserBean> list = DbOperation.query(account);
+            if (list == null || list.size() < 1) {
+                Log.i("result", list.size() + "");
+                Toast.makeText(MainActivity.this, "用户名或密码错误...", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                for (UserBean bean : list) {
+                    if (bean.getAccount().equals(account)) {
+                        if (pw!=null&&bean.getPw().equals(pw)) {
+                            Toast.makeText(MainActivity.this, "登陆成功!", Toast.LENGTH_SHORT).show();
+                            Message msg = new Message();
+                            msg.what = 0;
+                            msg.obj = bean.getId();
+                            handler.sendMessage(msg);
+                        } else {
+                            Toast.makeText(MainActivity.this, "密码错误...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        }
+    };
+
     public void qqLoginClick(View view) {
         loginQQ();
     }
@@ -128,88 +166,79 @@ public class MainActivity extends Activity implements View.OnClickListener {
             iUiListener = new BaseUiListener() {
                 @Override
                 protected void doComplete(JSONObject o) {
-                    updateUserInfo();
                     Log.i("result", o + "----------------------");
                     try {
                         openidString = o.getString("openid");
+                        String accessToken = o.getString("access_token");
+                        String exp = o.getString("expires_in");
                         Log.e("result", "-------------" + openidString);
+                        int userId = DbOperation.findByOpenId(openidString);
+                        if (userId == -1) {
+                            tencent.setOpenId(openidString);
+                            tencent.setAccessToken(accessToken, exp);
+                            UserInfo info = new UserInfo(MainActivity.this, tencent.getQQToken());
+                            info.getUserInfo(new IUiListener() {
+                                @Override
+                                public void onComplete(Object o) {
+                                    Log.i("result", "-----GetUserInfo-->onComplete" + o);
+                                    try {
+                                        JSONObject json = (JSONObject) o;
+                                        String nickName = json.getString("nickname");
+                                        String mbAccount = GenerMbAccount.generMbAccount();
+                                        final UserBean bean = new UserBean();
+                                        bean.setPetName(nickName);
+                                        bean.setAccount(mbAccount);
+                                        bean.setQqLoginOpenedId(openidString);
+                                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                        String time = format.format(new Date());
+                                        bean.setTime(time);
+                                        UserDetailBean detailBean=new UserDetailBean();
+                                        bean.setUserDetailBean(detailBean);
+                                        boolean isSuccess=bean.save();
+                                        detailBean.save();
+                                        if (isSuccess) {
+                                            loginSucceed(bean.getId());
+                                            Log.i("result","idiid---"+bean.getId());
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(UiError uiError) {
+
+                                }
+
+                                @Override
+                                public void onCancel() {
+
+                                }
+                            });
+                        } else {
+                            loginSucceed(userId);
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             };
-            // qqAuth.login(MainActivity.this,"all",iUiListener);
-//            tencent.login(MainActivity.this, "all", iUiListener);
-            tencent.loginWithOEM(MainActivity.this,"all",iUiListener,"10000144","10000144","xxxx");
+            tencent.login(MainActivity.this, "all", iUiListener);
+//            tencent.loginWithOEM(MainActivity.this,"all",iUiListener,"10000144","10000144","xxxx");
         } else {
             qqAuth.logout(MainActivity.this);
         }
 
     }
 
-    public void updateUserInfo() {
-            if (qqAuth != null && qqAuth.isSessionValid()) {
-                IUiListener listener = new IUiListener() {
-                    @Override
-                    public void onError(UiError e) {
-                        // TODO Auto-generated method stub
-                    }
-
-                    @Override
-                    public void onComplete(final Object response) {
-                        JSONObject json = (JSONObject) response;
-                        // 昵称
-                        Message msg = new Message();
-                        String nickname = null;
-                        try {
-                            nickname = ((JSONObject) response)
-                                    .getString("nickname");
-                            Log.i("result",nickname+"--------");
-                        } catch (JSONException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-//                        msg.getData().putString("nickname", nickname);
-//                        msg.what = 0;
-//                        mHandler.sendMessage(msg);
-                        // 头像
-                        String path;
-                        try {
-                            path = json.getString("figureurl_qq_2");
-                            Log.i("result",path+">>path");
-//                            MyImgThread imgThread = new MyImgThread(path);
-//                            Thread thread = new Thread(imgThread);
-//                            thread.start();
-                        } catch (JSONException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // TODO Auto-generated method stub
-
-                    }
-                };
-                // MainActivity.mTencent.requestAsync(Constants.GRAPH_SIMPLE_USER_INFO,
-                // null,
-                // Constants.HTTP_GET, requestListener, null);
-//                mInfo = new UserInfo(this, mQQAuth.getQQToken());
-//                mInfo.getUserInfo(listener);
-            } else {
-                // mUserInfo.setText("");
-                // mUserInfo.setVisibility(android.view.View.GONE);
-                // mUserLogo.setVisibility(android.view.View.GONE);
-            }
-    }
 
     public class BaseUiListener implements IUiListener {
 
         @Override
         public void onComplete(Object o) {
             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
-            Log.i("result",o+"");
+            Log.i("result", o + "");
             doComplete((JSONObject) o);
         }
 
@@ -238,6 +267,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    long time=0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            if (System.currentTimeMillis()-time<2000){
+                Intent startMain = new Intent(Intent.ACTION_MAIN);
+                startMain.addCategory(Intent.CATEGORY_HOME);
+                startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(startMain);
+                System.exit(0);//退出程序
+            }else{
+                Toast.makeText(this,"再点一次退出程序",Toast.LENGTH_SHORT).show();
+                time = System.currentTimeMillis();
+                return false;
+            }
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /**

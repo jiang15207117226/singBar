@@ -74,6 +74,11 @@ public class SetActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
+    public void noLogin(View view){
+        Intent intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     //消息提示音开关监听
     ToggleButton.OnToggleChanged onToggleChanged = new ToggleButton.OnToggleChanged() {

@@ -48,6 +48,7 @@ public class DetailsActivity extends Activity {
     private PopupWindow popupWindowo;
     private View xz;
     private Drawable dr;
+    private TextView nickName;
     private TextView old;
     private TextView zhuangtai;
     private TextView tall;
@@ -95,6 +96,7 @@ public class DetailsActivity extends Activity {
         profession = (TextView) findViewById(R.id.tv_details_profession);
         tall = (TextView) findViewById(R.id.tv_details_tall);
         zhuangtai = (TextView) findViewById(R.id.tv_details_zhuangtai);
+        nickName = (TextView) findViewById(R.id.tv_details_nickName);
         old = (TextView) findViewById(R.id.tv_details_old);
         iv = (ImageView) findViewById(R.id.iv_datails_head);
         bri = (TextView) findViewById(R.id.tv_details_brithday);
@@ -119,6 +121,9 @@ public class DetailsActivity extends Activity {
 
     private void initView() {
         Log.i("result", "initView");
+        if (bean.getPetName() != null && bean.getPetName().length() >= 1) {
+            nickName.setText(bean.getPetName());        //设置昵称
+        }
         if (userDetailBean.getAge() != 0) {             //设置年龄
             old.setText(userDetailBean.getAge() + "");
         }
@@ -318,6 +323,28 @@ public class DetailsActivity extends Activity {
                     }
                 });
                 break;
+            case R.id.tv_details_nickName:
+                et.setHint("设置昵称");
+                popupWindowo = new PopupWindow(etview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindowo.setFocusable(true);
+                popupWindowo.setTouchable(true);
+                popupWindowo.setBackgroundDrawable(dr);
+                popupWindowo.showAtLocation(ll, Gravity.CENTER, 0, 0);
+                // 设置背景颜色变暗
+                WindowManager.LayoutParams lmlms = getWindow().getAttributes();
+                lmlms.alpha = 0.7f;
+                getWindow().setAttributes(lmlms);
+                popupWindowo.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+                    @Override
+                    public void onDismiss() {
+                        WindowManager.LayoutParams lmlm = getWindow().getAttributes();
+                        lmlm.alpha = 1f;
+                        getWindow().setAttributes(lmlm);
+                    }
+                });
+
+                break;
             case R.id.tv_details_old:
                 xz = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.item_onepicker, null);
                 onlyone = (PickerView) xz.findViewById(R.id.pic_one_one);
@@ -467,7 +494,7 @@ public class DetailsActivity extends Activity {
                 });
                 break;
             case R.id.tv_details_qianming:
-
+                et.setHint("设置个性签名");
                 popupWindowo = new PopupWindow(etview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popupWindowo.setFocusable(true);
                 popupWindowo.setTouchable(true);
@@ -536,16 +563,25 @@ public class DetailsActivity extends Activity {
                 popupWindowo.dismiss();
                 break;
             case R.id.btn_pop_yes:
-                if (et.getText() == null || et.getText().toString().length() < 1) {
-                    qianm.setText("点击设置");
-                } else {
-                    String sign = et.getText().toString();
-                    qianm.setText(sign);//签名
-                    bean.setSign(sign);
-                    popupWindowo.dismiss();
-                    Log.i("result", sign + "-->签名");
+                if (et.getHint().equals("设置个性签名")) {
+                    if (et.getText() == null || et.getText().toString().length() < 1) {
+                        qianm.setText("点击设置");
+                    } else {
+                        String sign = et.getText().toString();
+                        qianm.setText(sign);//签名
+                        bean.setSign(sign);
+                        popupWindowo.dismiss();
+                        Log.i("result", sign + "-->签名");
+                    }
+                } else if (et.getHint().equals("设置昵称")) {
+                    if (et.getText() != null && et.getText().toString().length() >= 1) {
+                        String nickNames = et.getText().toString();
+                        nickName.setText(nickNames);//签名
+                        bean.setPetName(nickNames);
+                        popupWindowo.dismiss();
+                        Log.i("result", nickNames + "-->昵称");
+                    }
                 }
-
                 break;
             case R.id.btn_pop_nohome:
                 popupWindowo.dismiss();
@@ -610,10 +646,10 @@ public class DetailsActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         Log.i("result", "onDestroy");
-        String month=m.getText().toString();
-        String day=bri.getText().toString();
-        if (month!=null&&month.length()>0&&day!=null&&day.length()>0){
-            userDetailBean.setBirthday( month+day);
+        String month = m.getText().toString();
+        String day = bri.getText().toString();
+        if (month != null && month.length() > 0 && day != null && day.length() > 0) {
+            userDetailBean.setBirthday(month + day);
         }
         bean.setUserDetailBean(userDetailBean);
         bean.update(bean.getId());

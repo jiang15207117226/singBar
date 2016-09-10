@@ -24,6 +24,7 @@ public class UserBean extends DataSupport implements Serializable {
     private String butility;    //称号
     private int attentionCount; //关注数
     private int fansCount;      //粉丝数
+    private String qqLoginOpenedId;
     private List<UserOwnSongsBean> userOwnSongsBeen = new ArrayList<>();
     private List<AttenBean> attenBeen = new ArrayList<>();
     private int userOwnSongsCount;
@@ -59,6 +60,14 @@ public class UserBean extends DataSupport implements Serializable {
 
     public void setUserOwnSongsBeen(List<UserOwnSongsBean> userOwnSongsBeen) {
         this.userOwnSongsBeen = userOwnSongsBeen;
+    }
+
+    public String getQqLoginOpenedId() {
+        return qqLoginOpenedId;
+    }
+
+    public void setQqLoginOpenedId(String qqLoginOpenedId) {
+        this.qqLoginOpenedId = qqLoginOpenedId;
     }
 
     public int getId() {

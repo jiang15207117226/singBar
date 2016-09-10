@@ -61,7 +61,7 @@ public class FansAdapter extends BaseAdapter implements View.OnClickListener {
             view.setTag(holder);
         }
         holder = (ViewHolder) view.getTag();
-        Picasso.with(context).load(list.get(i).getHead()).placeholder(R.mipmap.health_guide_woman_selected).resize(80, 80).transform(new CircleTrans()).centerCrop().into(holder.head);
+        Picasso.with(context).load("file://"+list.get(i).getHead()).placeholder(R.mipmap.health_guide_woman_selected).resize(80, 80).transform(new CircleTrans()).centerCrop().into(holder.head);
         holder.name.setText(list.get(i).getPetName());
         holder.callName.setText(list.get(i).getCallName());
         if (isOthersHome){
