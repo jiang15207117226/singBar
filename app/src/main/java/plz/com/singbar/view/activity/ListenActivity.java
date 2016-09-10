@@ -128,7 +128,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         inflater = LayoutInflater.from(this);
         View popupwindow = inflater.inflate(R.layout.item_comment, null);
         et= (EditText) popupwindow.findViewById(R.id.et_comment);
-        pw = new PopupWindow(popupwindow, 100, 800);
+        pw = new PopupWindow(popupwindow, 1000, 800);
         pw.setTouchable(true);
         pw.setOutsideTouchable(true);
         pw.setBackgroundDrawable(new ColorDrawable(0000));

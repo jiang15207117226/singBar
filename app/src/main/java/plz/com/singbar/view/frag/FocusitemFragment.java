@@ -1,5 +1,6 @@
 package plz.com.singbar.view.frag;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ import plz.com.singbar.view.adapter.FocusitemAdapter;
 /**
  * Created by Administrator on 2016/8/26.
  */
-public class FocusitemFragment extends Fragment {
+public class FocusitemFragment extends Fragment implements HomeFragment.SetContext{
     private View view;
     private FocusitemAdapter adapter;
     private ImageView loading;
@@ -41,6 +42,7 @@ public class FocusitemFragment extends Fragment {
     private List<UserOwnSongsBean> list;
     private List<UserBean> userList;
     private TextView tv;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class FocusitemFragment extends Fragment {
     private void getdata() {
         list = new ArrayList<>();
         userList=new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
             Date date = new Date();
             String string = dateFormat.format(date);
@@ -95,20 +97,24 @@ public class FocusitemFragment extends Fragment {
             UserBean bean=new UserBean();
             String name = "secret";
             String singname = "我们的歌";
-            int singnum = 521;
+            int singnum = 521213;
             int comment = 22163;
             int flower = 31311;
-            info.setSongName(singname);
+            info.setSongName(singname+i);
             info.setTime(string);
             info.setTrys(singnum);
             info.setComments(comment);
             info.setFlowers(flower);
             list.add(info);
-            bean.setPetName(name);
+            bean.setPetName(name+i);
             bean.setFansCount(1200);
             bean.setButility("歌唱新人");
             userList.add(bean);
         }
+    }
+    @Override
+    public void setContext(Context context) {
+        this.context=context;
     }
 
     private void buildadapter() {
@@ -127,7 +133,7 @@ public class FocusitemFragment extends Fragment {
             Intent intent = new Intent(getActivity(), ListenActivity.class);
             UserOwnSongsBean info = (UserOwnSongsBean) adapterView.getItemAtPosition(i);
             intent.putExtra("songsBean", info);
-            intent.putExtra("userBean",userList.get(i));
+            intent.putExtra("userBean",userList.get(i-1));
             startActivity(intent);
 
         }

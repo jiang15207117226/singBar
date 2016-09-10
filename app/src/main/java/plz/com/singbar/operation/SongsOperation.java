@@ -59,10 +59,10 @@ public class SongsOperation {
 
                 try {
                     jsonObject = new JSONObject(json);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
                 final JSONObject object = jsonObject.optJSONObject("data");
                 Gson gson = new Gson();
