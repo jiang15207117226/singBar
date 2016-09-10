@@ -139,7 +139,13 @@ public class DbOperation {
         }
         return null;
     }
-
+    public static int findByOpenId(String QQopenId){
+        List<UserBean>list=DataSupport.where("qqloginopenedid = ?",QQopenId).find(UserBean.class);
+        if (list==null||list.size()<1){
+            return -1;
+        }
+        return list.get(0).getId();
+    }
     public static List<UserBean> getRandomData(int id) {
         List<UserBean> list = new ArrayList<>();
         int[] positions = new int[10];

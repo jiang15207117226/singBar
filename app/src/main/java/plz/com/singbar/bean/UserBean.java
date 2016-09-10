@@ -3,7 +3,8 @@ package plz.com.singbar.bean;
 import org.litepal.crud.DataSupport;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * plz.com.singbar.bean.UserBean
@@ -23,6 +24,51 @@ public class UserBean extends DataSupport implements Serializable {
     private String butility;    //称号
     private int attentionCount; //关注数
     private int fansCount;      //粉丝数
+    private String qqLoginOpenedId;
+    private List<UserOwnSongsBean> userOwnSongsBeen = new ArrayList<>();
+    private List<AttenBean> attenBeen = new ArrayList<>();
+    private int userOwnSongsCount;
+    private UserDetailBean userDetailBean;
+
+    public UserDetailBean getUserDetailBean() {
+        return userDetailBean;
+    }
+
+    public void setUserDetailBean(UserDetailBean userDetailBean) {
+        this.userDetailBean = userDetailBean;
+    }
+
+    public List<AttenBean> getAttenBeen() {
+        return attenBeen;
+    }
+
+    public void setAttenBeen(List<AttenBean> attenBeen) {
+        this.attenBeen = attenBeen;
+    }
+
+    public int getUserOwnSongsCount() {
+        return userOwnSongsCount;
+    }
+
+    public void setUserOwnSongsCount(int userOwnSongsCount) {
+        this.userOwnSongsCount = userOwnSongsCount;
+    }
+
+    public List<UserOwnSongsBean> getUserOwnSongsBeen() {
+        return userOwnSongsBeen;
+    }
+
+    public void setUserOwnSongsBeen(List<UserOwnSongsBean> userOwnSongsBeen) {
+        this.userOwnSongsBeen = userOwnSongsBeen;
+    }
+
+    public String getQqLoginOpenedId() {
+        return qqLoginOpenedId;
+    }
+
+    public void setQqLoginOpenedId(String qqLoginOpenedId) {
+        this.qqLoginOpenedId = qqLoginOpenedId;
+    }
 
     public int getId() {
         return id;
@@ -127,7 +173,6 @@ public class UserBean extends DataSupport implements Serializable {
     public void setFansCount(int fansCount) {
         this.fansCount = fansCount;
     }
-
 
 
 }

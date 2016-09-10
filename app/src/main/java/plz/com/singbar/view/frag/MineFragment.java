@@ -88,6 +88,12 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         holder.opusLv.setOnItemClickListener(this);
         holder.topBtnLeft.setOnClickListener(this);
         holder.topBtnRight.setOnClickListener(this);
+
+        getCheckItem(false);
+    }
+
+    @Override
+    public void onResume() {
         if (userID == 0) {
             userID = info.getUserID();
         }
@@ -108,7 +114,7 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         if (callName != null && callName.length() >= 1) {
             holder.callName.setText(callName);
         }
-        getCheckItem(false);
+        super.onResume();
     }
 
     private void getCheckItem(boolean isNotify) {
