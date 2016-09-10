@@ -39,6 +39,8 @@
         android:layout_centerVertical="true"
         android:background="@drawable/selector_mine_item_fans_btn_bg"
         android:button="@null"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         android:text="她的主页"
         android:textColor="@color/mine_item_attention_btn_bg_color"

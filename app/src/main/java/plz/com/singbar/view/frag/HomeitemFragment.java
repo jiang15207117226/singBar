@@ -129,6 +129,7 @@ public class HomeitemFragment extends Fragment implements HomeFragment.SetContex
 
     @Override
     public void onPostFinish(List<NoteBean> noteBeen) {
+        Log.i("result","onPostFinish");
         noteList = noteBeen;
         AnimationDrawable drawable = (AnimationDrawable) loadingImg.getDrawable();
         drawable.stop();
@@ -140,6 +141,7 @@ public class HomeitemFragment extends Fragment implements HomeFragment.SetContex
 
     @Override
     public void onPre() {
+        Log.i("result","onPre");
         AnimationDrawable drawable = (AnimationDrawable) loadingImg.getDrawable();
         drawable.start();
         loadingText.setVisibility(View.VISIBLE);

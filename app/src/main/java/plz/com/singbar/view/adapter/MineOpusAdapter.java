@@ -76,6 +76,10 @@ public class MineOpusAdapter extends BaseAdapter {
         holder.contents.setText("...来听听我唱的《"+songName+"》");
         return view;
     }
+    public void notifyData(List<UserOwnSongsBean> list){
+        this.list=list;
+        notifyDataSetChanged();
+    }
 
 
     private class ViewHolder {

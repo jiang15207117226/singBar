@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment {
         homeFragment = new HomeitemFragment();
         homeFragment.setContext(getContext());
         focusFragment = new FocusitemFragment();
+        focusFragment.setContext(getContext());
         fragmentList.add(homeFragment);
         fragmentList.add(focusFragment);
         tabList = new ArrayList<>();
@@ -57,8 +58,6 @@ public class HomeFragment extends Fragment {
         tablayout.setTabMode(TabLayout.MODE_FIXED);
         tablayout.addTab(tablayout.newTab().setText(tabList.get(0)));
         tablayout.addTab(tablayout.newTab().setText(tabList.get(1)));
-
-
     }
 
     private void buildadapter() {

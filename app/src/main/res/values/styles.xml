@@ -11,4 +11,8 @@
         <item name="android:windowEnterAnimation">@anim/set_pop_anim</item>
         <item name="android:windowExitAnimation">@anim/set_pop_anim_finish</item>
     </style>
+    <style name="feedbackPopAnimation">
+        <item name="android:windowEnterAnimation">@anim/set_pop_anim_enter</item>
+        <item name="android:windowExitAnimation">@anim/set_pop_anim_enter_exit</item>
+    </style>
 </resources>

@@ -1,13 +1,24 @@
 package plz.com.singbar.bean;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by Administrator on 2016/9/1.
  */
-public class AttenBean {
+public class AttenBean extends DataSupport {
+    private int id;
     private String head;
-    private String petName;
-    private String callName;
+    private int attenUserId;
+    private int userId;
     private boolean stadus;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getHead() {
         return head;
@@ -17,20 +28,20 @@ public class AttenBean {
         this.head = head;
     }
 
-    public String getPetName() {
-        return petName;
+    public int getId() {
+        return id;
     }
 
-    public void setPetName(String petName) {
-        this.petName = petName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCallName() {
-        return callName;
+    public int getAttenUserId() {
+        return attenUserId;
     }
 
-    public void setCallName(String callName) {
-        this.callName = callName;
+    public void setAttenUserId(int attenUserId) {
+        this.attenUserId = attenUserId;
     }
 
     public boolean isStadus() {

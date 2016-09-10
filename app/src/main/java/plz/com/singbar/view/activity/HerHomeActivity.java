@@ -1,23 +1,15 @@
-package plz.com.singbar.view.frag;
+package plz.com.singbar.view.activity;
 
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -36,41 +28,37 @@ import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.bean.UserOwnSongsBean;
 import plz.com.singbar.operation.CircleTrans;
 import plz.com.singbar.operation.DbOperation;
-import plz.com.singbar.view.activity.InsertAttenActivity;
-import plz.com.singbar.view.activity.ListenActivity;
-import plz.com.singbar.view.activity.SetActivity;
 import plz.com.singbar.view.adapter.AttentionAdapter;
 import plz.com.singbar.view.adapter.FansAdapter;
 import plz.com.singbar.view.adapter.MineOpusAdapter;
 
 /**
- * Created by Administrator on 2016/8/29.
+ * Created by Administrator on 2016/9/8.
  */
-public class MineFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, AdapterView.OnItemClickListener, View.OnClickListener {
+public class HerHomeActivity extends Activity implements RadioGroup.OnCheckedChangeListener ,AdapterView.OnItemClickListener{
     private ViewHolder holder;
     private List<UserOwnSongsBean> list;
     private List<AttenBean> attenList;
     private List<FansBean> fansList;
-    private UserInfo info;
     private UserBean userBean;
     private int userID = 0;
     private MineOpusAdapter opusAdapter;
     private AttentionAdapter attenAdapter;
     private FansAdapter fansAdapter;
     private View view;
-    private boolean isRegistered=false;
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_mine, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_herhome, null);
+        init(view);
         //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
-        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         //设置状态栏颜色
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.pop_song_top));
-        init(view);//初始化
-        Log.i("result", "onCreateView");
-        return view;
+        getWindow().setStatusBarColor(getResources().getColor(R.color.pop_song_top));
+        setContentView(view);
     }
+
     /**
      * 初始化
      *
@@ -81,22 +69,18 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         holder.bindView(view);//绑定视图
         list = new ArrayList<>();
         fansList = new ArrayList<>();
-        this.view = LayoutInflater.from(getActivity()).inflate(R.layout.head_mine_show_attention, null);
-        holder.topBarTitle.setText(getString(R.string.mine_title));
         holder.mineRg.setOnCheckedChangeListener(this);
 
-        holder.opusLv.setOnItemClickListener(this);
-        holder.topBtnLeft.setOnClickListener(this);
-        holder.topBtnRight.setOnClickListener(this);
         if (userID == 0) {
-            userID = info.getUserID();
+            userID = getIntent().getIntExtra("id", -1);
         }
         Log.i("result", userID + "");
         userBean = DbOperation.queryById(userID);
         String headUrl = userBean.getHead();
+        holder.topBarTitle.setText(userBean.getPetName()+"的主页");
         if (headUrl != null) {
             Log.i("headUrl", headUrl);
-            Picasso.with(getActivity()).load("file://" + headUrl).placeholder(R.mipmap.health_guide_woman_selected).resize(100, 100).transform(new CircleTrans()).centerCrop().into(holder.userHead);
+            Picasso.with(this).load("file://" + headUrl).placeholder(R.mipmap.health_guide_woman_selected).resize(100, 100).transform(new CircleTrans()).centerCrop().into(holder.userHead);
         }
         holder.userName.setText(userBean.getPetName());
         holder.listenCount.setText(userBean.getListenCount() + "");
@@ -108,74 +92,84 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         if (callName != null && callName.length() >= 1) {
             holder.callName.setText(callName);
         }
-        getCheckItem(false);
+        getCheckItem();
+        holder.opusLv.setOnItemClickListener(this);
     }
 
-    private void getCheckItem(boolean isNotify) {
+    private void getCheckItem() {
         int btnId = holder.mineRg.getCheckedRadioButtonId();
         switch (btnId) {
             case R.id.rb_mine_opus:
                 //作品
-                setOpusAdapter(isNotify);
+                setOpusAdapter();
                 break;
             case R.id.rb_mine_attention:
                 //关注
-                setAttenAdapter(isNotify);
+                setAttenAdapter();
                 break;
             case R.id.rb_mine_fans:
                 //粉丝
-                setFansAdapter(isNotify);
+                setFansAdapter();
                 break;
         }
     }
+
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         switch (i) {
             case R.id.rb_mine_opus:
                 //作品
-                setOpusAdapter(false);
+                setOpusAdapter();
                 break;
             case R.id.rb_mine_attention:
                 //关注
-                setAttenAdapter(false);
+                setAttenAdapter();
                 break;
             case R.id.rb_mine_fans:
                 //粉丝
-                setFansAdapter(false);
+                setFansAdapter();
                 break;
         }
     }
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-    private void setOpusAdapter(boolean isNotify) {
+        if (holder.opusLv.getAdapter() == opusAdapter) {
+            //作品 item点击事件
+            UserOwnSongsBean songsBean = list.get(i);
+            Intent intent = new Intent(this, ListenActivity.class);
+            intent.putExtra("songsBean", songsBean);
+            intent.putExtra("userBean", userBean);
+            intent.putExtra("adress", 0x02);
+            startActivity(intent);
+        }
+    }
+    private void setOpusAdapter() {
         addListData();
-        holder.noProduct.setText("您当前还没有任何作品");
+        holder.noProduct.setText("该用户当前还没有任何作品");
         Drawable opus = getResources().getDrawable(R.mipmap.icon_opus, null);
         opus.setBounds(0, 0, opus.getMinimumWidth(), opus.getMinimumHeight());
         holder.noProduct.setCompoundDrawables(null, opus, null, null);
         holder.opusLv.setDividerHeight(10);
-        holder.opusLv.setAdapter(null);
         holder.noProduct.setClickable(false);
         holder.noProduct.setFocusable(false);
-        holder.layoutQuery.setVisibility(View.GONE);
         if (list == null || list.size() < 1) {
             holder.opusLv.setAdapter(null);
             holder.noProduct.setVisibility(View.VISIBLE);
         } else {
             holder.noProduct.setVisibility(View.GONE);
             if (opusAdapter == null) {
-                opusAdapter = new MineOpusAdapter(getActivity(), list, userBean);
+                opusAdapter = new MineOpusAdapter(this, list, userBean);
             }
-            if (isNotify){
-                opusAdapter.notifyData(list);
-            }
+            holder.opusLv.setAdapter(null);
             holder.opusLv.setAdapter(opusAdapter);
         }
 
     }
 
-    private void setAttenAdapter(boolean isNotify) {
+    private void setAttenAdapter() {
         attenList = DbOperation.queryByUserId(userID);
-        holder.noProduct.setText("您当前还没有关注任何人,添加一些吧");
+        holder.noProduct.setText("该用户当前还没有关注任何人");
         Drawable attention = getResources().getDrawable(R.mipmap.icon_attention, null);
         attention.setBounds(0, 0, attention.getMinimumWidth(), attention.getMinimumHeight());
         holder.noProduct.setCompoundDrawables(null, attention, null, null);
@@ -185,119 +179,39 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         if (attenList == null || attenList.size() < 1) {
             holder.opusLv.setAdapter(null);
             holder.noProduct.setVisibility(View.VISIBLE);
-            holder.noProduct.setOnClickListener(addAtten);
-            holder.layoutQuery.setVisibility(View.GONE);
         } else {
             holder.noProduct.setVisibility(View.GONE);
-            holder.layoutQuery.setVisibility(View.VISIBLE);
             List<UserBean> userAttenLsit = addAttenData();
-            Log.i("size",userAttenLsit.size()+"--size");
+            Log.i("size", userAttenLsit.size() + "--size");
             if (attenAdapter == null) {
-                attenAdapter = new AttentionAdapter(getActivity(), userAttenLsit, new int[0]);
+                attenAdapter = new AttentionAdapter(this, userAttenLsit, new int[0]);
                 attenAdapter.setInsertAtten(false);
                 holder.opusLv.setAdapter(attenAdapter);
             }
-            if (isNotify){
-                attenAdapter.notifyData(userAttenLsit);
-            }else{
-                holder.opusLv.setAdapter(null);
-                holder.opusLv.setAdapter(attenAdapter);
-            }
-            holder.btnQuery.setOnClickListener(addAtten);
+            holder.opusLv.setAdapter(null);
+            holder.opusLv.setAdapter(attenAdapter);
         }
-        attenList = null;
     }
 
-    private void setFansAdapter(boolean isNotify) {
+    private void setFansAdapter() {
         addFansData();
-        Log.i("result","set----null"+isNotify);
-        holder.noProduct.setText("您当前还没有粉丝");
+        holder.opusLv.setAdapter(null);
+        holder.noProduct.setText("该用户当前还没有粉丝");
         Drawable fans = getResources().getDrawable(R.mipmap.icon_fans, null);
         fans.setBounds(0, 0, fans.getMinimumWidth(), fans.getMinimumHeight());
         holder.noProduct.setCompoundDrawables(null, fans, null, null);
         holder.noProduct.setClickable(false);
         holder.noProduct.setFocusable(false);
-        holder.layoutQuery.setVisibility(View.GONE);
         if (fansList == null || fansList.size() < 1) {
             holder.opusLv.setAdapter(null);
             holder.noProduct.setVisibility(View.VISIBLE);
         } else {
             holder.noProduct.setVisibility(View.GONE);
             if (fansAdapter == null) {
-                fansAdapter = new FansAdapter(getActivity(), fansList);
+                fansAdapter = new FansAdapter(this, fansList);
+                fansAdapter.setIsOthersHome(true);
             }
-            if (isNotify){
-                fansAdapter.notifyData(fansList);
-            }else{
-                Log.i("result","set----null");
-                holder.opusLv.setAdapter(null);
-                holder.opusLv.setAdapter(fansAdapter);
-            }
-        }
-    }
-
-    View.OnClickListener addAtten = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), InsertAttenActivity.class);
-            intent.putExtra("id", userID);
-            if (attenList != null) {
-                int[] _ids = new int[attenList.size()];
-                for (int i = 0; i < attenList.size(); i++) {
-                    _ids[i] = attenList.get(i).getAttenUserId();
-                }
-                intent.putExtra("_ids", _ids);
-            }
-            startActivity(intent);
-            IntentFilter intentFilter = new IntentFilter(InsertAttenActivity.action);
-            getActivity().registerReceiver(br, intentFilter);
-        }
-    };
-    BroadcastReceiver br = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Log.i("size","onReceive");
-            isRegistered=intent.getBooleanExtra("isRegister",false);
-            getCheckItem(true);
-        }
-    };
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (isRegistered){
-            getActivity().unregisterReceiver(br);
-        }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        if (holder.opusLv.getAdapter() == opusAdapter) {
-            //作品 item点击事件
-            UserOwnSongsBean songsBean = list.get(i);
-            Intent intent = new Intent(getActivity(), ListenActivity.class);
-            intent.putExtra("songsBean", songsBean);
-            intent.putExtra("userBean", userBean);
-            intent.putExtra("adress", 0x02);
-            startActivity(intent);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.iv_top_btn_left:
-                //设置
-                Log.i("result", "onClick-->left");
-                Intent intent = new Intent(getActivity(), SetActivity.class);
-                intent.putExtra("user", userBean);
-                startActivity(intent);
-                break;
-            case R.id.iv_top_btn_right:
-                //后台歌曲
-
-                break;
+            holder.opusLv.setAdapter(fansAdapter);
         }
     }
 
@@ -305,9 +219,6 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
      * 视图管理类
      */
     private class ViewHolder {
-        private LinearLayout topBar;
-        private ImageView topBtnLeft;
-        private ImageView topBtnRight;
         private TextView topBarTitle;
         private ListView opusLv;
         private TextView noProduct;
@@ -317,13 +228,8 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         private TextView sign;
         private TextView callName;
         private TextView listenCount;
-        private LinearLayout layoutQuery;
-        private Button btnQuery;
 
         private void bindView(View view) {
-            topBar = (LinearLayout) view.findViewById(R.id.layout_top_navgationBar);
-            topBtnLeft = (ImageView) view.findViewById(R.id.iv_top_btn_left);
-            topBtnRight = (ImageView) view.findViewById(R.id.iv_top_btn_right);
             topBarTitle = (TextView) view.findViewById(R.id.tv_top_title);
             opusLv = (ListView) view.findViewById(R.id.lv_mine_opus);
             noProduct = (TextView) view.findViewById(R.id.tv_mine_noProduct);
@@ -333,8 +239,6 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
             sign = (TextView) view.findViewById(R.id.tv_mine_design);
             callName = (TextView) view.findViewById(R.id.tv_mine_callName);
             listenCount = (TextView) view.findViewById(R.id.tv_mine_listenCount);
-            layoutQuery = (LinearLayout) view.findViewById(R.id.layout_query);
-            btnQuery = (Button) layoutQuery.findViewById(R.id.btn_query);
         }
     }
 
@@ -349,8 +253,8 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
             String time = format.format(new Date());
             userOwn.setTime(time);
             list.add(userOwn);
-//            userOwn.save();
-//            DbOperation.updateSongsUserId(userID, DbOperation.querySongsId(userOwn.getSongName()));
+            userOwn.save();
+            DbOperation.updateSongsUserId(userID, DbOperation.querySongsId(userOwn.getSongName()));
         }
     }
 
@@ -384,17 +288,8 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
             bean.setHead(userBean.getHead());
             bean.setPetName(userBean.getPetName());
             bean.setCallName(userBean.getButility());
-            bean.setUserId(_ids[i]);
             fansList.add(bean);
         }
-    }
-
-    public void getUserInfo(UserInfo info) {
-        this.info = info;
-    }
-
-    public interface UserInfo {
-        int getUserID();
     }
 
 }

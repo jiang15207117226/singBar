@@ -1,6 +1,7 @@
 package plz.com.singbar.view.activity;
 
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -52,6 +53,9 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
      * @param view
      */
     private void init(View view) {
+//        for (int i=2;i<50;i++){
+//            DbOperation.insertData(i);
+//        }
         holder = new ViewHolder();
         holder.bindView(view);
         initPop();//初始化pop
@@ -171,6 +175,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
                     break;
                 case R.id.tv_pop_item_kodBox:
                     //点歌台
+                    Intent intent=new Intent(HomeActivity.this,DiangeActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.tv_pop_item_koded:
                     //已点歌曲

@@ -53,4 +53,8 @@
 
     <color name="dg">#F4C600</color>
     <color name="bai">#ffffff</color>
+
+    <color name="feedback_title_color">#f0f0f0</color>
+    <color name="feedback_btn_color">#21bc22</color>
+    <color name="feedback_top_color">#181818</color>
 </resources>
