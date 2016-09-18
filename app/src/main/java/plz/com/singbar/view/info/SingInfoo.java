@@ -3,13 +3,15 @@ package plz.com.singbar.view.info;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2016/9/5 0005.
  */
 public class SingInfoo implements Serializable{
-    private String filename;
+    private @SerializedName("name")String filename;
     private String extname;
     private int m4afilesize;
     private int filesize;

@@ -90,6 +90,8 @@ public class MediaRecordertest extends Activity {
                     player();
 
 
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

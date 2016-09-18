@@ -183,6 +183,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
                     break;
                 case R.id.tv_pop_item_koded:
                     //已点歌曲
+                    Intent intento=new Intent(HomeActivity.this,HistortActivity.class);
+                    startActivity(intento);
                     break;
                 case R.id.tv_pop_item_record:
                     //本地录音

@@ -14,8 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import java.util.List;
 import plz.com.singbar.R;
+import plz.com.singbar.operation.SongO;
 import plz.com.singbar.operation.SongsOperation;
+import plz.com.singbar.view.adapter.NewAdapter;
 import plz.com.singbar.view.adapter.SouSuoAdapter;
+import plz.com.singbar.view.info.NewSongInfo;
 import plz.com.singbar.view.info.SingInfo;
 import plz.com.singbar.view.info.SingInfoo;
 
@@ -32,7 +35,9 @@ public class DgSouSuoActivity extends Activity {
     private SongsOperation songsOperation;
     private ImageView ivloading;
     private TextView tvloading;
-
+    private NewAdapter newAdapter;
+    private NewSongInfo info;
+    private SongO songO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +66,13 @@ public class DgSouSuoActivity extends Activity {
                 tvloading.setVisibility(View.VISIBLE);
                 AnimationDrawable ad = (AnimationDrawable) ivloading.getDrawable();
                 ad.start();
-                songsOperation = new SongsOperation(handler);
+                /*songsOperation = new SongsOperation(handler);
 
-                songsOperation.getSongsBean(sousuo.getText().toString());
+                songsOperation.getSongsBean(sousuo.getText().toString());*/
+
+                songO=new SongO(handler);
+                songO.songInfo(sousuo.getText().toString());
+
 //                buildAdapter();
 
             }
@@ -72,11 +81,12 @@ public class DgSouSuoActivity extends Activity {
     };
 
     public void buildAdapter() {
-        if (adapter == null) {
-            adapter = new SouSuoAdapter(DgSouSuoActivity.this, singInfo, imalist);
-            lv.setAdapter(adapter);
+        if (newAdapter == null) {
+          //  adapter = new SouSuoAdapter(DgSouSuoActivity.this, singInfo, imalist);
+            newAdapter = new NewAdapter(DgSouSuoActivity.this,info);
+            lv.setAdapter(newAdapter);
         } else {
-            adapter.datachange(singInfo, imalist);
+            newAdapter.datachange(info);
         }
     }
 
@@ -87,28 +97,29 @@ public class DgSouSuoActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    singInfo = (SingInfo) msg.obj;
+                /*    singInfo = (SingInfo) msg.obj;
                     List<SingInfoo> list = singInfo.getSingInfoo();
 
                     for (int i = 0; i < list.size(); i++) {
                         Log.i("result", list.get(i).getSingername() + "---" + i);
                         songsOperation.getSingerBean(list.get(i).getSingername(), list.size());
 
-                    }
-
-                    break;
-
-                case 3:
-                    List<String> imgs = (List<String>) msg.obj;
-                    imalist = imgs;
-//                    for (int i=0;i<imgs.size();i++){
-//                        Log.i("result",imalist.get(i)+"----"+i);
-//                    }
+                    }*/
+                    info= (NewSongInfo) msg.obj;
                     ivloading.setVisibility(View.GONE);
                     tvloading.setVisibility(View.GONE);
                     AnimationDrawable ad = (AnimationDrawable) ivloading.getDrawable();
                     ad.stop();
                     buildAdapter();
+                    break;
+
+                case 3:
+                  /*  List<String> imgs = (List<String>) msg.obj;
+                    imalist = imgs;
+//                    for (int i=0;i<imgs.size();i++){
+//                        Log.i("result",imalist.get(i)+"----"+i);
+//                    }*/
+
                     break;
             }
         }

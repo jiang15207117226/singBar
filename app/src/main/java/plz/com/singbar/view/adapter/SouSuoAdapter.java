@@ -16,11 +16,14 @@ import com.squareup.picasso.Picasso;
 
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import plz.com.singbar.R;
 
+import plz.com.singbar.view.activity.HistortActivity;
 import plz.com.singbar.view.activity.MediaRecordertest;
+import plz.com.singbar.view.info.DgGxInfo;
 import plz.com.singbar.view.info.SingInfo;
 
 /**
@@ -33,11 +36,14 @@ public class SouSuoAdapter extends BaseAdapter implements View.OnClickListener{
     private Context context;
     private List<String> imalist;
     private LayoutInflater inflater;
+    private DgGxInfo dgGxInfo;
+    private List<DgGxInfo> list;
 
     public SouSuoAdapter(Context context,SingInfo info,List<String> imalist){
         this.context=context;
         this.info=info;
         this.imalist=imalist;
+        list=new ArrayList<>();
         inflater=LayoutInflater.from(context);
     }
     public void datachange(SingInfo info,List<String> imalist){
@@ -95,6 +101,16 @@ public class SouSuoAdapter extends BaseAdapter implements View.OnClickListener{
         intent.putExtra("data",info.getSingInfoo().get(i));
         intent.putExtra("tag",0);
         context.startActivity(intent);
+
+        dgGxInfo = new DgGxInfo();
+        dgGxInfo.setSingname(info.getSingInfoo().get(i).getFilename());
+        dgGxInfo.setIma(info.getSingInfoo().get(i).getIma());
+        dgGxInfo.setSingername(info.getSingInfoo().get(i).getSingername());
+        dgGxInfo.setPlayurl(info.getSingInfoo().get(i).getUrl());
+        list.add(dgGxInfo);
+        HistortActivity histortActivity = new HistortActivity();
+        histortActivity.listinfo(list);
+
     }
 
     class ViewHolder{

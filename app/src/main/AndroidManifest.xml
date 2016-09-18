@@ -66,6 +66,7 @@
             android:name=".view.activity.InsertAttenActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".view.activity.HerHomeActivity" />
+        <activity android:name=".view.activity.HistortActivity"></activity>
     </application>
 
 </manifest>

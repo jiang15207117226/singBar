@@ -78,7 +78,7 @@ public class GxFragment extends Fragment{
 
     private void build() {
         info=new DgGxInfo();
-        info.setPlayurl("http://song.music.response.itmf.cn/9c1cb390b9c83f3ba0c20032d42a9a94/57cf81b4/G003/M03/10/14/o4YBAFS3ATCAYcVEAFbE1tcxGOY012.mp3");
+        info.setPlayurl("http:\\/\\/yinyueshiting.baidu.com\\/data2\\/music\\/124598466\\/124598466.mp3?xcode=ce5922d63dec3d873cbb1604e4436b22");
         info.setIma("http://img1.music.response.itmf.cn/uploadpic/pass/softhead/400/20160614/20160614183818760585.jpg");
         info.setSingername("陈奕迅");
         info.setSingname("浮夸");
@@ -86,7 +86,7 @@ public class GxFragment extends Fragment{
         gxlist.add(info);
 
         info=new DgGxInfo();
-        info.setPlayurl("http://song.music.response.itmf.cn/a61470388b45eb5b5220184ec2d59071/57cf82f7/G009/M06/02/1F/qYYBAFT-hwWAVM2RADuuPEzsBhk535.mp3");
+        info.setPlayurl("http:\\/\\/yinyueshiting.baidu.com\\/data2\\/music\\/9549419d16a0bfac9818423eaa149b21\\/264005473\\/264005473.mp3?xcode=4fa8e60b38e41d082a1779a2a81a9c08");
         info.setIma("http://img1.music.response.itmf.cn/uploadpic/pass/softhead/400/20160614/20160614161830591380.jpg");
         info.setSingername("周杰伦");
         info.setSingname("稻香");
@@ -94,7 +94,7 @@ public class GxFragment extends Fragment{
         gxlist.add(info);
 
         info=new DgGxInfo();
-        info.setPlayurl("http://song.music.response.itmf.cn/aa92978357a82bcb58f2b097ccdca771/57cf83c4/G057/M01/11/13/2YYBAFcbPGSAGTc3ADu9yAGq5io136.mp3");
+        info.setPlayurl("http:\\/\\/yinyueshiting.baidu.com\\/data2\\/music\\/2b6655840b5ec803e04c26ca11bdd009\\/270587896\\/270587896.mp3?xcode=4fa8e60b38e41d0848ae5c20176c0886");
         info.setIma("http://img1.music.response.itmf.cn/uploadpic/pass/softhead/400/20160810/20160810175724522.jpg");
         info.setSingername("薛之谦");
         info.setSingname("丑八怪");
@@ -102,7 +102,7 @@ public class GxFragment extends Fragment{
         gxlist.add(info);
 
         info=new DgGxInfo();
-        info.setPlayurl("http://song.music.response.itmf.cn/8e3a8524f1abf3a43ae4dc8255cfcc37/57cf8545/G004/M00/13/05/pIYBAFS60SSABD6NADG8XXx-zWc410.mp3");
+        info.setPlayurl("http:\\/\\/yinyueshiting.baidu.com\\/data2\\/music\\/59eec38ecf8863b4277804e8814d4a51\\/260357989\\/260357989.mp3?xcode=016eed673d7668794394f800f7f2550e");
         info.setIma("http://img1.music.response.itmf.cn/uploadpic/pass/softhead/400/20160407/20160407184433394229.jpg");
         info.setSingername("凤凰传奇");
         info.setSingname("最炫民族风");
@@ -110,7 +110,7 @@ public class GxFragment extends Fragment{
         gxlist.add(info);
 
         info=new DgGxInfo();
-        info.setPlayurl("http://song.music.response.itmf.cn/5f80fa3d1d89b493b5fc2aeac156beb7/57cf8612/G005/M03/01/03/RQ0DAFS35BaAaTERAFmi8DAoTn0791.mp3");
+        info.setPlayurl("http:\\/\\/yinyueshiting.baidu.com\\/data2\\/music\\/123860036\\/123860036.mp3?xcode=016eed673d7668797ed60eb536e08c87");
         info.setIma("http://img1.music.response.itmf.cn/uploadpic/pass/softhead/400/20160418/20160418100531196.jpg");
         info.setSingername("Beyond");
         info.setSingname("海阔天空");
@@ -118,7 +118,7 @@ public class GxFragment extends Fragment{
         gxlist.add(info);
 
         info=new DgGxInfo();
-        info.setPlayurl("http://song.music.response.itmf.cn/6b41b2ed9545efcb7500f22191464f51/57cf86f9/G013/M06/0C/1D/TQ0DAFUK1EuAV-m9ADiVgHwQr7U125.mp3");
+        info.setPlayurl("http:\\/\\/yinyueshiting.baidu.com\\/data2\\/music\\/8f5c521fe452f90ba9bbef2573114250\\/270273605\\/270273605.mp3?xcode=016eed673d766879bd5cc648288db746");
         info.setIma("http://img1.music.response.itmf.cn/uploadpic/pass/softhead/400/20160425/20160425102353574359.jpg");
         info.setSingername("张杰");
         info.setSingname("逆战");

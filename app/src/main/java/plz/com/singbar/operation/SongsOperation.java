@@ -53,111 +53,113 @@ public class SongsOperation {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                String json = response.body().string();
-                Log.i("result", json);
+                String json = response.body().toString();
+                Log.i("result", "++++++++++++++++++++++"+json);
                 JSONObject jsonObject = null;
-
+                 JSONObject object = null;
                 try {
                     jsonObject = new JSONObject(json);
+                    object = jsonObject.optJSONObject("data");
 
+                    Gson gson = new Gson();
+                    Gson gsons = new Gson();
+                    SingInfo singInfo = gsons.fromJson(object.toString(), SingInfo.class);
+
+                    List<SingInfoo> listo = singInfo.getSingInfoo();
+
+                    JSONArray array = object.optJSONArray("data");
+                    for (int i = 0; i < array.length(); i++) {
+
+                        try {
+                            final SingInfoo singInfoo = gson.fromJson(array.get(i).toString(), SingInfoo.class);
+
+                            String spec = "http://apis.baidu.com/geekery/music/playinfo";
+
+                            OkHttpClient mOkHttpClient = new OkHttpClient();
+                            final Request request = new Request.Builder()
+                                    .url(spec + "?hash=" + singInfoo.getHash()).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
+                                    .get()
+                                    .build();
+                            Call callo = mOkHttpClient.newCall(request);
+                            callo.enqueue(new Callback() {
+
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    String str = response.body().string();
+                                    JSONObject jsonObject = null;
+
+                                    try {
+                                        jsonObject = new JSONObject(str);
+                                        JSONObject data = jsonObject.optJSONObject("data");
+                                        String url = data.optString("url");
+                                        singInfoo.setUrl(url);
+                                        Log.i("result", url + "===================================");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+
+                            String speco = "http://apis.baidu.com/geekery/music/krc";
+
+                            String arg = "?name=" + singInfoo.getFilename() + "&hash=" + singInfoo.getHash() + "&time=" + singInfoo.getDuration();
+                            OkHttpClient mOkHttpCliento = new OkHttpClient();
+                            final Request requesto = new Request.Builder()
+                                    .url(speco + arg).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
+                                    .get()
+                                    .build();
+                            Call calloo = mOkHttpCliento.newCall(requesto);
+                            calloo.enqueue(new Callback() {
+
+
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    String stro = response.body().string();
+                                    Log.i("result", "-------------------" + stro + "-------------------------");
+                                    JSONObject jsonObjecto = null;
+                                    try {
+                                        jsonObjecto = new JSONObject(stro);
+                                        JSONObject object1 = jsonObjecto.optJSONObject("data");
+                                        if (object1 != null) {
+                                            String ss = object1.optString("content");
+                                            singInfoo.setContext(ss);
+                                        }else{
+                                            Log.i("result","这个是空");
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            listo.add(singInfoo);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                    singInfo.setSingInfoo(listo);
+                    Message msg = new Message();
+                    msg.obj = singInfo;
+                    msg.what = 1;
+                    handler.sendMessage(msg);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                final JSONObject object = jsonObject.optJSONObject("data");
-                Gson gson = new Gson();
-                Gson gsons = new Gson();
-                SingInfo singInfo = gsons.fromJson(object.toString(), SingInfo.class);
-
-                List<SingInfoo> listo = singInfo.getSingInfoo();
-
-                JSONArray array = object.optJSONArray("data");
-                for (int i = 0; i < array.length(); i++) {
-
-                    try {
-                        final SingInfoo singInfoo = gson.fromJson(array.get(i).toString(), SingInfoo.class);
-
-                        String spec = "http://apis.baidu.com/geekery/music/playinfo";
-
-                        OkHttpClient mOkHttpClient = new OkHttpClient();
-                        final Request request = new Request.Builder()
-                                .url(spec + "?hash=" + singInfoo.getHash()).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
-                                .get()
-                                .build();
-                        Call callo = mOkHttpClient.newCall(request);
-                        callo.enqueue(new Callback() {
-
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                String str = response.body().string();
-                                JSONObject jsonObject = null;
-
-                                try {
-                                    jsonObject = new JSONObject(str);
-                                    JSONObject data = jsonObject.optJSONObject("data");
-                                    String url = data.optString("url");
-                                    singInfoo.setUrl(url);
-                                    Log.i("result", url + "===================================");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-
-                        String speco = "http://apis.baidu.com/geekery/music/krc";
-
-                        String arg = "?name=" + singInfoo.getFilename() + "&hash=" + singInfoo.getHash() + "&time=" + singInfoo.getDuration();
-                        OkHttpClient mOkHttpCliento = new OkHttpClient();
-                        final Request requesto = new Request.Builder()
-                                .url(speco + arg).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
-                                .get()
-                                .build();
-                        Call calloo = mOkHttpCliento.newCall(requesto);
-                        calloo.enqueue(new Callback() {
 
 
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                String stro = response.body().string();
-                                Log.i("result", "-------------------" + stro + "-------------------------");
-                                JSONObject jsonObjecto = null;
-                                try {
-                                    jsonObjecto = new JSONObject(stro);
-                                    JSONObject object1 = jsonObjecto.optJSONObject("data");
-                                    if (object1 != null) {
-                                        String ss = object1.optString("content");
-                                        singInfoo.setContext(ss);
-                                    }else{
-                                        Log.i("result","这个是空");
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                      listo.add(singInfoo);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-                singInfo.setSingInfoo(listo);
-                Message msg = new Message();
-                msg.obj = singInfo;
-                msg.what = 1;
-                handler.sendMessage(msg);
 
             }
         });
