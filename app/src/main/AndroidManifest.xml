@@ -62,6 +62,7 @@
         <activity android:name=".view.activity.DgSouSuoActivity" />
         <activity android:name=".view.activity.MediaRecordertest" />
         <activity android:name=".view.activity.SetActivity" />
+        <activity android:name=".view.activity.LocalActivity"/>
         <activity
             android:name=".view.activity.InsertAttenActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />

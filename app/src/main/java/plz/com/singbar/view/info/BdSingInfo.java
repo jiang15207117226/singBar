@@ -1,9 +1,11 @@
 package plz.com.singbar.view.info;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/9/7 0007.
  */
-public class BdSingInfo {
+public class BdSingInfo implements Serializable {
     private String name;
     private String sname;
     private Long dx;

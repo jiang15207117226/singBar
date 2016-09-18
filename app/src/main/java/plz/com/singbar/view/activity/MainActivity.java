@@ -35,6 +35,8 @@ import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.bean.UserDetailBean;
 import plz.com.singbar.operation.DbOperation;
 import plz.com.singbar.operation.GenerMbAccount;
+import plz.com.singbar.operation.UserIdConfig;
+
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private ViewHolder holder;
@@ -46,7 +48,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private IUiListener iUiListener;
     private String account;
     private String pw;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         intent.setClass(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
-
     private void init(View view) {
         /**
          * 绑定视图中用到的控件
@@ -78,54 +78,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
          */
         setClickListener();
     }
-
     private void setClickListener() {
         holder.btnLogin.setOnClickListener(this);
         holder.registerAccount.setOnClickListener(this);
         holder.findbackPw.setOnClickListener(this);
     }
-
     private void loginSucceed(int userId) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra("id", userId);
         startActivity(intent);
         finish();
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login_login:
                 //登陆
-//                String account = holder.inputAccount.getText().toString();
-//                String pw = holder.inputPassword.getText().toString();
-//                account = holder.inputAccount.getText().toString();
-//                pw = holder.inputPassword.getText().toString();
-//                if (account.length() < 1 || pw.length() < 1) {
-//                    Toast.makeText(this, "用户名或密码为空...", Toast.LENGTH_SHORT).show();
-//                    break;
-//                }
-//                List<UserBean> list = DbOperation.query(account);
-//                if (list == null || list.size() < 1) {
-//                    Log.i("result", list.size() + "");
-//                    Toast.makeText(this, "用户名或密码错误...", Toast.LENGTH_SHORT).show();
-//                    break;
-//                } else {
-//                    for (UserBean bean : list) {
-//                        if (bean.getAccount().equals(account)) {
-//                            if (bean.getPw().equals(pw)) {
-//                                Toast.makeText(this, "登陆成功!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(this, HomeActivity.class);
-//                                intent.putExtra("id", bean.getId());
-                                startActivity(intent);
-//                                finish();
-//                            } else {
-//                                Toast.makeText(this, "密码错误...", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//                }
-//                handler.postDelayed(loginThread, 700);
+                account = holder.inputAccount.getText().toString();
+                pw = holder.inputPassword.getText().toString();
+                if (account.length() < 1 || pw.length() < 1) {
+                    Toast.makeText(this, "用户名或密码为空...", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                handler.postDelayed(loginThread, 700);
                 break;
             case R.id.tv_login_registerAccount:
                 //注册账号
@@ -139,7 +114,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
-
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -168,6 +142,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             msg.what = 0;
                             msg.obj = bean.getId();
                             handler.sendMessage(msg);
+                            UserIdConfig.id=bean.getId();
                         } else {
                             Toast.makeText(MainActivity.this, "密码错误...", Toast.LENGTH_SHORT).show();
                         }
@@ -176,11 +151,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
     };
-
     public void qqLoginClick(View view) {
         loginQQ();
     }
-
     public void loginQQ() {
         tencent = Tencent.createInstance(APP_ID, getApplicationContext());
         qqAuth = QQAuth.createInstance(APP_ID, getApplicationContext());
@@ -188,7 +161,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             iUiListener = new BaseUiListener() {
                 @Override
                 protected void doComplete(JSONObject o) {
-                    updateUserInfo();
                     Log.i("result", o + "----------------------");
                     try {
                         openidString = o.getString("openid");
@@ -227,15 +199,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                         e.printStackTrace();
                                     }
                                 }
-
                                 @Override
                                 public void onError(UiError uiError) {
-
                                 }
-
                                 @Override
                                 public void onCancel() {
-
                                 }
                             });
                         } else {
@@ -246,95 +214,31 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 }
             };
-            // qqAuth.login(MainActivity.this,"all",iUiListener);
-//            tencent.login(MainActivity.this, "all", iUiListener);
-            tencent.loginWithOEM(MainActivity.this,"all",iUiListener,"10000144","10000144","xxxx");
             tencent.login(MainActivity.this, "all", iUiListener);
 //            tencent.loginWithOEM(MainActivity.this,"all",iUiListener,"10000144","10000144","xxxx");
         } else {
             qqAuth.logout(MainActivity.this);
         }
-
-    }
-    public void updateUserInfo() {
-        if (qqAuth != null && qqAuth.isSessionValid()) {
-            IUiListener listener = new IUiListener() {
-                @Override
-                public void onError(UiError e) {
-                    // TODO Auto-generated method stub
-                }
-                @Override
-                public void onComplete(final Object response) {
-                    JSONObject json = (JSONObject) response;
-                    // 昵称
-                    Message msg = new Message();
-                    String nickname = null;
-                    try {
-                        nickname = ((JSONObject) response)
-                                .getString("nickname");
-                        Log.i("result",nickname+"--------");
-                    } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-//                        msg.getData().putString("nickname", nickname);
-//                        msg.what = 0;
-//                        mHandler.sendMessage(msg);
-                    // 头像
-                    String path;
-                    try {
-                        path = json.getString("figureurl_qq_2");
-                        Log.i("result",path+">>path");
-//                            MyImgThread imgThread = new MyImgThread(path);
-//                            Thread thread = new Thread(imgThread);
-//                            thread.start();
-                    } catch (JSONException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
-                }
-                @Override
-                public void onCancel() {
-                    // TODO Auto-generated method stub
-                }
-            };
-            // MainActivity.mTencent.requestAsync(Constants.GRAPH_SIMPLE_USER_INFO,
-            // null,
-            // Constants.HTTP_GET, requestListener, null);
-//                mInfo = new UserInfo(this, mQQAuth.getQQToken());
-//                mInfo.getUserInfo(listener);
-        } else {
-            // mUserInfo.setText("");
-            // mUserInfo.setVisibility(android.view.View.GONE);
-            // mUserLogo.setVisibility(android.view.View.GONE);
-        }
     }
     public class BaseUiListener implements IUiListener {
-
         @Override
         public void onComplete(Object o) {
             Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
-            Log.i("result",o+"");
             Log.i("result", o + "");
             doComplete((JSONObject) o);
         }
-
         /**
          * 处理返回的消息
          */
         protected void doComplete(JSONObject o) {
         }
-
         @Override
         public void onError(UiError uiError) {
-
         }
         @Override
         public void onCancel() {
-
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_LOGIN) {
@@ -359,11 +263,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 time = System.currentTimeMillis();
                 return false;
             }
-
         }
         return super.onKeyDown(keyCode, event);
     }
-
     /**
      * 控件(视图)管理类
      */
@@ -373,7 +275,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         private Button btnLogin;
         private TextView registerAccount;
         private TextView findbackPw;
-
         private void bindView(View view) {
             inputAccount = (EditText) view.findViewById(R.id.et_login_inputAccount);
             inputPassword = (EditText) view.findViewById(R.id.et_login_inputPW);

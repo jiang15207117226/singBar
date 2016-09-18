@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_sing_singname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="歌曲名" />
+
+    <TextView
+        android:id="@+id/tv_sing_geci"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:gravity="center"
+        android:text="显示歌词" />
+
+    <ProgressBar
+        android:id="@+id/pb_bar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_above="@+id/rg_record"
+        android:layout_toLeftOf="@+id/tv_tape_time" />
+
+    <TextView
+        android:id="@+id/tv_tape_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/pb_bar"
+        android:layout_marginLeft="10dp"
+        android:text="00:00/00:00" />
+
+    <LinearLayout
+        android:id="@+id/rg_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/rb_quxiao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_quxiao"
+            android:gravity="center"
+            android:text="取消" />
+
+        <CheckBox
+            android:id="@+id/start_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/changge"
+            android:gravity="center"
+            android:text="录歌" />
+
+        <CheckBox
+            android:id="@+id/end_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/wancheng"
+            android:gravity="center"
+            android:text="完成" />
+    </LinearLayout>
+
+
+</RelativeLayout>

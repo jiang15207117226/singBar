@@ -56,6 +56,7 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
 //        for (int i=2;i<50;i++){
 //            DbOperation.insertData(i);
 //        }
+//        DbOperation.deleteAllSongs();
         id = getIntent().getIntExtra("id", -1);
         holder = new ViewHolder();
         holder.bindView(view);
@@ -186,6 +187,9 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
                     break;
                 case R.id.tv_pop_item_record:
                     //本地录音
+                    Intent intent1=new Intent(HomeActivity.this,LocalActivity.class);
+                    startActivity(intent1);
+                    Log.i("result","localClick");
                     break;
             }
         }

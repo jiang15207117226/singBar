@@ -9,6 +9,6 @@ import java.io.FilenameFilter;
 class MusicFilter implements FilenameFilter {
     @Override
     public boolean accept(File file, String s) {
-        return (s.endsWith(".amr"));
+        return (s.endsWith(".mp3"));
     }
 }

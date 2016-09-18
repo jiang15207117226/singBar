@@ -39,7 +39,7 @@ public class SongsOperation {
     public void getSongsBean(String songName) {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(head + "?" + "s=" + songName).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
+                .url(head + "?" + "s=" + songName).addHeader("apikey", "bd3c27144607ec0617f96d91a0ec6b24")
                 .get()
                 .build();
         Call call = mOkHttpClient.newCall(request);
@@ -81,7 +81,7 @@ public class SongsOperation {
 
                         OkHttpClient mOkHttpClient = new OkHttpClient();
                         final Request request = new Request.Builder()
-                                .url(spec + "?hash=" + singInfoo.getHash()).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
+                                .url(spec + "?hash=" + singInfoo.getHash()).addHeader("apikey", "bd3c27144607ec0617f96d91a0ec6b24")
                                 .get()
                                 .build();
                         Call callo = mOkHttpClient.newCall(request);
@@ -115,7 +115,7 @@ public class SongsOperation {
                         String arg = "?name=" + singInfoo.getFilename() + "&hash=" + singInfoo.getHash() + "&time=" + singInfoo.getDuration();
                         OkHttpClient mOkHttpCliento = new OkHttpClient();
                         final Request requesto = new Request.Builder()
-                                .url(speco + arg).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
+                                .url(speco + arg).addHeader("apikey", "bd3c27144607ec0617f96d91a0ec6b24")
                                 .get()
                                 .build();
                         Call calloo = mOkHttpCliento.newCall(requesto);
@@ -166,7 +166,7 @@ public class SongsOperation {
     public void getSingerBean(String singerName, final int size) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(singerHead + "?" + "name=" + singerName).addHeader("apikey", "9f021592a34b6c446b4557778852774f")
+                .url(singerHead + "?" + "name=" + singerName).addHeader("apikey", "bd3c27144607ec0617f96d91a0ec6b24")
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
