@@ -1,10 +1,12 @@
 package plz.com.singbar.operation;
 
 import android.content.ContentValues;
+import android.os.Environment;
 import android.util.Log;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,11 +66,22 @@ public class DbOperation {
         values.put("userbean_id", user_id);
         DataSupport.update(AttenBean.class, values, id);
     }
-
+    public static List<UserOwnSongsBean> querySongs(int user_id){
+       return DataSupport.where("userbean_id = ?",user_id+"").find(UserOwnSongsBean.class);
+    }
     public static void updateUserAttenCount(int count, int id) {
         ContentValues value = new ContentValues();
         value.put("attentionCount", count);
         DataSupport.update(UserBean.class, value, id);
+    }
+    public static void deleteAllSongs() {
+        DataSupport.deleteAll(UserOwnSongsBean.class);
+        File[] files = new File(Environment.getExternalStorageDirectory().toString() + "/Mb录音").listFiles();
+        if (files != null) {
+            for (File file : files) {
+                file.delete();
+            }
+        }
     }
 
     public static int findLastBeanId() {
@@ -97,7 +110,7 @@ public class DbOperation {
     public static void insertData(int i) {
         UserBean bean = new UserBean();
         UserDetailBean userDetailBean = new UserDetailBean();
-        String account=GenerMbAccount.generMbAccount();
+        String account = GenerMbAccount.generMbAccount();
         bean.setAccount(account);
         bean.setPw("123456");
         bean.setPhone(Long.parseLong("132" + (int) ((Math.random() * 9 + 1) * 10000000)));
@@ -133,19 +146,21 @@ public class DbOperation {
                 AttenBean attenBean = list.get(i);
                 int _id = attenBean.getUserId();
                 Log.i("_id", _id + "-->_id");
-                _ids[i]=_id;
+                _ids[i] = _id;
             }
             return _ids;
         }
         return null;
     }
-    public static int findByOpenId(String QQopenId){
-        List<UserBean>list=DataSupport.where("qqloginopenedid = ?",QQopenId).find(UserBean.class);
-        if (list==null||list.size()<1){
+
+    public static int findByOpenId(String QQopenId) {
+        List<UserBean> list = DataSupport.where("qqloginopenedid = ?", QQopenId).find(UserBean.class);
+        if (list == null || list.size() < 1) {
             return -1;
         }
         return list.get(0).getId();
     }
+
     public static List<UserBean> getRandomData(int id) {
         List<UserBean> list = new ArrayList<>();
         int[] positions = new int[10];
@@ -165,7 +180,7 @@ public class DbOperation {
             if (!isExit) {
                 positions[i] = position;
                 List<UserBean> list1 = DbOperation.queryPartById(position);
-                if (list1!=null&&list1.size()>=1){
+                if (list1 != null && list1.size() >= 1) {
                     UserBean bean = list1.get(0);
                     list.add(bean);
                 }

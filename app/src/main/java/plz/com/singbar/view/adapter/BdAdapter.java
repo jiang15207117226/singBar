@@ -1,6 +1,7 @@
 package plz.com.singbar.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,13 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import plz.com.singbar.R;
+import plz.com.singbar.view.activity.MediaRecordertest;
 import plz.com.singbar.view.info.BdSingInfo;
 
 /**
  * Created by Administrator on 2016/9/7 0007.
  */
-public class BdAdapter extends BaseAdapter{
+public class BdAdapter extends BaseAdapter implements View.OnClickListener{
     private List<BdSingInfo> list;
     private Context context;
     private LayoutInflater inflater;
@@ -69,8 +71,18 @@ public class BdAdapter extends BaseAdapter{
         holder.dx.setText(vv+"M");
 
         Picasso.with(context).load(R.mipmap.health_guide_men_selected).into(holder.head);
-
+        holder.kge.setOnClickListener(this);
+        holder.kge.setTag(i);
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int i= (int) view.getTag();
+        Intent intent=new Intent(context, MediaRecordertest.class);
+        intent.putExtra("data",list.get(i));
+        intent.putExtra("tag",2);
+        context.startActivity(intent);
     }
 
     class ViewHolder{

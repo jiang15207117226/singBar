@@ -24,9 +24,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import plz.com.singbar.R;
@@ -114,6 +112,7 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         if (callName != null && callName.length() >= 1) {
             holder.callName.setText(callName);
         }
+        getCheckItem(true);
         super.onResume();
     }
 
@@ -159,7 +158,6 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         opus.setBounds(0, 0, opus.getMinimumWidth(), opus.getMinimumHeight());
         holder.noProduct.setCompoundDrawables(null, opus, null, null);
         holder.opusLv.setDividerHeight(10);
-        holder.opusLv.setAdapter(null);
         holder.noProduct.setClickable(false);
         holder.noProduct.setFocusable(false);
         holder.layoutQuery.setVisibility(View.GONE);
@@ -169,13 +167,18 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
         } else {
             holder.noProduct.setVisibility(View.GONE);
             if (opusAdapter == null) {
+                holder.opusLv.setAdapter(null);
                 opusAdapter = new MineOpusAdapter(getActivity(), list, userBean);
+                holder.opusLv.setAdapter(opusAdapter);
+            }else{
+                if (isNotify){
+                    opusAdapter.notifyData(list);
+                }else {
+                    holder.opusLv.setAdapter(opusAdapter);
+                }
             }
-            if (isNotify){
-                opusAdapter.notifyData(list);
             }
-            holder.opusLv.setAdapter(opusAdapter);
-        }
+
 
     }
 
@@ -345,19 +348,7 @@ public class MineFragment extends Fragment implements RadioGroup.OnCheckedChange
     }
 
     private void addListData() {
-        for (int i = 0; i < 10; i++) {
-            UserOwnSongsBean userOwn = new UserOwnSongsBean();
-            userOwn.setSongName("死了都要爱" + i);
-            userOwn.setComments(100);
-            userOwn.setFlowers(321);
-            userOwn.setTrys(140);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            String time = format.format(new Date());
-            userOwn.setTime(time);
-            list.add(userOwn);
-//            userOwn.save();
-//            DbOperation.updateSongsUserId(userID, DbOperation.querySongsId(userOwn.getSongName()));
-        }
+        list=DbOperation.querySongs(userID);
     }
 
     private List<UserBean> addAttenData() {

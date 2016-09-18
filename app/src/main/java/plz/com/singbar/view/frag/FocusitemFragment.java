@@ -122,7 +122,7 @@ public class FocusitemFragment extends Fragment implements HomeFragment.SetConte
             tv.setVisibility(View.VISIBLE);
         } else {
             tv.setVisibility(View.GONE);
-            adapter = new FocusitemAdapter(list,userList, getActivity().getBaseContext());
+            adapter = new FocusitemAdapter(list,userList, context);
             lv.setAdapter(adapter);
         }
     }
