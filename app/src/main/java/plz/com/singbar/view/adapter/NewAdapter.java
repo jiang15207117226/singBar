@@ -15,34 +15,39 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import plz.com.singbar.R;
+import plz.com.singbar.operation.CircleTrans;
 import plz.com.singbar.view.info.NewSongInfo;
+import plz.com.singbar.view.info.SingInfo;
+import plz.com.singbar.view.info.SingInfoo;
 
 /**
  * Created by Administrator on 2016/9/18 0018.
  */
 public class NewAdapter extends BaseAdapter{
-    private NewSongInfo info;
+    private SingInfo info;
     private Context context;
     private LayoutInflater inflater;
-    private List<NewSongInfo.SongBean> list;
-    public NewAdapter(Context context,NewSongInfo info){
+    private List<SingInfoo> list;
+    private String name;
+    public NewAdapter(Context context,SingInfo info,String name){
         this.context=context;
         this.info=info;
-        list = info.getSong();
+        this.name=name;
+        list = info.getSingInfoo();
         inflater=LayoutInflater.from(context);
     }
-    public void datachange(NewSongInfo info){
+    public void datachange(SingInfo info){
         this.info=info;
         notifyDataSetChanged();
     }
     @Override
     public int getCount() {
-        return info==null?0:info.getSong().size();
+        return info==null?0:info.getSingInfoo().size();
     }
 
     @Override
     public Object getItem(int i) {
-        return info.getSong().get(i);
+        return info.getSingInfoo().get(i);
     }
 
     @Override
@@ -64,16 +69,16 @@ public class NewAdapter extends BaseAdapter{
             view.setTag(viewHolder);
         }
         viewHolder= (ViewHolder) view.getTag();
-        viewHolder.singname.setText(list.get(i).getSongname());
-        viewHolder.singername.setText(list.get(i).getSinger());
+        viewHolder.singname.setText(name);
+        viewHolder.singername.setText(list.get(i).getSingername());
     /*    double b=(info.getSingInfoo().get(i).getFilesize())/(1024*1024);
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         float vv=Float.parseFloat(decimalFormat.format(b));
         viewHolder.daxiao.setText(vv+"M-");*/
-        String uri=info.getSong().get(i).getIma();
+        String uri=info.getSingInfoo().get(i).getIma();
         if(uri!=null&&uri.length()>=1){
 
-            Picasso.with(context).load(uri).placeholder(R.mipmap.health_guide_men_selected).into(viewHolder.iv);
+            Picasso.with(context).load(uri).placeholder(R.mipmap.health_guide_men_selected).transform(new CircleTrans()).resize(80,80).centerCrop().into(viewHolder.iv);
         }
 
 

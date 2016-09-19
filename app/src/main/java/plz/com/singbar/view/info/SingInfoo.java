@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Created by Administrator on 2016/9/5 0005.
  */
 public class SingInfoo implements Serializable{
-    private @SerializedName("name")String filename;
+    private String filename;
     private String extname;
     private int m4afilesize;
     private int filesize;

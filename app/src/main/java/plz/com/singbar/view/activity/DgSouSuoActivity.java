@@ -36,8 +36,9 @@ public class DgSouSuoActivity extends Activity {
     private ImageView ivloading;
     private TextView tvloading;
     private NewAdapter newAdapter;
-    private NewSongInfo info;
+    private SingInfo info;
     private SongO songO;
+    private String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class DgSouSuoActivity extends Activity {
                 return;
             } else {
 //                visit(sousuo.getText()+"");
+                name=sousuo.getText().toString();
                 ivloading.setVisibility(View.VISIBLE);
                 tvloading.setVisibility(View.VISIBLE);
                 AnimationDrawable ad = (AnimationDrawable) ivloading.getDrawable();
@@ -83,7 +85,7 @@ public class DgSouSuoActivity extends Activity {
     public void buildAdapter() {
         if (newAdapter == null) {
           //  adapter = new SouSuoAdapter(DgSouSuoActivity.this, singInfo, imalist);
-            newAdapter = new NewAdapter(DgSouSuoActivity.this,info);
+            newAdapter = new NewAdapter(DgSouSuoActivity.this,info,name);
             lv.setAdapter(newAdapter);
         } else {
             newAdapter.datachange(info);
@@ -105,7 +107,7 @@ public class DgSouSuoActivity extends Activity {
                         songsOperation.getSingerBean(list.get(i).getSingername(), list.size());
 
                     }*/
-                    info= (NewSongInfo) msg.obj;
+                    info= (SingInfo) msg.obj;
                     ivloading.setVisibility(View.GONE);
                     tvloading.setVisibility(View.GONE);
                     AnimationDrawable ad = (AnimationDrawable) ivloading.getDrawable();
