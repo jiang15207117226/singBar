@@ -33,6 +33,7 @@ import plz.com.singbar.operation.DbOperation;
 import plz.com.singbar.operation.UserIdConfig;
 import plz.com.singbar.view.info.BdSingInfo;
 import plz.com.singbar.view.info.DgGxInfo;
+import plz.com.singbar.view.info.NewSongInfo;
 import plz.com.singbar.view.info.SingInfoo;
 
 
@@ -100,6 +101,12 @@ public class MediaRecordertest extends Activity implements CompoundButton.OnChec
             songUrl = info.getUri();
             geming = info.getSname();
             dur = info.getDx();
+        }else if (tag==4){
+            NewSongInfo.SongBean bean= (NewSongInfo.SongBean) getIntent().getSerializableExtra("data");
+            Log.i("result",bean.getUrl());
+            songUrl=bean.getUrl();
+            geming=bean.getSongname();
+            geci=bean.getGeci();
         }
         singer.setText(geming);
         mediaPlayer1 = new MediaPlayer();
@@ -194,10 +201,14 @@ public class MediaRecordertest extends Activity implements CompoundButton.OnChec
             int position = mediaPlayer1.getCurrentPosition();
             int duration = mediaPlayer1.getDuration();
             Log.i("result", position + "==============" + duration);
-            if (duration > 0) {
-                long pos = progressBar.getMax() * position / duration;
-                progressBar.setProgress((int) pos);
-                time.setText(parseDur(position) + "/" + parseDur(duration));
+            if (position==duration){
+                stop();
+            }else{
+                if (duration > 0) {
+                    long pos = progressBar.getMax() * position / duration;
+                    progressBar.setProgress((int) pos);
+                    time.setText(parseDur(position) + "/" + parseDur(duration));
+                }
             }
         }
     };
@@ -237,26 +248,28 @@ public class MediaRecordertest extends Activity implements CompoundButton.OnChec
             Log.i("result", "stop");
             if (b) {
                 Log.i("result", "stop--check");
-                mediaPlayer1.stop();
-                mediaRecorder.stop();
-                stop.setClickable(false);
-                stop.setFocusable(false);
-                mediaRecorder = null;
-                File file=new File(record.getAbsolutePath() + File.separator + path.getName());
-                path.renameTo(file);
-                UserOwnSongsBean userOwnSongsBean=new UserOwnSongsBean();
-                userOwnSongsBean.setSongName(geming);
-                SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                userOwnSongsBean.setTime(format.format(new Date()));
-                userOwnSongsBean.setVoiceUrl(file.getAbsolutePath());
-                userOwnSongsBean.save();
-                int id= UserIdConfig.id;
-                Log.i("result",id+"--userid");
-                DbOperation.updateSongsUserId(id,userOwnSongsBean.getId());
+                stop();
             }
         }
     }
-
+    private void stop(){
+        mediaPlayer1.stop();
+        mediaRecorder.stop();
+        stop.setClickable(false);
+        stop.setFocusable(false);
+        mediaRecorder = null;
+        File file=new File(record.getAbsolutePath() + File.separator + path.getName());
+        path.renameTo(file);
+        UserOwnSongsBean userOwnSongsBean=new UserOwnSongsBean();
+        userOwnSongsBean.setSongName(geming);
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        userOwnSongsBean.setTime(format.format(new Date()));
+        userOwnSongsBean.setVoiceUrl(file.getAbsolutePath());
+        userOwnSongsBean.save();
+        int id= UserIdConfig.id;
+        Log.i("result",id+"--userid");
+        DbOperation.updateSongsUserId(id,userOwnSongsBean.getId());
+    }
     @Override
     public void onBufferingUpdate(MediaPlayer mediaPlayer, int i) {
         progressBar.setSecondaryProgress(i);

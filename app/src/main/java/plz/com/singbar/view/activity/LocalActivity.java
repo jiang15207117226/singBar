@@ -2,6 +2,7 @@ package plz.com.singbar.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ListView;
 
 import java.util.List;
@@ -20,6 +21,10 @@ public class LocalActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置状态栏颜色
+        getWindow().setStatusBarColor(getResources().getColor(R.color.zise));
         setContentView(R.layout.activity_localvoice);
         init();
     }

@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ import plz.com.singbar.bean.UserOwnSongsBean;
 /**
  * Created by Administrator on 2016/8/29.
  */
-public class ListenActivity extends Activity implements CompoundButton.OnCheckedChangeListener{
+public class ListenActivity extends Activity implements CompoundButton.OnCheckedChangeListener {
     private MyService.MyIBinder binder;
     private ImageView head;
     private TextView name;
@@ -60,6 +61,8 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
     private TextView musictime;
     private SimpleDateFormat dateFormat;
     private TextView textView;
+    private String path;
+    private boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +74,18 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         this.getWindow().setStatusBarColor(getResources().getColor(R.color.home_bottom_rg_bg));
         init();
     }
-    ServiceConnection connection=new ServiceConnection() {
+
+    ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            binder= (MyService.MyIBinder) service;
-            binder.getmusic();
+            binder = (MyService.MyIBinder) service;
+            binder.getplayer().setOnCompletionListener(musiclistener);
+            binder.getPath(path);
             seekBar.setMax(binder.getDuration());
             musictime.setText(dateFormat.format(binder.getDuration()));
-            binder.getplayer().setOnCompletionListener(musiclistener);
 //            songName.setText(binder.getmusicname());
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
 
@@ -88,62 +93,65 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
     };
 
     private void init() {
+        Intent intent = getIntent();
+        songsBean = (UserOwnSongsBean) intent.getSerializableExtra("songsBean");
+        bean = (UserBean) intent.getSerializableExtra("userBean");
         dateFormat = new SimpleDateFormat("mm:ss");
-        Intent intents=new Intent(this, MyService.class);
-        bindService(intents,connection,BIND_AUTO_CREATE);
-        giveFlower= (CheckBox) findViewById(R.id.cb_user_flower);
-        play= (Button) findViewById(R.id.cb_activity_play);
-        atten= (CheckBox) findViewById(R.id.cb_focus_listen);
-        head= (ImageView) findViewById(R.id.iv_listen_user);
-        name= (TextView) findViewById(R.id.tv_listen_username);
-        callName= (TextView) findViewById(R.id.tv_listen_callName);
-        fansCount= (TextView) findViewById(R.id.tv_listen_fans);
-        songName= (TextView) findViewById(R.id.tv_listen_name);
-        sorce= (TextView) findViewById(R.id.tv_listen_source);
-        time= (TextView) findViewById(R.id.tv_activity_time);
-        singnum= (TextView) findViewById(R.id.tv_activity_singnum);
-        comment= (TextView) findViewById(R.id.tv_activity_comment);
-        flower= (TextView) findViewById(R.id.tv_activity_flower);
-        seekBar= (SeekBar) findViewById(R.id.sb_activity);
-        playtime= (TextView) findViewById(R.id.tv_music_playtime);
-        musictime= (TextView) findViewById(R.id.tv_music_time);
-        textView= (TextView) findViewById(R.id.tv_comment_content);
+        Intent intents = new Intent(this, MyService.class);
+        path = songsBean.getVoiceUrl();
+        Log.i("result", path);
+        bindService(intents, connection, BIND_AUTO_CREATE);
+        giveFlower = (CheckBox) findViewById(R.id.cb_user_flower);
+        play = (Button) findViewById(R.id.cb_activity_play);
+        atten = (CheckBox) findViewById(R.id.cb_focus_listen);
+        head = (ImageView) findViewById(R.id.iv_listen_user);
+        name = (TextView) findViewById(R.id.tv_listen_username);
+        callName = (TextView) findViewById(R.id.tv_listen_callName);
+        fansCount = (TextView) findViewById(R.id.tv_listen_fans);
+        songName = (TextView) findViewById(R.id.tv_listen_name);
+        sorce = (TextView) findViewById(R.id.tv_listen_source);
+        time = (TextView) findViewById(R.id.tv_activity_time);
+        singnum = (TextView) findViewById(R.id.tv_activity_singnum);
+        comment = (TextView) findViewById(R.id.tv_activity_comment);
+        flower = (TextView) findViewById(R.id.tv_activity_flower);
+        seekBar = (SeekBar) findViewById(R.id.sb_activity);
+        playtime = (TextView) findViewById(R.id.tv_music_playtime);
+        musictime = (TextView) findViewById(R.id.tv_music_time);
+        textView = (TextView) findViewById(R.id.tv_comment_content);
 
-        Intent intent=getIntent();
-        songsBean= (UserOwnSongsBean) intent.getSerializableExtra("songsBean");
-        bean= (UserBean) intent.getSerializableExtra("userBean");
         name.setText(bean.getPetName());
         callName.setText(bean.getButility());
-        fansCount.setText(bean.getFansCount()+"");
+        fansCount.setText(bean.getFansCount() + "");
         songName.setText(songsBean.getSongName());
-        sorce.setText("...来听听我唱的《"+songsBean.getSongName()+"》");
+        sorce.setText("...来听听我唱的《" + songsBean.getSongName() + "》");
         time.setText(songsBean.getTime());
-        singnum.setText(songsBean.getTrys()+"");
-        comment.setText(songsBean.getComments()+"");
-        flower.setText(songsBean.getFlowers()+"");
+        singnum.setText(songsBean.getTrys() + "");
+        comment.setText(songsBean.getComments() + "");
+        flower.setText(songsBean.getFlowers() + "");
 
         atten.setOnCheckedChangeListener(this);
         seekBar.setOnSeekBarChangeListener(sbchangelistener);
 
         inflater = LayoutInflater.from(this);
         View popupwindow = inflater.inflate(R.layout.item_comment, null);
-        et= (EditText) popupwindow.findViewById(R.id.et_comment);
+        et = (EditText) popupwindow.findViewById(R.id.et_comment);
         pw = new PopupWindow(popupwindow, 1000, 800);
         pw.setTouchable(true);
         pw.setOutsideTouchable(true);
         pw.setBackgroundDrawable(new ColorDrawable(0000));
         pw.setFocusable(true);
     }
-    MediaPlayer.OnCompletionListener musiclistener=new MediaPlayer.OnCompletionListener() {
+
+    MediaPlayer.OnCompletionListener musiclistener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
             binder.playdown();
         }
     };
     Handler handler = new Handler();
-    Runnable updateThread = new Runnable(){
+    Runnable updateThread = new Runnable() {
         public void run() {
-            if (binder==null){
+            if (binder == null) {
                 return;
             }
             //获得歌曲现在播放位置并设置成播放进度条的值
@@ -153,23 +161,32 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
             handler.postDelayed(updateThread, 100);
         }
     };
-    public void click(View view){
-        if (binder==null){
+
+    public void click(View view) {
+        if (binder == null) {
             return;
         }
-        int comments=Integer.parseInt(comment.getText().toString());
-        int flowers=Integer.parseInt(flower.getText().toString());
-        switch (view.getId()){
+        int comments = Integer.parseInt(comment.getText().toString());
+        int flowers = Integer.parseInt(flower.getText().toString());
+        switch (view.getId()) {
             case R.id.rb_activity_up:
                 binder.playup();
                 play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 break;
             case R.id.cb_activity_play:
-                if (binder.getplayer().isPlaying()){
+                if (binder.getplayer().isPlaying()) {
                     binder.pause();
                     play.setBackground(getDrawable(R.mipmap.minibar_btn_play_normal));
-                }else {
-                    binder.play();
+                } else {
+                    if (isFirst) {
+                        Log.i("result", "first");
+                        if (binder != null) {
+                            binder.prepare();
+                        }
+                        isFirst = false;
+                    } else {
+                        binder.play();
+                    }
                     play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 }
                 handler.post(updateThread);
@@ -179,23 +196,23 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
                 play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 break;
             case R.id.tv_user_share:
-                String s="来听听我唱的《"+songsBean.getSongName()+"》";
+                String s = "来听听我唱的《" + songsBean.getSongName() + "》";
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT,s);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, s);
                 shareIntent.setType("text/plain");
                 startActivity(Intent.createChooser(shareIntent, "分享到"));
                 break;
             case R.id.tv_user_comment:
                 pw.showAtLocation(view, Gravity.CENTER, 0, 300);
-                pw.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE|WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                pw.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
                 pw.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
                 break;
             case R.id.cb_user_flower:
-                if(giveFlower.isChecked()){
-                    flower.setText(flowers+1+"");
-                }else{
-                    flower.setText(flowers-1+"");
+                if (giveFlower.isChecked()) {
+                    flower.setText(flowers + 1 + "");
+                } else {
+                    flower.setText(flowers - 1 + "");
                 }
                 break;
             case R.id.iv_listen_back:
@@ -205,11 +222,11 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
                 pw.dismiss();
                 break;
             case R.id.bt_comment_finish:
-                comment.setText(comments+1+"");
+                comment.setText(comments + 1 + "");
                 songsBean.setComment(et.getText().toString());
                 pw.dismiss();
-                textView.setText(bean.getPetName()+"刚刚发表了评论:"+songsBean.getComment());
-                Toast.makeText(this,"评论成功",Toast.LENGTH_SHORT).show();
+                textView.setText(bean.getPetName() + "刚刚发表了评论:" + songsBean.getComment());
+                Toast.makeText(this, "评论成功", Toast.LENGTH_SHORT).show();
                 break;
 
         }
@@ -218,23 +235,24 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if (b){
+        if (b) {
             Drawable attention = getResources().getDrawable(R.mipmap.icon_right, null);
             attention.setBounds(0, 0, attention.getMinimumWidth(), attention.getMinimumHeight());
-            atten.setCompoundDrawables(attention,null, null, null);
+            atten.setCompoundDrawables(attention, null, null, null);
             atten.setText("已关注");
             atten.setTextColor(getResources().getColor(R.color.mine_item_opus_name_color));
-        }else{
-            atten.setCompoundDrawables(null,null, null, null);
+        } else {
+            atten.setCompoundDrawables(null, null, null, null);
             atten.setText("关注");
             atten.setTextColor(Color.WHITE);
         }
     }
-    SeekBar.OnSeekBarChangeListener sbchangelistener=new SeekBar.OnSeekBarChangeListener() {
+
+    SeekBar.OnSeekBarChangeListener sbchangelistener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-            if (b){
-                if (binder==null){
+            if (b) {
+                if (binder == null) {
                     return;
                 }
                 binder.seekTo(i);
@@ -250,7 +268,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            if (binder==null){
+            if (binder == null) {
                 return;
             }
             binder.seekTo(seekBar.getProgress());
@@ -263,4 +281,5 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         unbindService(connection);
         super.onDestroy();
     }
+
 }

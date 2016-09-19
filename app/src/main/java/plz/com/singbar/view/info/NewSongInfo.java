@@ -1,11 +1,12 @@
 package plz.com.singbar.view.info;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/18 0018.
  */
-public class NewSongInfo {
+public class NewSongInfo implements Serializable {
 
     /**
      * song : [{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"0","songname":"海阔天空","artistname":"Beyond","control":"0000000000","songid":"877578","has_mv":"1","encrypted_songid":"4205d640a09579ac78dL"},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"0","songname":"海阔天空","artistname":"黄家驹","control":"0000000000","songid":"14795583","has_mv":"1","encrypted_songid":"3306e1c33f0956b2ababL"},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"0","songname":"海阔天空","artistname":"欢子","control":"0000000000","songid":"109915269","has_mv":"0","encrypted_songid":"240768d2c85095795bb9eL"},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"0","songname":"海阔天空","artistname":"叶倩文","control":"0000000000","songid":"23276935","has_mv":"0","encrypted_songid":"55071632d870957a04312L"},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"1","songname":"海阔天空 beyond  干声","artistname":"陈奕迅~安子","control":"0000000000","songid":"73924588","has_mv":"0","encrypted_songid":""},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"0","songname":"海阔天空","artistname":"T榜","control":"0000000000","songid":"266907369","has_mv":"0","encrypted_songid":"0307fe8aee90957726fa9L"},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"1","songname":"海阔天空-电吉他版","artistname":"MC雪殇","control":"0100000000","songid":"73984962","has_mv":"0","encrypted_songid":""},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"1","songname":"海阔天空翻唱","artistname":"西单男孩","control":"0000000000","songid":"73870587","has_mv":"0","encrypted_songid":""},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"1","songname":"海阔天空主题歌(我们的天空)","artistname":"杨成成","control":"0000000000","songid":"73899356","has_mv":"0","encrypted_songid":""},{"bitrate_fee":"{\"0\":\"0|0\",\"1\":\"0|0\"}","yyr_artist":"1","songname":"海阔天空","artistname":"无尘无埃","control":"0000000000","songid":"73931185","has_mv":"0","encrypted_songid":""}]
@@ -69,7 +70,7 @@ public class NewSongInfo {
         this.album = album;
     }
 
-    public static class SongBean {
+    public static class SongBean implements Serializable{
         private String bitrate_fee;
         private String yyr_artist;
         private String songname;
@@ -181,7 +182,7 @@ public class NewSongInfo {
         }
     }
 
-    public static class AlbumBean {
+    public static class AlbumBean implements Serializable{
         private String albumname;
         private String artistpic;
         private String albumid;

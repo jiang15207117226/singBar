@@ -1,10 +1,5 @@
 package plz.com.singbar.view.info;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 /**
@@ -66,6 +61,14 @@ public class SingInfoo implements Serializable{
         return extname;
     }
 
+    public long getFilesize() {
+        return filesize;
+    }
+
+    public void setFilesize(int filesize) {
+        this.filesize = filesize;
+    }
+
     public void setExtname(String extname) {
         this.extname = extname;
     }
@@ -78,13 +81,9 @@ public class SingInfoo implements Serializable{
         this.m4afilesize = m4afilesize;
     }
 
-    public int getFilesize() {
-        return filesize;
-    }
 
-    public void setFilesize(int filesize) {
-        this.filesize = filesize;
-    }
+
+
 
     public int getBitrate() {
         return bitrate;

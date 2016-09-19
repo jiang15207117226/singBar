@@ -89,14 +89,20 @@ public class SongO {
                                     JSONObject object1 = object.getJSONObject("songinfo");
                                     JSONObject object2 = object.optJSONObject("bitrate");
                                     String ima = (String) object1.opt("pic_big");
+                                    String name = object1.optString("title");
+
                                     String gc = object1.optString("lrclink");
                                     String u = object2.optString("file_link");
+                                    int dx = object2.optInt("file_size");
+
                                     String singer=object1.optString("author");
-                                    String name =object1.optString("album_title");
                                     singInfoo.setContext(gc);
                                     singInfoo.setSingername(singer);
                                     singInfoo.setUrl(u);
                                     singInfoo.setIma(ima);
+                                    singInfoo.setFilesize(dx);
+                                    singInfoo.setFilename(name);
+
                                     list.add(singInfoo);
 
                                 } catch (JSONException e) {

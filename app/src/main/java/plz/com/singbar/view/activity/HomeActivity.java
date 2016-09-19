@@ -43,6 +43,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
         View view = LayoutInflater.from(this).inflate(R.layout.activity_home, null);
         //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置状态栏颜色
+        getWindow().setStatusBarColor(getResources().getColor(R.color.zise));
         setContentView(view);
         init(view);
     }
@@ -174,8 +176,6 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
                     //取消pop
                     pop.dismiss();
                     holder.bottomCenter.setImageResource(R.mipmap.icon_record);
-                    //设置状态栏颜色
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.home_bottom_rg_bg));
                     break;
                 case R.id.tv_pop_item_kodBox:
                     //点歌台
@@ -200,6 +200,8 @@ public class HomeActivity extends FragmentActivity implements RadioGroup.OnCheck
         @Override
         public void onDismiss() {
             holder.bottomCenter.setImageResource(R.mipmap.icon_record);
+            //设置状态栏颜色
+            getWindow().setStatusBarColor(getResources().getColor(R.color.home_bottom_rg_bg));
             holder.isPopShow.setVisibility(View.GONE);
         }
     };

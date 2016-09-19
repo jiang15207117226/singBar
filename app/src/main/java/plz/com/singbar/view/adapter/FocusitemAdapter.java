@@ -8,11 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import plz.com.singbar.R;
 import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.bean.UserOwnSongsBean;
+import plz.com.singbar.operation.CircleTrans;
 
 /**
  * Created by Administrator on 2016/8/29.
@@ -69,6 +72,7 @@ public class FocusitemAdapter extends BaseAdapter {
         hold.comment.setText(list.get(i).getComments()+"");
         hold.flower.setText(list.get(i).getFlowers()+"");
         hold.contents.setText("...来听听我唱的《"+list.get(i).getSongName()+"》");
+        Picasso.with(context).load("file://"+beanList.get(i).getHead()).transform(new CircleTrans()).resize(80,80).placeholder(R.mipmap.health_guide_woman_selected).centerCrop().into(hold.head);
         return view;
     }
     public void notifyData(List<UserOwnSongsBean> list){

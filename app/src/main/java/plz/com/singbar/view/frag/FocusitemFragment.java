@@ -18,14 +18,15 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import plz.com.singbar.R;
+import plz.com.singbar.bean.AttenBean;
 import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.bean.UserOwnSongsBean;
+import plz.com.singbar.operation.DbOperation;
+import plz.com.singbar.operation.UserIdConfig;
 import plz.com.singbar.view.activity.ListenActivity;
 import plz.com.singbar.view.adapter.FocusitemAdapter;
 
@@ -72,7 +73,9 @@ public class FocusitemFragment extends Fragment implements HomeFragment.SetConte
                 drawable.stop();
                 loading.setVisibility(View.GONE);
                 loadingText.setVisibility(View.GONE);
-                adapter.notifyData(list);
+                if (adapter!=null){
+                    adapter.notifyData(list);
+                }
             }
         }
     };
@@ -89,27 +92,18 @@ public class FocusitemFragment extends Fragment implements HomeFragment.SetConte
     private void getdata() {
         list = new ArrayList<>();
         userList=new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH:mm");
-            Date date = new Date();
-            String string = dateFormat.format(date);
-            UserOwnSongsBean info = new UserOwnSongsBean();
-            UserBean bean=new UserBean();
-            String name = "secret";
-            String singname = "我们的歌";
-            int singnum = 521213;
-            int comment = 22163;
-            int flower = 31311;
-            info.setSongName(singname+i);
-            info.setTime(string);
-            info.setTrys(singnum);
-            info.setComments(comment);
-            info.setFlowers(flower);
-            list.add(info);
-            bean.setPetName(name+i);
-            bean.setFansCount(1200);
-            bean.setButility("歌唱新人");
-            userList.add(bean);
+        List<AttenBean>attenList=DbOperation.queryByUserId(UserIdConfig.id);
+        if (attenList==null||attenList.size()<1){
+            return;
+        }
+        for (AttenBean bean:attenList){
+            int id=bean.getAttenUserId();
+            List<UserOwnSongsBean>userSongs=DbOperation.querySongs(id);
+            for (int i=0;i<userSongs.size();i++){
+                list.add(userSongs.get(i));
+            }
+            UserBean bean1=DbOperation.queryById(id);
+            userList.add(bean1);
         }
     }
     @Override

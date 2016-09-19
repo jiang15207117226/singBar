@@ -59,7 +59,6 @@ public class DbOperation {
         values.put("userbean_id", user_id);
         DataSupport.update(UserOwnSongsBean.class, values, id);
     }
-
     public static void updateAttenUserId(int user_id, int id) {
         ContentValues values = new ContentValues();
         values.put("userId", user_id);
