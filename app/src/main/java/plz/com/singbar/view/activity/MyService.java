@@ -14,19 +14,14 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2016/7/13.
  */
-public class MyService extends Service implements MediaPlayer.OnPreparedListener{
-    public MediaPlayer player = new MediaPlayer();
+public class MyService extends Service{
+    public MediaPlayer player;
     public int position = 0;
     private int musicposition = 0;
-    private String path;
-
-    @Override
-    public void onPrepared(MediaPlayer mediaPlayer) {
-        mediaPlayer.start();
-    }
 
 
-    public class MyIBinder extends Binder implements MediaPlayer.OnPreparedListener{
+
+    public class MyIBinder extends Binder{
         public MediaPlayer getplayer() {
             return player;
         }
@@ -69,48 +64,40 @@ public class MyService extends Service implements MediaPlayer.OnPreparedListener
         public void playdown() {
             play();
         }
-        public void prepare(){
-            try {
-                MyService.this.player.prepare();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }catch (IllegalStateException i){
-                player=new MediaPlayer();
-                createMediaPlayer(path);
-                player.setOnPreparedListener(this);
-            }
-        }
         public void getPath(String path){
             createMediaPlayer(path);
             Log.i("result",path+"-----getPath");
-        }
-
-        @Override
-        public void onPrepared(MediaPlayer mediaPlayer) {
-            mediaPlayer.start();
         }
     }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        createMediaPlayer(path);
+        Log.i("result","onBind");
         return new MyIBinder();
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.i("result","onCreate");
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
+        Log.i("result","onRebind");
+    }
+
+
     public MediaPlayer createMediaPlayer(String path) {
         try {
-            Log.i("result", path + "------");
+            player=new MediaPlayer();
             player.setDataSource("file://"+path);
-            Log.i("result",player.getDuration()+"--getDuration");
-            player.setOnPreparedListener(this);
-
+            player.prepare();
+//            player.start();
         } catch (IOException e) {
             e.printStackTrace();
-        }catch (IllegalStateException i){
-            player=new MediaPlayer();
-            createMediaPlayer(path);
-            player.setOnPreparedListener(this);
         }
         return player;
     }

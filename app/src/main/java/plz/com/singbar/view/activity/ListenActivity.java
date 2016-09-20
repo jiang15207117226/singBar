@@ -26,11 +26,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.SimpleDateFormat;
 
 import plz.com.singbar.R;
 import plz.com.singbar.bean.UserBean;
 import plz.com.singbar.bean.UserOwnSongsBean;
+import plz.com.singbar.operation.CircleTrans;
 
 
 /**
@@ -62,12 +65,13 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
     private SimpleDateFormat dateFormat;
     private TextView textView;
     private String path;
-    private boolean isFirst = true;
+    private MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listen);
+        Log.i("result", "**************************");
         //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         //设置状态栏颜色
@@ -79,11 +83,13 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             binder = (MyService.MyIBinder) service;
-            binder.getplayer().setOnCompletionListener(musiclistener);
             binder.getPath(path);
+            player = binder.getplayer();
+//            binder.getplayer().setOnCompletionListener(musiclistener);
             seekBar.setMax(binder.getDuration());
             musictime.setText(dateFormat.format(binder.getDuration()));
 //            songName.setText(binder.getmusicname());
+
         }
 
         @Override
@@ -97,10 +103,15 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         songsBean = (UserOwnSongsBean) intent.getSerializableExtra("songsBean");
         bean = (UserBean) intent.getSerializableExtra("userBean");
         dateFormat = new SimpleDateFormat("mm:ss");
+
+
         Intent intents = new Intent(this, MyService.class);
         path = songsBean.getVoiceUrl();
         Log.i("result", path);
         bindService(intents, connection, BIND_AUTO_CREATE);
+
+
+
         giveFlower = (CheckBox) findViewById(R.id.cb_user_flower);
         play = (Button) findViewById(R.id.cb_activity_play);
         atten = (CheckBox) findViewById(R.id.cb_focus_listen);
@@ -128,6 +139,7 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
         singnum.setText(songsBean.getTrys() + "");
         comment.setText(songsBean.getComments() + "");
         flower.setText(songsBean.getFlowers() + "");
+        Picasso.with(this).load("file://"+bean.getHead()).transform(new CircleTrans()).resize(80,80).centerCrop().into(head);
 
         atten.setOnCheckedChangeListener(this);
         seekBar.setOnSeekBarChangeListener(sbchangelistener);
@@ -174,19 +186,12 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
                 play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 break;
             case R.id.cb_activity_play:
-                if (binder.getplayer().isPlaying()) {
+                if (player.isPlaying()) {
                     binder.pause();
+                    Log.i("result", "pause");
                     play.setBackground(getDrawable(R.mipmap.minibar_btn_play_normal));
                 } else {
-                    if (isFirst) {
-                        Log.i("result", "first");
-                        if (binder != null) {
-                            binder.prepare();
-                        }
-                        isFirst = false;
-                    } else {
-                        binder.play();
-                    }
+                    binder.play();
                     play.setBackground(getDrawable(R.mipmap.minibar_btn_pause_normal));
                 }
                 handler.post(updateThread);
@@ -278,8 +283,9 @@ public class ListenActivity extends Activity implements CompoundButton.OnChecked
 
     @Override
     protected void onDestroy() {
-        unbindService(connection);
+//        unbindService(connection);
         super.onDestroy();
     }
+
 
 }

@@ -99,6 +99,7 @@ public class SongO {
                                     singInfoo.setContext(gc);
                                     singInfoo.setSingername(singer);
                                     singInfoo.setUrl(u);
+                                    Log.i("result",""+u);
                                     singInfoo.setIma(ima);
                                     singInfoo.setFilesize(dx);
                                     singInfoo.setFilename(name);
@@ -117,11 +118,6 @@ public class SongO {
                         msg.what = 1;
                         handler.sendMessage(msg);
                     }
-
-
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,7 @@ public class FocusitemFragment extends Fragment implements HomeFragment.SetConte
     private void getdata() {
         list = new ArrayList<>();
         userList=new ArrayList<>();
+        Log.i("result","*******************************+"+UserIdConfig.id+"");
         List<AttenBean>attenList=DbOperation.queryByUserId(UserIdConfig.id);
         if (attenList==null||attenList.size()<1){
             return;

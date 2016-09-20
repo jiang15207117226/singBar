@@ -2,6 +2,7 @@ package plz.com.singbar.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,6 +49,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private IUiListener iUiListener;
     private String account;
     private String pw;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +62,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
         /**
          * 初始化
          */
+//        test();
         init(view);
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setClass(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+
     }
+
+    void test() {
+        try {
+            MediaPlayer player = new MediaPlayer();
+            String path = "/storage/emulated/0/Mb录音/recaudio_-920661630.MP3";
+//            String path = "/storage/emulated/0/音乐/宋茜-星星泪.mp3";
+            player.setDataSource("file://" + path);
+//            Log.i("result", player.getDuration() + "--getDuration");
+//            player.setOnPreparedListener(this);
+            player.prepare();
+            player.start();
+        }catch (Exception e){
+            Log.i("result","*******---"+e.toString());
+        }
+    }
+
     private void init(View view) {
         /**
          * 绑定视图中用到的控件
@@ -78,17 +98,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
          */
         setClickListener();
     }
+
     private void setClickListener() {
         holder.btnLogin.setOnClickListener(this);
         holder.registerAccount.setOnClickListener(this);
         holder.findbackPw.setOnClickListener(this);
     }
+
     private void loginSucceed(int userId) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra("id", userId);
         startActivity(intent);
         finish();
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -114,6 +137,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -136,13 +160,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
             } else {
                 for (UserBean bean : list) {
                     if (bean.getAccount().equals(account)) {
-                        if (pw!=null&&bean.getPw().equals(pw)) {
+                        if (pw != null && bean.getPw().equals(pw)) {
                             Toast.makeText(MainActivity.this, "登陆成功!", Toast.LENGTH_SHORT).show();
                             Message msg = new Message();
                             msg.what = 0;
                             msg.obj = bean.getId();
                             handler.sendMessage(msg);
-                            UserIdConfig.id=bean.getId();
+                            UserIdConfig.id = bean.getId();
                         } else {
                             Toast.makeText(MainActivity.this, "密码错误...", Toast.LENGTH_SHORT).show();
                         }
@@ -151,9 +175,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
     };
+
     public void qqLoginClick(View view) {
         loginQQ();
     }
+
     public void loginQQ() {
         tencent = Tencent.createInstance(APP_ID, getApplicationContext());
         qqAuth = QQAuth.createInstance(APP_ID, getApplicationContext());
@@ -187,21 +213,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                         String time = format.format(new Date());
                                         bean.setTime(time);
-                                        UserDetailBean detailBean=new UserDetailBean();
+                                        UserDetailBean detailBean = new UserDetailBean();
                                         bean.setUserDetailBean(detailBean);
-                                        boolean isSuccess=bean.save();
+                                        boolean isSuccess = bean.save();
                                         detailBean.save();
                                         if (isSuccess) {
                                             loginSucceed(bean.getId());
-                                            Log.i("result","idiid---"+bean.getId());
+                                            Log.i("result", "idiid---" + bean.getId());
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
+
                                 @Override
                                 public void onError(UiError uiError) {
                                 }
+
                                 @Override
                                 public void onCancel() {
                                 }
@@ -220,6 +248,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             qqAuth.logout(MainActivity.this);
         }
     }
+
     public class BaseUiListener implements IUiListener {
         @Override
         public void onComplete(Object o) {
@@ -227,18 +256,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
             Log.i("result", o + "");
             doComplete((JSONObject) o);
         }
+
         /**
          * 处理返回的消息
          */
         protected void doComplete(JSONObject o) {
         }
+
         @Override
         public void onError(UiError uiError) {
         }
+
         @Override
         public void onCancel() {
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_LOGIN) {
@@ -248,24 +281,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-    long time=0;
+
+    long time = 0;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode==KeyEvent.KEYCODE_BACK){
-            if (System.currentTimeMillis()-time<2000){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - time < 2000) {
                 Intent startMain = new Intent(Intent.ACTION_MAIN);
                 startMain.addCategory(Intent.CATEGORY_HOME);
                 startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startMain);
                 System.exit(0);//退出程序
-            }else{
-                Toast.makeText(this,"再点一次退出程序",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "再点一次退出程序", Toast.LENGTH_SHORT).show();
                 time = System.currentTimeMillis();
                 return false;
             }
         }
         return super.onKeyDown(keyCode, event);
     }
+
     /**
      * 控件(视图)管理类
      */
@@ -275,6 +311,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         private Button btnLogin;
         private TextView registerAccount;
         private TextView findbackPw;
+
         private void bindView(View view) {
             inputAccount = (EditText) view.findViewById(R.id.et_login_inputAccount);
             inputPassword = (EditText) view.findViewById(R.id.et_login_inputPW);

@@ -51,7 +51,7 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity android:name=".view.activity.DetailsActivity"></activity>
         <activity android:name=".view.activity.AboutActivity"></activity>
-        <activity android:name=".view.activity.ListenActivity"></activity>
+        <activity android:name=".view.activity.ListenActivity" android:launchMode="singleTask"></activity>
         <activity android:name=".view.activity.ReadContentActivity" />
 
         <service android:name=".view.activity.MyService"></service>
